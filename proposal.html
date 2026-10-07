@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>에이블리 × 토스페이 쿠폰 광고 제안 · 윤지욱</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  *{box-sizing:border-box; word-break:keep-all; overflow-wrap:break-word}
+  :root{--blue:#3182F6; --navy:#191F28; --gray:#4E5968; --line:#E5E8EB; --bg:#F2F4F6;
+        --green:#15803D; --greenbg:#E8F7EE; --ably:#FF3D77; --zig:#FF2E93}
+  body{margin:0; font-family:Pretendard,-apple-system,sans-serif; color:var(--navy); background:#fff; line-height:1.6; font-size:14px}
+  .wrap{max-width:960px; margin:0 auto; padding:0 24px}
+  header{background:linear-gradient(120deg,#1B5FD6 0%,#2E7BF6 52%,#4E73FF 100%); color:#fff; padding:40px 0 40px; position:relative; overflow:hidden}
+  header::after{content:""; position:absolute; right:-90px; top:-70px; width:360px; height:360px; background:radial-gradient(circle,rgba(255,61,119,.38),transparent 68%); pointer-events:none}
+  .hero{display:flex; align-items:center; gap:30px; justify-content:space-between; position:relative; z-index:1}
+  .hero-l{flex:1; min-width:0}
+  .hpill{display:inline-block; font-size:12px; font-weight:800; letter-spacing:.02em; background:rgba(255,255,255,.17); padding:7px 14px; border-radius:999px; color:#fff}
+  header h1{font-size:33px; line-height:1.18; margin:16px 0 12px; font-weight:800; letter-spacing:-.02em}
+  header .lead{font-size:14.5px; color:#E7EFFF; max-width:470px; margin:0; line-height:1.6}
+  header .who{margin-top:16px; font-size:12px; color:#CFE1FF}
+  .hero-r{flex:none}
+  .couponcard{width:232px; background:linear-gradient(165deg,#ffffff,#FFF1F6); border-radius:22px; padding:20px 20px 18px; color:var(--navy); box-shadow:0 26px 60px rgba(8,16,44,.38); position:relative; transform:rotate(-2.5deg)}
+  .couponcard::before,.couponcard::after{content:""; position:absolute; width:22px; height:22px; border-radius:50%; background:#3570EC; top:50%; transform:translateY(-50%)}
+  .couponcard::before{left:-11px} .couponcard::after{right:-11px}
+  .cc-top{display:flex; align-items:center; gap:10px}
+  .cc-logo{width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg,#FF6AA5,#FF2E6E); color:#fff; font-weight:900; font-size:22px; display:flex; align-items:center; justify-content:center}
+  .cc-brand{font-weight:800; font-size:15px} .cc-ad{font-size:10px; color:#A0A6AE; font-weight:800; letter-spacing:.04em}
+  .cc-big{font-size:50px; font-weight:900; color:var(--ably); line-height:1; margin-top:16px; letter-spacing:-.03em}
+  .cc-big span{font-size:19px; margin-left:4px; color:var(--navy)}
+  .cc-sub{font-size:12.5px; color:var(--gray); font-weight:700; margin-top:5px}
+  .cc-dash{border-top:2px dashed #FBD3E1; margin:15px -20px 0}
+  .cc-btn{background:var(--ably); color:#fff; text-align:center; border-radius:12px; padding:11px; font-weight:800; font-size:14px; margin-top:15px}
+  @media(max-width:760px){.hero{flex-direction:column; align-items:flex-start} .couponcard{transform:none}}
+  section{padding:24px 0; border-bottom:1px solid var(--line)}
+  .kicker{display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.03em; color:var(--blue); background:#EAF2FE; padding:4px 10px; border-radius:999px; margin-bottom:8px}
+  h2{font-size:20px; margin:4px 0 4px} h2 .em{color:var(--blue)} h2 .pk{color:var(--ably)}
+  .sub{color:var(--gray); font-size:13px; margin:0 0 14px}
+  .cards{display:grid; gap:12px}
+  .c4{grid-template-columns:repeat(4,1fr)} .c3{grid-template-columns:repeat(3,1fr)} .c2{grid-template-columns:1fr 1fr}
+  @media(max-width:720px){.c4,.c3{grid-template-columns:1fr 1fr} .c2{grid-template-columns:1fr}}
+  .stat{border:1px solid var(--line); border-radius:14px; padding:14px 16px; background:#fff; break-inside:avoid}
+  .stat .t{font-size:11.5px; color:var(--gray); font-weight:600}
+  .stat .n{font-size:21px; font-weight:800; margin-top:3px; letter-spacing:-.01em}
+  .stat .s{font-size:11px; color:#8B95A1; margin-top:2px}
+  .box{border:1px solid var(--line); border-radius:14px; padding:16px 18px; background:#fff; margin-top:12px; break-inside:avoid}
+  .box.hl{background:#0E1726; color:#E9EEF5} .box.hl b{color:#7FB2FF}
+  .box.ably{background:#FFF0F5; border-color:#FFC2D8}
+  .box.good{background:var(--greenbg); border-color:#BBE6C9}
+  .why{border-left:4px solid var(--blue); background:#F3F8FF; border-radius:10px; padding:12px 15px; margin-top:12px; break-inside:avoid}
+  .why .wh{font-size:12.5px; font-weight:800; color:var(--blue); margin-bottom:5px}
+  .why ul{margin:2px 0 0; padding-left:16px} .why li{font-size:12.5px; margin:3px 0}
+  table{width:100%; border-collapse:collapse; margin-top:10px; font-size:12.5px}
+  th,td{border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top}
+  th{background:#EAF2FE; color:var(--navy)}
+  th.col-ably{background:#FFDDEA; color:var(--ably)} td.col-ably{background:#FFF2F7; color:var(--ably); font-weight:800}
+  ul{margin:8px 0 0; padding-left:18px} li{margin:3px 0; font-size:13px}
+  .label{font-size:10.5px; font-weight:700; padding:2px 7px; border-radius:6px; background:var(--bg); color:var(--gray); margin-right:3px; white-space:nowrap}
+  .lbA{background:#FEF3C7; color:#B45309} .lbB{background:#E8F7EE; color:#15803D} .lbC{background:#EAF2FE; color:#1B4FA0}
+  .flow{display:flex; align-items:stretch; gap:8px; flex-wrap:wrap; margin-top:10px}
+  .step{flex:1; min-width:150px; border:1px solid var(--line); border-radius:12px; padding:12px 14px; background:#fff; break-inside:avoid}
+  .step .k{font-size:11px; color:var(--blue); font-weight:700} .step .v{font-size:13px; margin-top:3px}
+  .arrow{display:flex; align-items:center; color:#B0B8C1; font-size:18px; font-weight:700}
+  footer{padding:20px 0 40px; color:var(--gray); font-size:12.5px}
+  .disc{font-size:11.5px; color:#8B95A1; margin-top:10px}
+
+  /* ── 광고상품 미니 목업 ── */
+  .prodgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:4px}
+  @media(max-width:720px){.prodgrid{grid-template-columns:1fr}}
+  .prod{border:1px solid var(--line); border-radius:16px; overflow:hidden; background:#fff; break-inside:avoid}
+  .shot{background:#0A0B0D; padding:14px 14px 16px; height:158px; position:relative}
+  .shot .mini{font-size:9px; color:#8B9099}
+  .pin{background:linear-gradient(135deg,#223049,#16213a); border:1px solid #2b3a57; border-radius:12px; padding:10px 12px; position:relative}
+  .pin .adtag{position:absolute; top:-7px; right:10px; background:#3182F6; color:#fff; font-size:8.5px; font-weight:800; padding:1px 7px; border-radius:5px}
+  .pin .b1{color:#fff; font-size:12px; font-weight:800} .pin .b2{color:#8FB4FF; font-size:10.5px; margin-top:2px}
+  .ghost{height:9px; background:#1b1d21; border-radius:5px; margin-top:8px} .ghost.s{width:60%}
+  .ticket{background:#17191D; border:1px dashed #3a3d44; border-radius:12px; padding:12px; text-align:center; position:relative}
+  .ticket .timer{color:#FF6B6B; font-size:11px; font-weight:800; letter-spacing:.05em}
+  .ticket .disc{color:#fff; font-size:20px; font-weight:900; margin-top:4px} .ticket .cps{color:#63D297; font-size:9.5px; font-weight:800; margin-top:4px}
+  .mission{background:#17191D; border-radius:12px; padding:12px; display:flex; align-items:center; gap:10px}
+  .coin{width:34px; height:34px; border-radius:50%; background:radial-gradient(circle,#ffd980,#f5a623); color:#7a4a00; font-weight:900; font-size:14px; display:flex; align-items:center; justify-content:center; flex:none}
+  .mission .mt{color:#fff; font-size:12px; font-weight:800} .mission .ms{color:#9AA0A8; font-size:10px; margin-top:2px}
+  .prod .body{padding:13px 15px}
+  .prod .pname{font-size:14px; font-weight:800} .prod .pmeta{font-size:11.5px; color:var(--blue); font-weight:700; margin-top:2px}
+  .prod .pdesc{font-size:12px; color:var(--gray); margin-top:6px}
+
+  /* ── 토스 쿠폰 피드 폰 목업 ── */
+  .mock{display:flex; gap:26px; justify-content:center; align-items:stretch; flex-wrap:wrap; margin-top:6px}
+  .phoneWrap{text-align:center; display:flex; flex-direction:column}
+  .phoneCap{font-size:13px; font-weight:800; margin-bottom:10px}
+  .capAs{color:var(--gray)} .capTo{color:var(--ably)}
+  .phone{width:286px; background:#0A0B0D; border-radius:34px; padding:12px 12px 16px; border:8px solid #17191C; box-shadow:0 18px 50px rgba(16,30,54,.28); text-align:left; flex:1}
+  .ph-status{display:flex; justify-content:space-between; align-items:center; color:#fff; font-size:12px; font-weight:700; padding:4px 10px 10px}
+  .ph-status .r{font-size:10px; color:#cfd3d8}
+  .ph-top{display:flex; align-items:center; gap:10px; padding:0 4px 10px}
+  .ph-back{color:#fff; font-size:17px} .ph-search{flex:1; background:#1C1E22; border-radius:12px; padding:9px 12px; color:#777C83; font-size:12px}
+  .ph-tabs{display:flex; gap:16px; padding:4px 8px 0; font-size:13px; color:#696E75}
+  .ph-tabs .on{color:#fff; font-weight:800; position:relative; padding-bottom:9px}
+  .ph-tabs .on::after{content:""; position:absolute; left:0; right:0; bottom:0; height:2px; background:#fff; border-radius:2px}
+  .ph-div{border-top:1px solid #202327; margin:0 -12px 0}
+  .tcard{background:#17191D; border-radius:16px; padding:14px; margin:12px 2px 0; position:relative}
+  .tcard .tt{color:#fff; font-size:15px; font-weight:800; line-height:1.3}
+  .tcard .bt{background:#3182F6; color:#fff; text-align:center; border-radius:11px; padding:11px; font-size:13.5px; font-weight:800; margin-top:12px}
+  .cpg{position:absolute; top:12px; right:12px; width:46px; height:46px; border-radius:50%; background:radial-gradient(circle,#ff5330,#d81e05); color:#fff; font-size:9px; font-weight:800; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 3px #0A0B0D}
+  .adrow{display:flex; align-items:center; gap:12px; padding:16px 6px 14px; margin:0 2px}
+  .adrow.ably-emph{border:2px solid #FF3D77; border-radius:16px; background:rgba(255,61,119,.08)}
+  .ic{border-radius:16px; display:flex; align-items:center; justify-content:center; font-weight:900; flex:none}
+  .ic.big{width:62px; height:62px; font-size:30px} .ic.sm{width:40px; height:40px; font-size:16px; border-radius:11px}
+  .ic-zig{background:var(--zig); color:#111} .ic-ably{background:linear-gradient(135deg,#FF6AA5,#FF2E6E); color:#fff; font-size:26px}
+  .ic-ali{background:#E62E04; color:#fff; font-size:13px} .ic-lotte{background:#fff; color:#111; font-size:10px; line-height:1} .ic-yogi{background:#FA0050; color:#fff; font-size:15px}
+  .adrow .meta{flex:1} .adrow .n1{color:#9AA0A8; font-size:12px} .adrow .n2{color:#fff; font-size:18px; font-weight:800; margin-top:2px}
+  .go{border-radius:9px; padding:8px 15px; font-size:12.5px; font-weight:800; flex:none} .go.gray{background:#23262B; color:#cfd3d8} .go.blue{background:#3182F6; color:#fff}
+  .lrow{display:flex; align-items:center; gap:10px; padding:9px 6px; margin:0 2px}
+  .lrow .rk{color:#3182F6; font-weight:800; width:12px; font-size:14px}
+  .lrow .meta{flex:1} .lrow .n1{font-size:11px; color:#9AA0A8} .lrow .n2{font-size:14px; color:#fff; font-weight:700; margin-top:1px}
+  .lrow .go{padding:6px 13px; font-size:11.5px}
+  .mock-note{font-size:11.5px; color:#8B95A1; text-align:center; margin-top:12px}
+
+  /* ── 예상성과 계산기 ── */
+  .calc{display:grid; grid-template-columns:320px 1fr; gap:16px; margin-top:6px}
+  @media(max-width:760px){.calc{grid-template-columns:1fr}}
+  .calc .panel{background:var(--bg); border-radius:16px; padding:18px}
+  .fld{margin:12px 0 0} .fld:first-child{margin-top:0}
+  .fld .lab{display:flex; justify-content:space-between; font-size:12.5px; font-weight:700; margin-bottom:6px}
+  .fld .lab .v{color:var(--blue); font-weight:800}
+  .fld input[type=number]{width:100%; border:1px solid var(--line); border-radius:10px; padding:9px 11px; font-size:14px; font-family:inherit}
+  .fld input[type=range]{width:100%; accent-color:var(--blue)}
+  .fld .hint{font-size:10.5px; color:#8B95A1; margin-top:3px}
+  .outcards{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .oc{border:1px solid var(--line); border-radius:12px; padding:12px 14px; background:#fff}
+  .oc .t{font-size:11px; color:var(--gray); font-weight:600} .oc .n{font-size:20px; font-weight:800; margin-top:3px} .oc .s{font-size:10.5px; color:#8B95A1; margin-top:2px}
+  .oc.hero{grid-column:1/-1; background:#EAF2FE; border-color:#BBD6FF} .oc.hero .n{color:var(--blue)}
+  .oc.locked{background:#FFF7FA; border:1px dashed #FFB3CE} .oc.locked .n{color:var(--ably)}
+
+  @media print{
+    @page{size:A4; margin:9mm}
+    body{font-size:12px} *{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+    section{padding:13px 0} .box,.stat,.step,table,.flow,.phone,.mock,.prod,.calc,.why{break-inside:avoid}
+    h2{break-after:avoid} .phone{box-shadow:none} .calc{grid-template-columns:320px 1fr}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap hero">
+    <div class="hero-l">
+      <span class="hpill">에이블리 × 토스페이 쿠폰 광고</span>
+      <h1>에이블리 신규 고객,<br>토스에서 데려옵니다</h1>
+      <p class="lead">에이블리가 이미 운영 중인 오퍼(전상품 15% 할인)를 토스 쿠폰 피드로 확장해, 패션 관심 토스 유저를 신규 고객으로 전환하는 방안을 제안드립니다.</p>
+      <div class="who">제안: 토스페이 광고팀 · 작성 윤지욱 · jiuk2038@gmail.com</div>
+    </div>
+    <div class="hero-r">
+      <div class="couponcard">
+        <div class="cc-top"><div class="cc-logo">a</div><div><div class="cc-brand">에이블리</div><div class="cc-ad">TOSS PAY · AD</div></div></div>
+        <div class="cc-big">15%<span>할인</span></div>
+        <div class="cc-sub">전상품 즉시할인 쿠폰</div>
+        <div class="cc-dash"></div>
+        <div class="cc-btn">쿠폰 받기</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- 1. 논지 -->
+  <section>
+    <span class="kicker">THESIS · 한 줄 제안</span>
+    <h2>지그재그는 토스 쿠폰 광고로 이미 <span class="em">월 수만 건의 전환</span>을 만들고 있습니다</h2>
+    <p class="sub">같은 채널에 에이블리는 아직 없습니다. 패션 관심 토스 유저풀에서 지그재그가 선점 중인 지금, 에이블리의 검증된 오퍼(15% 할인)를 올리면 이 전환의 일부를 바로 가져올 수 있습니다.</p>
+    <div class="cards c4">
+      <div class="stat"><div class="t">지그재그 월 전환 (추정)</div><div class="n">~2.5만건+</div><div class="s">노출 × 전환율 추정 <span class="label lbA">추정</span></div></div>
+      <div class="stat"><div class="t">권장 쿠폰</div><div class="n">15% 할인</div><div class="s">에이블리 공개 오퍼와 동일</div></div>
+      <div class="stat"><div class="t">과금 방식</div><div class="n">CPS</div><div class="s">결제 시에만 과금 — 리스크 0</div></div>
+      <div class="stat"><div class="t">토스 MAU</div><div class="n">2,480만</div><div class="s">2명 중 1명이 쓰는 토스</div></div>
+    </div>
+    <p class="sub" style="margin-top:10px; font-size:12px; color:#8B95A1">※ 경쟁사 월 전환은 토스 최상단 AD 노출(100만/일) × 업종 쿠폰 전환율로 추정한 예시이며, 정확한 수치는 토스 내부 데이터로 확인합니다. <span class="label lbB">토스 내부 데이터로 확정</span></p>
+  </section>
+
+  <!-- 2. 광고상품 소개 -->
+  <section>
+    <span class="kicker">PRODUCT · 토스페이 쿠폰 광고란</span>
+    <h2>목적별 지면 × <span class="em">성과보장(CPS) 과금</span></h2>
+    <p class="sub">토스페이 쿠폰 광고는 "선점 노출"과 "성과보장 전환"을 조합합니다. 에이블리 신규 획득엔 아래 3가지를 제안드립니다. <span class="label lbC">출처: 토스페이 쿠폰 광고 안내</span></p>
+    <div class="prodgrid">
+      <div class="prod">
+        <div class="shot">
+          <div class="mini">쿠폰 홈 · 최상단</div>
+          <div class="pin" style="margin-top:10px"><span class="adtag">AD</span><div class="b1">브랜드 쿠폰</div><div class="b2">15% 할인 · 받기</div></div>
+          <div class="ghost"></div><div class="ghost s"></div><div class="ghost"></div>
+        </div>
+        <div class="body"><div class="pname">최상단 AD</div><div class="pmeta">CPT · 하루 100만 노출</div><div class="pdesc">24시간 쿠폰 홈 최상단 고정. 경쟁사 위 포지션을 선점합니다.</div></div>
+      </div>
+      <div class="prod">
+        <div class="shot">
+          <div class="mini">오늘딜 · 24시간 타임딜</div>
+          <div class="ticket" style="margin-top:14px"><div class="timer">⏱ 23:59:40</div><div class="disc">15% 할인</div><div class="cps">결제 시에만 과금 (CPS)</div></div>
+        </div>
+        <div class="body"><div class="pname">오늘딜 · 기본딜 쿠폰</div><div class="pmeta">CPS · 성과보장</div><div class="pdesc">결제가 일어날 때만 과금. 무료 푸시알림까지 지원됩니다.</div></div>
+      </div>
+      <div class="prod">
+        <div class="shot">
+          <div class="mini">방문미션</div>
+          <div class="mission" style="margin-top:14px"><div class="coin">P</div><div><div class="mt">에이블리 방문하고<br>포인트 받기</div></div></div>
+          <div class="ghost" style="margin-top:14px"></div><div class="ghost s"></div>
+        </div>
+        <div class="body"><div class="pname">방문미션</div><div class="pmeta">CPC · 35만 트래픽</div><div class="pdesc">앱 유입·리타겟 보조. 클릭당 과금으로 트래픽을 끌어옵니다.</div></div>
+      </div>
+    </div>
+    <div class="box good"><b>왜 리스크가 낮은가</b> — 쿠폰(오늘딜·기본딜)은 <b>CPS, 즉 실제 결제가 일어날 때만 과금</b>됩니다. 할인·매체비 모두 전환에 연동 → 에이블리는 <b>낭비 지출 없이</b> 신규 결제만큼만 비용을 냅니다. 토스 MAU 2,480만 중 패션 관심 세그먼트를 선점하는 구조입니다.</div>
+  </section>
+
+  <!-- 3. 경쟁 현황 + 에이블리 제안 목업 -->
+  <section>
+    <span class="kicker">THE GAP · 경쟁사는 이미 시작했습니다</span>
+    <h2>이미 경쟁사는 토스에서 쿠폰 광고를 <span class="em">시작했습니다</span></h2>
+    <p class="sub">현재 토스 쿠폰 피드엔 지그재그가 2.5% 적립으로 노출 중이고, 패션 커머스 중 에이블리는 아직 없습니다. 아래는 현재 피드(좌)와 에이블리를 최상단 AD에 올린 제안(우)입니다.</p>
+    <div class="mock">
+      <div class="phoneWrap">
+        <div class="phoneCap capAs">현재 (As-Is) — 지그재그가 선점</div>
+        <div class="phone">
+          <div class="ph-status"><span>3:39</span><span class="r">📶 56</span></div>
+          <div class="ph-top"><span class="ph-back">‹</span><div class="ph-search">🔍 쿠폰 검색</div></div>
+          <div class="ph-tabs"><span class="on">온라인</span><span>오프라인</span><span>신세계면세점</span></div>
+          <div class="ph-div"></div>
+          <div class="tcard"><div class="tt">오늘의 브랜드<br>쿠팡 방문미션</div><div class="cpg">coupang</div><div class="bt">방문하고 5원 받기</div></div>
+          <div class="adrow"><div class="ic big ic-zig">Z</div><div class="meta"><div class="n1">지그재그 · AD</div><div class="n2">2.5% 적립</div></div><div class="go gray">보기</div></div>
+          <div class="lrow"><div class="rk">1</div><div class="ic sm ic-ali">Ali</div><div class="meta"><div class="n1">알리익스프레스</div><div class="n2">1% 할인</div></div><div class="go gray">보기</div></div>
+          <div class="lrow"><div class="rk">2</div><div class="ic sm ic-lotte">LOTTE<br>ON</div><div class="meta"><div class="n1">롯데ON</div><div class="n2">2.5% 할인</div></div><div class="go gray">보기</div></div>
+          <div class="lrow"><div class="rk">3</div><div class="ic sm ic-yogi">요</div><div class="meta"><div class="n1">요기요</div><div class="n2">1,000원 할인</div></div><div class="go blue">받기</div></div>
+        </div>
+      </div>
+      <div class="phoneWrap">
+        <div class="phoneCap capTo">제안 (To-Be) — 에이블리가 최상단 AD 선점</div>
+        <div class="phone">
+          <div class="ph-status"><span>3:39</span><span class="r">📶 56</span></div>
+          <div class="ph-top"><span class="ph-back">‹</span><div class="ph-search">🔍 쿠폰 검색</div></div>
+          <div class="ph-tabs"><span class="on">온라인</span><span>오프라인</span><span>신세계면세점</span></div>
+          <div class="ph-div"></div>
+          <div class="tcard"><div class="tt">오늘의 브랜드<br>쿠팡 방문미션</div><div class="cpg">coupang</div><div class="bt">방문하고 5원 받기</div></div>
+          <div class="adrow ably-emph"><div class="ic big ic-ably">a</div><div class="meta"><div class="n1">에이블리 · AD</div><div class="n2">15% 할인</div></div><div class="go gray">보기</div></div>
+          <div class="lrow"><div class="rk">1</div><div class="ic sm ic-zig">Z</div><div class="meta"><div class="n1">지그재그 · AD</div><div class="n2">2.5% 적립</div></div><div class="go gray">보기</div></div>
+          <div class="lrow"><div class="rk">2</div><div class="ic sm ic-ali">Ali</div><div class="meta"><div class="n1">알리익스프레스</div><div class="n2">1% 할인</div></div><div class="go gray">보기</div></div>
+          <div class="lrow"><div class="rk">3</div><div class="ic sm ic-lotte">LOTTE<br>ON</div><div class="meta"><div class="n1">롯데ON</div><div class="n2">2.5% 할인</div></div><div class="go gray">보기</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="mock-note">※ 실제 토스 앱 쿠폰 피드를 재현한 오리지널 목업입니다. 좌측(현재)의 지그재그 2.5% 적립은 토스 앱 실관찰 <span class="label lbC">관찰</span>, 우측(제안)은 에이블리 15% 할인을 최상단 AD에 배치한 가상 제안입니다.</div>
+    <p style="font-size:15px; font-weight:800; margin:24px 0 2px">경쟁사 방식 vs 에이블리 제안 방식</p>
+    <p class="sub">같은 토스 쿠폰 광고라도 목적에 맞는 쿠폰 설계가 다릅니다. 경쟁사는 '재구매'에 맞춰져 있지만, 에이블리는 '신규 획득'에 맞춰 이렇게 해보시길 제안드립니다.</p>
+    <table>
+      <tr><th>구분</th><th>지그재그 (현재)</th><th class="col-ably">⭐ 에이블리 (제안)</th><th>왜 더 좋은가</th></tr>
+      <tr><td>쿠폰 형태</td><td>2.5% 적립 (이연 혜택)</td><td class="col-ably">전상품 15% 즉시할인</td><td>지금 바로 체감 → 첫 구매 결정에 직접 작용</td></tr>
+      <tr><td>광고 목적</td><td>재구매·리텐션 중심</td><td class="col-ably">신규 고객 획득</td><td>토스는 새로 만나는 접점 → 신규 선점이 효율적</td></tr>
+      <tr><td>혜택 체감</td><td>낮음 (다음 구매에 적립)</td><td class="col-ably">높음 (지금 15% 할인)</td><td>2.5% 적립 대비 체감 우위로 전환율↑</td></tr>
+      <tr><td>지면 전략</td><td>피드 노출 <span class="label lbC">관찰</span></td><td class="col-ably">최상단 AD 선점 + 오늘딜(CPS)</td><td>노출은 고정 선점, 비용은 전환에만 발생</td></tr>
+    </table>
+  </section>
+
+  <!-- 4. 제안: 왜 15% -->
+  <section>
+    <span class="kicker">제안 · 왜 15%인가</span>
+    <h2>에이블리님, <span class="pk">전상품 15% 즉시할인</span> — 이미 쓰고 계신 그 오퍼로 어떠세요?</h2>
+    <p class="sub">할인율은 감이 아니라 3개 데이터 근거가 수렴하는 지점으로 제안드립니다. 특히 ③이 결정적입니다 — 에이블리께서 이미 쓰고 계신 숫자이기 때문입니다.</p>
+    <table>
+      <tr><th>근거</th><th>내용</th><th>시사점</th></tr>
+      <tr><td>① 경쟁 체감가치</td><td>지그재그 2.5% <b>적립(이연)</b> vs <b>즉시할인</b></td><td>즉시 10%+면 체감상 압도 → 신규 선점</td></tr>
+      <tr><td>② 업종 벤치마크</td><td>패션 이커머스 신규 첫구매 쿠폰 통상 10~20% <span class="label lbA">가설</span></td><td>10~20% 밴드</td></tr>
+      <tr><td>③ <b>에이블리 revealed preference</b></td><td><b>에이블리가 이미 신규가입에 전상품 15% 할인 운영 중</b> <span class="label lbC">관찰</span></td><td><b>"신규 1명에 이만큼 쓸 가치 있다"를 스스로 검증 → 추가 리스크 없음</b></td></tr>
+    </table>
+    <div class="box ably"><b>카테고리 티어</b> — 에이블리는 이미 <b>뷰티 30% / 전상품 15%</b>로 차등 운영합니다. 토스 쿠폰 광고도 동일하게 카테고리별 차등 오퍼를 그대로 적용할 수 있습니다.</div>
+    <div class="why">
+      <div class="wh">📊 근거 · 왜 '적립'이 아니라 '즉시할인'인가</div>
+      <ul>
+        <li><b>적립</b> = 다음 구매에 쓰는 <b>이연 혜택</b> → 재구매·리텐션용 (지그재그가 적립을 쓰는 이유: 이미 확보된 유저 대상)</li>
+        <li><b>즉시할인</b> = 지금 당장 체감 → <b>신규 trial 전환 허들 최소화</b> → 토스에서 처음 만나는 유저를 선점하는 목적엔 즉시할인이 유리</li>
+        <li>지그재그 2.5% 적립(이연) 대비 15% 즉시할인은 <b>첫 구매 전환</b>에서 체감 우위 <span class="label lbC">관찰</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. 예상 성과 계산기 (토스 데이터) -->
+  <section>
+    <span class="kicker">예상 성과 · 유사업종 기준</span>
+    <h2>유사업종(패션 커머스) 기준 <span class="em">예상 성과</span></h2>
+    <p class="sub">에이블리 내부 데이터 없이, <b>유사 패션 커머스 업종의 토스 벤치마크</b>로 예상 성과를 추정합니다. 노출·전환·신규 결제·거래액(GMV)·광고 ROAS까지 토스 데이터로 예측되고, 광고주는 "결제당 비용(CPS)"만 합의하면 됩니다.</p>
+    <div class="box good"><b>유사업종 예상 성과 요약</b> — 월 예산 1,000만원 · 목표 CPS 8,000원 · 패션 업종 전환율 0.5% 가정 시 → <b>신규 결제 ~1,250건 · 거래액(GMV) ~4,750만원 · 광고 ROAS 4.75배</b> <span class="label lbB">유사업종·토스 데이터 기준</span>. 아래에서 값을 직접 조정해 보세요.</div>
+    <div class="calc">
+      <div class="panel">
+        <div class="fld"><div class="lab"><span>월 예산</span><span class="v" id="vB"></span></div><input type="number" id="B" step="1000000" value="10000000"></div>
+        <div class="fld"><div class="lab"><span>목표 CPS (결제당 지불 비용)</span><span class="v" id="vC"></span></div><input type="number" id="C" step="500" value="8000"><div class="hint">광고주가 수용 가능한 결제당 광고비 — 유일하게 합의할 값</div></div>
+        <div class="fld"><div class="lab"><span>예상 전환율 (노출→결제)</span><span class="v" id="vR"></span></div><input type="range" id="R" min="0.1" max="2" step="0.05" value="0.5"><div class="hint">토스 패션 업종 쿠폰 전환율 <span class="label lbB">토스 내부 데이터</span></div></div>
+        <div class="fld"><div class="lab"><span>평균 객단가</span><span class="v" id="vV"></span></div><input type="number" id="V" step="1000" value="38000"><div class="hint">토스페이 결제 데이터 기반 <span class="label lbB">토스 내부 데이터</span></div></div>
+        <div class="fld"><div class="lab"><span>에이블리 기여마진 (선택)</span><span class="v" id="vM"></span></div><input type="range" id="M" min="0" max="60" step="1" value="0"><div class="hint">이 한 칸만 에이블리가 채우면 순이익까지 산출 <span class="label lbA">광고주 내부</span></div></div>
+      </div>
+      <div>
+        <div class="outcards">
+          <div class="oc hero"><div class="t">광고 ROAS (거래액 ÷ 광고비)</div><div class="n" id="oROAS"></div><div class="s">= 평균 객단가 ÷ 목표 CPS · 토스 데이터로 산출</div></div>
+          <div class="oc"><div class="t">예상 신규 결제(고객)</div><div class="n" id="oN"></div><div class="s">월 예산 ÷ CPS</div></div>
+          <div class="oc"><div class="t">예상 신규 거래액 (GMV)</div><div class="n" id="oGMV"></div><div class="s">신규 결제 × 객단가</div></div>
+          <div class="oc"><div class="t">결제당 광고비</div><div class="n" id="oCPS"></div><div class="s">성과보장 (CPS)</div></div>
+          <div class="oc"><div class="t">필요 노출 (참고)</div><div class="n" id="oIMP"></div><div class="s">전환 ÷ 전환율</div></div>
+          <div class="oc locked"><div class="t">월 순이익 (에이블리 마진 필요)</div><div class="n" id="oPROFIT"></div><div class="s" id="oProfitS">마진 입력 시 산출</div></div>
+        </div>
+        <div class="box hl" style="margin-top:12px"><b>이게 핵심입니다</b> — 노출·전환·신규 결제·<b>거래액(GMV)·광고 ROAS까지 토스가 전부 예측</b>합니다. 마지막 <b>'순이익' 한 칸만 에이블리의 마진을 곱하면</b> 나옵니다. 토스는 "거래액까지" 책임지고, 에이블리는 마진만 대입하면 됩니다.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 집행·증액 -->
+  <section>
+    <span class="kicker">PLAN · 집행 & 증액</span>
+    <h2>선점 → 전환 → 재구매, 그리고 단계적 증액</h2>
+    <div class="flow">
+      <div class="step"><div class="k">① 선점</div><div class="v">최상단 AD(CPT) 24h 고정 — 지그재그 위 포지션</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="k">② 전환</div><div class="v">오늘딜·기본딜 쿠폰(CPS) 15% 즉시할인 → 첫 구매</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="k">③ 재구매</div><div class="v">적립 혜택으로 재구매 lock-in</div></div>
+    </div>
+    <div class="why">
+      <div class="wh">📊 근거 · 왜 '최상단 AD'부터인가</div>
+      <ul>
+        <li>최상단 AD는 <b>24시간 고정 노출 · 하루 평균 100만 노출</b> <span class="label lbC">토스 공식</span> → 지그재그 위 포지션을 선점</li>
+        <li>선점(최상단 AD) + 전환(쿠폰 CPS) 조합: <b>노출은 고정 확보, 비용은 전환에만</b> 발생 → 리스크 최소</li>
+      </ul>
+    </div>
+    <div class="box"><b>증액 로드맵</b> — 1단계 소액 라이브(할인율 10/15/20% A/B로 전환율 측정) → 2단계 실전환율로 최적 할인율 확정 → 3단계 <b>결제당 비용(CPS) ≤ 목표 & 3주 안정 & 소진율 90%+</b>면 예산 +30~50% 점진 증액(30/80 룰). "감이 아니라 조건 충족 시 증액."</div>
+  </section>
+
+  <!-- 7. 데이터 출처 -->
+  <section>
+    <span class="kicker">EVIDENCE · 데이터 출처</span>
+    <h2>"실제 데이터인 척" 하지 않습니다</h2>
+    <table>
+      <tr><th>태그</th><th>해당 내용</th></tr>
+      <tr><td><span class="label lbC">관찰 · 토스 앱 실측</span></td><td>지그재그 2.5% 적립 집행 / 에이블리 신규 15%·뷰티 30% 오퍼 (앱 화면 직접 확인)</td></tr>
+      <tr><td><span class="label lbC">출처 · 토스 공식</span></td><td>토스페이 쿠폰 광고 지면·과금(CPS)·노출·MAU 2,480만 (토스페이 쿠폰 광고 안내)</td></tr>
+      <tr><td><span class="label lbB">토스 내부 데이터로 산출</span></td><td>패션 업종 쿠폰 전환율·평균 객단가(토스페이 거래)·세그먼트 규모 (AM이 집행 전 리포트로 확보)</td></tr>
+      <tr><td><span class="label lbA">외부 추정 · 가설</span></td><td>업종 벤치마크(첫구매 쿠폰 10~20%) 등 계산기 기본값 (실집행 데이터로 교체)</td></tr>
+    </table>
+  </section>
+
+  <footer>
+    <div><b>윤지욱</b> · jiuk2038@gmail.com · 토스 Account Manager(토스페이/쿠폰) 지원</div>
+    <div class="disc">본 제안서는 세일즈 역량 증명을 위한 가상 제안서입니다. 브랜드명·경쟁사 현황은 공개 앱 화면 관찰 기준이며, 계산기 수치는 토스 데이터로 채우는 것을 전제로 한 예시 기본값입니다.</div>
+  </footer>
+</div>
+
+<script>
+  const $=id=>document.getElementById(id);
+  const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
+  const shortWon=n=>{n=Math.round(n); if(Math.abs(n)>=1e8)return (n/1e8).toFixed(2)+'억원'; if(Math.abs(n)>=1e4)return Math.round(n/1e4).toLocaleString('ko-KR')+'만원'; return n.toLocaleString('ko-KR')+'원';};
+  function calc(){
+    const B=+$('B').value, C=+$('C').value, R=+$('R').value/100, V=+$('V').value, M=+$('M').value/100;
+    $('vB').textContent=shortWon(B); $('vC').textContent=won(C); $('vR').textContent=(R*100).toFixed(2)+'%'; $('vV').textContent=won(V); $('vM').textContent=M? (M*100)+'%':'미입력';
+    const N = C>0? B/C : 0;              // 신규 결제 건수
+    const GMV = N*V;                     // 거래액
+    const ROAS = C>0? V/C : 0;           // 광고 ROAS
+    const IMP = R>0? N/R : 0;            // 필요 노출
+    $('oROAS').textContent=ROAS.toFixed(1)+'배';
+    $('oN').textContent=Math.round(N).toLocaleString('ko-KR')+'명';
+    $('oGMV').textContent=shortWon(GMV);
+    $('oCPS').textContent=won(C);
+    $('oIMP').textContent=Math.round(IMP).toLocaleString('ko-KR')+'회';
+    if(M>0){ const profit=GMV*M - B; $('oPROFIT').textContent=shortWon(profit); $('oProfitS').textContent='거래액×마진 − 광고비'; }
+    else { $('oPROFIT').textContent='—'; $('oProfitS').textContent='마진 입력 시 산출 (에이블리 내부값)'; }
+  }
+  ['B','C','R','V','M'].forEach(id=>$(id).addEventListener('input',calc));
+  calc();
+</script>
+</body>
+</html>

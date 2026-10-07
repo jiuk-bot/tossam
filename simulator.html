@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토스페이 쿠폰 ROI 시뮬레이터 · 윤지욱</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  *{box-sizing:border-box; word-break:keep-all; overflow-wrap:break-word}
+  :root{--blue:#3182F6; --navy:#191F28; --gray:#4E5968; --line:#E5E8EB; --bg:#F2F4F6;
+        --green:#15803D; --greenbg:#E8F7EE; --amber:#B45309; --amberbg:#FEF3C7; --red:#DC2626; --redbg:#FEE2E2}
+  body{margin:0; font-family:Pretendard,-apple-system,sans-serif; color:var(--navy); background:#fff; line-height:1.55}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px}
+  header{background:linear-gradient(135deg,#1B64DA,#3182F6); color:#fff; padding:40px 0 34px}
+  header .badge{display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:.04em; background:rgba(255,255,255,.18); padding:6px 12px; border-radius:999px}
+  header h1{font-size:30px; margin:14px 0 8px; line-height:1.25}
+  header p{font-size:15px; color:#DCEAFF; margin:0; max-width:760px}
+  .note{background:#EAF2FE; border-left:4px solid var(--blue); border-radius:10px; padding:14px 16px; margin:22px 0; font-size:13.5px; color:#1B4FA0}
+  section{padding:26px 0}
+  h2{font-size:20px; margin:0 0 4px}
+  .sub{color:var(--gray); font-size:13.5px; margin:0 0 18px}
+  .grid{display:grid; gap:16px}
+  .cols2{grid-template-columns:360px 1fr}
+  @media(max-width:860px){.cols2{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line); border-radius:16px; padding:20px; background:#fff}
+  .panel{background:var(--bg); border-radius:16px; padding:20px}
+  .presets{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px}
+  .preset{border:1px solid var(--line); background:#fff; border-radius:999px; padding:8px 14px; font-size:13px; font-weight:600; color:var(--gray); cursor:pointer}
+  .preset.on{background:var(--blue); color:#fff; border-color:var(--blue)}
+  label.fld{display:block; margin:14px 0 0}
+  label.fld .lab{display:flex; justify-content:space-between; font-size:13px; font-weight:600; color:var(--navy); margin-bottom:6px}
+  label.fld .lab .v{color:var(--blue); font-weight:700}
+  input[type=number]{width:100%; border:1px solid var(--line); border-radius:10px; padding:10px 12px; font-size:15px; font-family:inherit; color:var(--navy)}
+  input[type=range]{width:100%; accent-color:var(--blue)}
+  .hint{font-size:11.5px; color:#8B95A1; margin-top:3px}
+  .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+  @media(max-width:620px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{border:1px solid var(--line); border-radius:14px; padding:14px 16px; background:#fff}
+  .kpi .t{font-size:12px; color:var(--gray); font-weight:600}
+  .kpi .n{font-size:22px; font-weight:800; margin-top:4px; letter-spacing:-.01em}
+  .kpi .s{font-size:11.5px; color:#8B95A1; margin-top:2px}
+  .verdict{border-radius:14px; padding:16px 18px; font-size:15px; font-weight:700; margin:16px 0}
+  .v-good{background:var(--greenbg); color:var(--green)}
+  .v-warn{background:var(--amberbg); color:var(--amber)}
+  .v-bad{background:var(--redbg); color:var(--red)}
+  .reco{background:#0E1726; color:#E9EEF5; border-radius:16px; padding:20px 22px; margin-top:16px}
+  .reco b{color:#7FB2FF}
+  .chartbox{border:1px solid var(--line); border-radius:16px; padding:18px 10px 8px; margin-top:16px}
+  .chartbox .ct{font-size:13px; font-weight:700; color:var(--navy); padding:0 10px 6px}
+  table.logic{width:100%; border-collapse:collapse; margin-top:12px; font-size:13px}
+  table.logic th,table.logic td{border:1px solid var(--line); padding:8px 10px; text-align:left}
+  table.logic th{background:#EAF2FE; color:var(--navy)}
+  footer{border-top:1px solid var(--line); padding:22px 0 40px; color:var(--gray); font-size:13px}
+  .tag{display:inline-block; background:var(--bg); color:var(--gray); border-radius:8px; padding:4px 10px; font-size:12px; margin:3px 4px 0 0}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="badge">TOSS ADS · 쿠폰 ROI 시뮬레이터</span>
+    <h1>쿠폰 할인을 '광고주의 숫자'로 증명하는 제안 도구</h1>
+    <p>광고주의 유닛 이코노믹스(객단가·마진·LTV)를 넣으면, <b>최적 쿠폰 할인율·CAC·LTV/CAC·회수 가능 여부·월 순이익</b>을 즉시 계산합니다. "할인은 비용이 아니라 신규 고객을 끌어올리는 투자"임을 광고주 본인 숫자로 보여주는 세일즈 자료입니다.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="note">
+    💡 이 도구는 제가 셀프스토리지(공유창고)에서 <b>라커 점유율에 쿠폰 할인율을 연동</b>했던 로직 — <i>"점유율이 낮을수록(적자 구간) 공격적으로 할인해 진입 허들을 낮추고, 평균 이용기간 동안 회수한다"</i> — 을 <b>토스 광고주 일반 모델로 확장</b>한 것입니다. 수치는 예시 기본값이며, 광고주 실제 값으로 바꿔 쓰면 그대로 제안서가 됩니다.
+  </div>
+
+  <section>
+    <h2>광고주 조건 입력</h2>
+    <p class="sub">업종 프리셋을 고르거나 값을 직접 조정하세요. 쿠폰 할인율 슬라이더를 움직이면 결과가 실시간으로 바뀝니다.</p>
+
+    <div class="grid cols2">
+      <div class="panel">
+        <div class="presets" id="presets">
+          <button class="preset on" data-p="ably">에이블리 (패션 커머스)</button>
+          <button class="preset" data-p="cafe">카페·프랜차이즈</button>
+          <button class="preset" data-p="ecom">이커머스 일반</button>
+          <button class="preset" data-p="beauty">뷰티·헬스</button>
+        </div>
+
+        <label class="fld"><span class="lab">객단가 (1회 구매액) <span class="v" id="vV"></span></span>
+          <input type="number" id="V" step="500"></label>
+        <label class="fld"><span class="lab">마진율 <span class="v" id="vM"></span></span>
+          <input type="range" id="M" min="10" max="90" step="1"></label>
+          <div class="hint">매출 중 이익으로 남는 비율</div>
+        <label class="fld"><span class="lab">신규 고객 생애 구매 횟수 <span class="v" id="vN"></span></span>
+          <input type="range" id="N" min="1" max="12" step="1"></label>
+          <div class="hint">첫 구매 포함, 이 고객이 평생 몇 번 사는가 (LTV 기준)</div>
+        <label class="fld"><span class="lab">매체 CPA (쿠폰 0%일 때 신규고객 1명 광고비) <span class="v" id="vC"></span></span>
+          <input type="number" id="C" step="500"></label>
+        <label class="fld"><span class="lab">월 매체 예산 <span class="v" id="vB"></span></span>
+          <input type="number" id="B" step="500000"></label>
+        <label class="fld"><span class="lab">쿠폰 전환 민감도 <span class="v" id="vE"></span></span>
+          <input type="range" id="E" min="0" max="25" step="1"></label>
+          <div class="hint">쿠폰이 전환(신규 유입)을 얼마나 끌어올리는지 (가정값)</div>
+
+        <label class="fld" style="margin-top:20px"><span class="lab" style="font-size:15px">🎟️ 쿠폰 할인율 <span class="v" id="vD" style="font-size:16px"></span></span>
+          <input type="range" id="D" min="0" max="70" step="1"></label>
+          <div class="hint">신규 고객 첫 구매에 적용하는 할인율 (핵심 레버)</div>
+      </div>
+
+      <div>
+        <div id="verdict" class="verdict"></div>
+        <div class="kpis">
+          <div class="kpi"><div class="t">신규고객 획득비용 (CAC)</div><div class="n" id="oCAC"></div><div class="s">매체비 + 쿠폰 보조금</div></div>
+          <div class="kpi"><div class="t">신규고객 생애가치 (LTV·마진)</div><div class="n" id="oLTV"></div><div class="s">객단가 × 마진율 × 구매횟수</div></div>
+          <div class="kpi"><div class="t">LTV / CAC</div><div class="n" id="oRATIO"></div><div class="s">3배↑ 건강 · 1배↓ 적자</div></div>
+          <div class="kpi"><div class="t">고객 1명당 순이익</div><div class="n" id="oPROF"></div><div class="s">LTV − CAC</div></div>
+          <div class="kpi"><div class="t">손익분기 쿠폰율</div><div class="n" id="oBEP"></div><div class="s">이 % 넘으면 1명당 적자</div></div>
+          <div class="kpi"><div class="t">월 신규고객 수</div><div class="n" id="oN"></div><div class="s">월 예산 ÷ 유효 매체CPA</div></div>
+          <div class="kpi"><div class="t">월 순이익</div><div class="n" id="oMP"></div><div class="s">코호트 LTV − 월 총투자</div></div>
+          <div class="kpi"><div class="t">연 순이익 (12개월)</div><div class="n" id="oYP"></div><div class="s">월 순이익 × 12</div></div>
+          <div class="kpi" style="background:#EAF2FE; border-color:#BBD6FF"><div class="t" style="color:#1B4FA0">✅ 최적 쿠폰율</div><div class="n" id="oOPT" style="color:var(--blue)"></div><div class="s">월 순이익 극대화 지점</div></div>
+        </div>
+
+        <div class="reco" id="reco"></div>
+
+        <div class="chartbox">
+          <div class="ct">쿠폰 할인율 → 월 순이익 (곡선의 꼭대기가 최적점)</div>
+          <svg id="chart" viewBox="0 0 640 240" width="100%" height="240" role="img"></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>계산 로직 (유닛 이코노믹스)</h2>
+    <p class="sub">모든 수치는 아래 공식으로 투명하게 계산됩니다. 광고주 앞에서 "왜 이 쿠폰율인지"를 숫자로 설명할 수 있습니다.</p>
+    <table class="logic">
+      <tr><th>지표</th><th>공식</th><th>의미</th></tr>
+      <tr><td>전환 배수</td><td>1 + 민감도 × 쿠폰율</td><td>쿠폰이 높을수록 신규 유입↑</td></tr>
+      <tr><td>유효 매체CPA</td><td>기본 CPA ÷ 전환 배수</td><td>전환이 늘면 획득당 매체비↓</td></tr>
+      <tr><td>CAC</td><td>유효 매체CPA + (객단가 × 쿠폰율)</td><td>매체비 + 할인 보조금</td></tr>
+      <tr><td>LTV</td><td>객단가 × 마진율 × 구매횟수</td><td>고객 1명 생애 마진</td></tr>
+      <tr><td>월 신규고객</td><td>월 예산 ÷ 유효 매체CPA</td><td>예산으로 획득 가능한 수</td></tr>
+      <tr><td>월 순이익</td><td>(신규고객 × LTV) − 월 예산 − (신규고객 × 객단가 × 쿠폰율)</td><td>코호트 가치 − 총투자</td></tr>
+    </table>
+    <p class="sub" style="margin-top:14px">핵심: 쿠폰율을 0으로 두면 전환(신규 유입)을 놓치고, 너무 높이면 보조금이 마진을 잠식합니다. <b>그 사이에 월 순이익이 최대가 되는 '최적 쿠폰율'</b>이 존재합니다 — 라커 점유율 구간별 차등 할인과 같은 원리입니다.</p>
+  </section>
+
+  <footer class="wrap">
+    <div>
+      <span class="tag">쿠폰/프로모션 유닛 이코노믹스 설계</span>
+      <span class="tag">광고주 ROI 제안</span>
+      <span class="tag">B2B 세일즈</span>
+      <span class="tag">데이터 기반 설득</span>
+    </div>
+    <p style="margin-top:12px">윤지욱 · jiuk2038@gmail.com · 토스 Account Manager(토스페이/쿠폰) 지원 · 수치는 예시 기본값(광고주 실값 입력 시 제안서로 활용)</p>
+  </footer>
+</div>
+
+<script>
+const PRESETS = {
+  // 에이블리: 여성 패션 커머스. 수치는 업종 벤치마크 기반 [외부 추정·가설]
+  ably:   {V:38000, M:30, N:5,  C:10000, B:10000000, E:8,  D:15},
+  cafe:   {V:15000, M:55, N:6,  C:8000,  B:5000000,  E:12, D:20},
+  ecom:   {V:45000, M:35, N:3,  C:12000, B:10000000, E:9,  D:15},
+  beauty: {V:60000, M:60, N:4,  C:15000, B:8000000,  E:10, D:25},
+};
+const ids=['V','M','N','C','B','E','D'];
+const el={}; ids.forEach(i=>el[i]=document.getElementById(i));
+const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
+const wonShort=n=>{n=Math.round(n); if(Math.abs(n)>=1e8)return (n/1e8).toFixed(2)+'억원'; if(Math.abs(n)>=1e4)return Math.round(n/1e4).toLocaleString('ko-KR')+'만원'; return n.toLocaleString('ko-KR')+'원';};
+
+function read(){return {V:+el.V.value, m:+el.M.value/100, n:+el.N.value, C0:+el.C.value, B:+el.B.value, e:+el.E.value/10, d:+el.D.value/100};}
+
+function calc(d, p){
+  const conv = 1 + p.e*d;
+  const mcpa = p.C0 / conv;
+  const cac = mcpa + p.V*d;
+  const ltv = p.V*p.m*p.n;
+  const N = p.B / mcpa;
+  const couponCost = N*p.V*d;
+  const monthlyProfit = N*ltv - p.B - couponCost;
+  return {conv,mcpa,cac,ltv,ratio:ltv/cac,profitPer:ltv-cac,N,monthlyProfit};
+}
+function optimal(p){
+  let best={d:0,mp:-Infinity};
+  for(let x=0;x<=0.70001;x+=0.005){const r=calc(x,p); if(r.monthlyProfit>best.mp)best={d:x,mp:r.monthlyProfit};}
+  return best;
+}
+function bepRate(p){ // per-customer break-even coupon rate (전환효과 고정, 현재 conv 기준)
+  // ltv - mcpa - V*d = 0  →  d = (ltv - mcpa)/V  (mcpa at current d approx; use C0 base)
+  const d0 = (p.V*p.m*p.n - p.C0)/p.V;
+  return Math.max(0, Math.min(0.99, d0));
+}
+
+function setVals(){
+  el.V.value=el.V.value||15000;
+  document.getElementById('vV').textContent=won(+el.V.value);
+  document.getElementById('vM').textContent=el.M.value+'%';
+  document.getElementById('vN').textContent=el.N.value+'회';
+  document.getElementById('vC').textContent=won(+el.C.value);
+  document.getElementById('vB').textContent=wonShort(+el.B.value);
+  document.getElementById('vE').textContent=(+el.E.value/10).toFixed(1)+'×';
+  document.getElementById('vD').textContent=el.D.value+'%';
+}
+
+function drawChart(p, opt){
+  const svg=document.getElementById('chart'); const W=640,H=240,pad=42;
+  let pts=[], maxY=-Infinity, minY=Infinity;
+  for(let x=0;x<=0.70001;x+=0.01){const mp=calc(x,p).monthlyProfit; pts.push([x,mp]); maxY=Math.max(maxY,mp); minY=Math.min(minY,mp);}
+  if(minY>0)minY=0;
+  const X=x=>pad+(x/0.70)*(W-pad-14);
+  const Y=y=>H-pad-((y-minY)/(maxY-minY||1))*(H-pad-16);
+  let path=pts.map((p0,i)=>(i?'L':'M')+X(p0[0]).toFixed(1)+' '+Y(p0[1]).toFixed(1)).join(' ');
+  const zeroY=Y(0);
+  const cur=+el.D.value/100, curMP=calc(cur,p).monthlyProfit;
+  svg.innerHTML=`
+    <line x1="${pad}" y1="${zeroY}" x2="${W-14}" y2="${zeroY}" stroke="#E5E8EB"/>
+    <line x1="${pad}" y1="16" x2="${pad}" y2="${H-pad}" stroke="#E5E8EB"/>
+    <path d="${path}" fill="none" stroke="#3182F6" stroke-width="2.5"/>
+    <line x1="${X(opt.d)}" y1="16" x2="${X(opt.d)}" y2="${H-pad}" stroke="#15803D" stroke-dasharray="4 3"/>
+    <circle cx="${X(opt.d)}" cy="${Y(opt.mp)}" r="5" fill="#15803D"/>
+    <text x="${X(opt.d)}" y="12" fill="#15803D" font-size="11" font-weight="700" text-anchor="middle">최적 ${Math.round(opt.d*100)}%</text>
+    <circle cx="${X(cur)}" cy="${Y(curMP)}" r="5" fill="#3182F6"/>
+    <text x="${X(cur)}" y="${Y(curMP)-9}" fill="#3182F6" font-size="11" font-weight="700" text-anchor="middle">현재</text>
+    <text x="${pad}" y="${H-pad+16}" fill="#8B95A1" font-size="10">0%</text>
+    <text x="${W-14}" y="${H-pad+16}" fill="#8B95A1" font-size="10" text-anchor="end">70%</text>
+    <text x="6" y="20" fill="#8B95A1" font-size="10">월순이익</text>`;
+}
+
+function render(){
+  setVals();
+  const p=read();
+  const r=calc(p.d,p);
+  const opt=optimal(p);
+  const bep=bepRate(p);
+  document.getElementById('oCAC').textContent=won(r.cac);
+  document.getElementById('oLTV').textContent=won(r.ltv);
+  document.getElementById('oRATIO').textContent=r.ratio.toFixed(1)+'배';
+  document.getElementById('oPROF').textContent=won(r.profitPer);
+  document.getElementById('oBEP').textContent=Math.round(bep*100)+'%';
+  document.getElementById('oN').textContent=Math.round(r.N).toLocaleString('ko-KR')+'명';
+  document.getElementById('oMP').textContent=wonShort(r.monthlyProfit);
+  document.getElementById('oYP').textContent=wonShort(r.monthlyProfit*12);
+  document.getElementById('oOPT').textContent=Math.round(opt.d*100)+'%';
+
+  const v=document.getElementById('verdict');
+  if(r.ratio>=3){v.className='verdict v-good'; v.textContent=`✅ 건강 — LTV/CAC ${r.ratio.toFixed(1)}배. 이 쿠폰율에서 신규 고객 1명당 ${won(r.profitPer)} 남습니다.`;}
+  else if(r.ratio>=1){v.className='verdict v-warn'; v.textContent=`⚠️ 주의 — LTV/CAC ${r.ratio.toFixed(1)}배. 흑자지만 여유가 적습니다. 쿠폰율/매체CPA 조정 권장.`;}
+  else {v.className='verdict v-bad'; v.textContent=`🚫 적자 — LTV/CAC ${r.ratio.toFixed(1)}배. 고객 1명당 ${won(-r.profitPer)} 손실. 쿠폰율을 손익분기(${Math.round(bep*100)}%) 아래로 낮추세요.`;}
+
+  const diff=Math.round(opt.d*100)-(+el.D.value);
+  const msg = diff===0 ? `현재 쿠폰율이 이미 최적입니다.` :
+    diff>0 ? `현재보다 쿠폰율을 <b>${diff}%p 높이면</b> 월 순이익이 <b>${wonShort(opt.mp-r.monthlyProfit)}</b> 더 늘어납니다 — 할인을 더 써서 신규 유입을 키우는 게 이득인 구간입니다.`
+           : `현재보다 쿠폰율을 <b>${-diff}%p 낮추면</b> 월 순이익이 <b>${wonShort(opt.mp-r.monthlyProfit)}</b> 더 늘어납니다 — 할인이 과해 마진을 잠식하고 있습니다.`;
+  document.getElementById('reco').innerHTML=`<b>📌 세일즈 제안 요약</b><br>이 광고주의 최적 쿠폰율은 <b>${Math.round(opt.d*100)}%</b>이며, 이때 월 순이익은 <b>${wonShort(opt.mp)}</b>(연 <b>${wonShort(opt.mp*12)}</b>)입니다. ${msg}`;
+
+  drawChart(p,opt);
+}
+
+function loadPreset(key){
+  const v=PRESETS[key]; el.V.value=v.V; el.M.value=v.M; el.N.value=v.N; el.C.value=v.C; el.B.value=v.B; el.E.value=v.E; el.D.value=v.D;
+  document.querySelectorAll('.preset').forEach(b=>b.classList.toggle('on',b.dataset.p===key));
+  render();
+}
+document.getElementById('presets').addEventListener('click',e=>{if(e.target.dataset.p)loadPreset(e.target.dataset.p);});
+ids.forEach(i=>el[i].addEventListener('input',render));
+loadPreset('ably');
+</script>
+</body>
+</html>
