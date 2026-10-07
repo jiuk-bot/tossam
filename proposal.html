@@ -131,6 +131,25 @@
   .oc .t{font-size:11px; color:var(--gray); font-weight:600} .oc .n{font-size:20px; font-weight:800; margin-top:3px} .oc .s{font-size:10.5px; color:#8B95A1; margin-top:2px}
   .oc.hero{grid-column:1/-1; background:#EAF2FE; border-color:#BBD6FF} .oc.hero .n{color:var(--blue)}
   .oc.locked{background:#FFF7FA; border:1px dashed #FFB3CE} .oc.locked .n{color:var(--ably)}
+  /* 혜택 체감 바 */
+  .bench{background:#F2F4F6; border-radius:14px; padding:16px 18px; margin-top:14px; break-inside:avoid}
+  .bench .bt{font-size:12.5px; font-weight:800; margin-bottom:10px}
+  .bbrow{display:flex; align-items:center; gap:12px; margin:8px 0; font-size:12.5px}
+  .bbl{width:185px; flex:none; font-weight:700} .bbv{width:42px; flex:none; text-align:right; font-weight:800}
+  .bbtrack{flex:1; height:16px; background:#E1E5EA; border-radius:8px; overflow:hidden}
+  .bbfill{height:100%; border-radius:8px} .bbfill.gray{background:#B0B8C1} .bbfill.pink{background:linear-gradient(90deg,#FF6AA5,#FF2E6E)}
+  /* 성공사례 카드 */
+  .caserow{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px}
+  @media(max-width:720px){.caserow{grid-template-columns:1fr}}
+  .cse{border:1px solid var(--line); border-radius:16px; padding:18px 20px; background:#fff; break-inside:avoid}
+  .cse.pk{border-color:#FFC2D8; background:#FFF8FB}
+  .cse .cb{display:flex; align-items:center; gap:10px; margin-bottom:14px}
+  .cse .clogo{width:40px; height:40px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff; font-size:16px; flex:none}
+  .cse .cname{font-weight:800; font-size:15px} .cse .cind{font-size:11.5px; color:var(--gray)}
+  .cse .cst{display:flex; gap:24px}
+  .cse .cn{font-size:27px; font-weight:900; color:var(--blue); line-height:1; letter-spacing:-.02em} .cse.pk .cn{color:var(--ably)}
+  .cse .ct{font-size:11px; color:var(--gray); margin-top:4px}
+  .cse .cd{font-size:12px; color:var(--gray); margin-top:12px}
 
   @media print{
     @page{size:A4; margin:9mm}
@@ -266,6 +285,11 @@
       <tr><td>혜택 체감</td><td>낮음 (다음 구매에 적립)</td><td class="col-ably">높음 (지금 15% 할인)</td><td>2.5% 적립 대비 체감 우위로 전환율↑</td></tr>
       <tr><td>지면 전략</td><td>피드 노출 <span class="label lbC">관찰</span></td><td class="col-ably">최상단 AD 선점 + 오늘딜(CPS)</td><td>노출은 고정 선점, 비용은 전환에만 발생</td></tr>
     </table>
+    <div class="bench">
+      <div class="bt">혜택 체감 비교 — 같은 쿠폰 지면, 다른 체감</div>
+      <div class="bbrow"><span class="bbl">지그재그 · 2.5% 적립(이연)</span><div class="bbtrack"><div class="bbfill gray" style="width:17%"></div></div><span class="bbv">2.5%</span></div>
+      <div class="bbrow"><span class="bbl">에이블리 · 15% 즉시할인(제안)</span><div class="bbtrack"><div class="bbfill pink" style="width:100%"></div></div><span class="bbv">15%</span></div>
+    </div>
   </section>
 
   <!-- 4. 제안: 왜 15% -->
@@ -295,13 +319,13 @@
     <span class="kicker">예상 성과 · 유사업종 기준</span>
     <h2>유사업종(패션 커머스) 기준 <span class="em">예상 성과</span></h2>
     <p class="sub">에이블리 내부 데이터 없이, <b>유사 패션 커머스 업종의 토스 벤치마크</b>로 예상 성과를 추정합니다. 노출·전환·신규 결제·거래액(GMV)·광고 ROAS까지 토스 데이터로 예측되고, 광고주는 "결제당 비용(CPS)"만 합의하면 됩니다.</p>
-    <div class="box good"><b>유사업종 예상 성과 요약</b> — 월 예산 1,000만원 · 목표 CPS 8,000원 · 패션 업종 전환율 0.5% 가정 시 → <b>신규 결제 ~1,250건 · 거래액(GMV) ~4,750만원 · 광고 ROAS 4.75배</b> <span class="label lbB">유사업종·토스 데이터 기준</span>. 아래에서 값을 직접 조정해 보세요.</div>
+    <div class="box good"><b>유사업종 예상 성과 요약</b> — 월 예산 1,000만원 · 목표 CPS 8,000원 · 패션 업종 전환율 0.5% 가정 시 → <b>신규 결제 ~1,250건 · 거래액(GMV) ~4,750만원 · 광고 ROAS 4.75배(475%)</b> <span class="label lbB">유사업종·토스 데이터 기준</span>. 참고로 같은 패션 커머스 <b>솔드아웃은 토스페이 쿠폰 광고로 ROAS 1,500%</b>를 기록했습니다(하단 성공사례) — 본 예상치는 보수적 가정입니다. 아래에서 값을 직접 조정해 보세요.</div>
     <div class="calc">
       <div class="panel">
-        <div class="fld"><div class="lab"><span>월 예산</span><span class="v" id="vB"></span></div><input type="number" id="B" step="1000000" value="10000000"></div>
-        <div class="fld"><div class="lab"><span>목표 CPS (결제당 지불 비용)</span><span class="v" id="vC"></span></div><input type="number" id="C" step="500" value="8000"><div class="hint">광고주가 수용 가능한 결제당 광고비 — 유일하게 합의할 값</div></div>
+        <div class="fld"><div class="lab"><span>월 예산</span><span class="v" id="vB"></span></div><input type="text" inputmode="numeric" id="B" value="10,000,000"></div>
+        <div class="fld"><div class="lab"><span>목표 CPS (결제당 지불 비용)</span><span class="v" id="vC"></span></div><input type="text" inputmode="numeric" id="C" value="8,000"><div class="hint">광고주가 수용 가능한 결제당 광고비 — 유일하게 합의할 값</div></div>
         <div class="fld"><div class="lab"><span>예상 전환율 (노출→결제)</span><span class="v" id="vR"></span></div><input type="range" id="R" min="0.1" max="2" step="0.05" value="0.5"><div class="hint">토스 패션 업종 쿠폰 전환율 <span class="label lbB">토스 내부 데이터</span></div></div>
-        <div class="fld"><div class="lab"><span>평균 객단가</span><span class="v" id="vV"></span></div><input type="number" id="V" step="1000" value="38000"><div class="hint">토스페이 결제 데이터 기반 <span class="label lbB">토스 내부 데이터</span></div></div>
+        <div class="fld"><div class="lab"><span>평균 객단가</span><span class="v" id="vV"></span></div><input type="text" inputmode="numeric" id="V" value="38,000"><div class="hint">토스페이 결제 데이터 기반 <span class="label lbB">토스 내부 데이터</span></div></div>
         <div class="fld"><div class="lab"><span>에이블리 기여마진 (선택)</span><span class="v" id="vM"></span></div><input type="range" id="M" min="0" max="60" step="1" value="0"><div class="hint">이 한 칸만 에이블리가 채우면 순이익까지 산출 <span class="label lbA">광고주 내부</span></div></div>
       </div>
       <div>
@@ -352,6 +376,32 @@
     </table>
   </section>
 
+  <!-- 성공사례 -->
+  <section>
+    <span class="kicker">CASE · 토스페이 쿠폰 광고 성공사례</span>
+    <h2>이미 유사 업종이 토스에서 <span class="em">성과를 냈습니다</span></h2>
+    <p class="sub">특히 솔드아웃은 에이블리와 같은 패션 커머스 — 토스페이 쿠폰 광고(일반딜·오늘딜)로 아래 성과를 기록했습니다. <span class="label lbC">출처: 토스페이 공식 블로그</span></p>
+    <div class="caserow">
+      <div class="cse pk">
+        <div class="cb"><div class="clogo" style="background:#111">S</div><div><div class="cname">솔드아웃 (SOLDOUT)</div><div class="cind">패션·한정판 리셀 · ★ 에이블리와 유사 업종</div></div></div>
+        <div class="cst">
+          <div><div class="cn">1,500%</div><div class="ct">ROAS</div></div>
+          <div><div class="cn">2.2억원+</div><div class="ct">월 거래액</div></div>
+        </div>
+        <div class="cd">나이키 스니커즈·의류 판매 강화에 토스페이 쿠폰 광고(일반딜+오늘딜) 집행 → 성과보장 CPS로 거래액·ROAS 달성.</div>
+      </div>
+      <div class="cse">
+        <div class="cb"><div class="clogo" style="background:#1DB954">팔</div><div><div class="cname">팔도감</div><div class="cind">이커머스 (온라인 쇼핑)</div></div></div>
+        <div class="cst">
+          <div><div class="cn">3.3배↑</div><div class="ct">신규 구매자</div></div>
+          <div><div class="cn">+26%</div><div class="ct">타겟팅 정확성</div></div>
+        </div>
+        <div class="cd">신규 가입·첫 구매·재구매 촉진 목표로 쿠폰 광고(기본딜·오늘딜·브랜드관) 집행 → 신규 구매자 약 3.3배 증가.</div>
+      </div>
+    </div>
+    <div class="box ably"><b>에이블리 시사점</b> — 같은 패션 커머스 솔드아웃이 토스페이 쿠폰 광고로 ROAS 1,500%·월 거래액 2.2억을 만들었습니다. 에이블리도 이미 검증된 15% 오퍼 + CPS 성과보장으로 동일 구조의 성과를 기대할 수 있습니다.</div>
+  </section>
+
   <footer>
     <div><b>윤지욱</b> · jiuk2038@gmail.com · 토스 Account Manager(토스페이/쿠폰) 지원</div>
     <div class="disc">본 제안서는 세일즈 역량 증명을 위한 가상 제안서입니다. 브랜드명·경쟁사 현황은 공개 앱 화면 관찰 기준이며, 계산기 수치는 토스 데이터로 채우는 것을 전제로 한 예시 기본값입니다.</div>
@@ -362,8 +412,10 @@
   const $=id=>document.getElementById(id);
   const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
   const shortWon=n=>{n=Math.round(n); if(Math.abs(n)>=1e8)return (n/1e8).toFixed(2)+'억원'; if(Math.abs(n)>=1e4)return Math.round(n/1e4).toLocaleString('ko-KR')+'만원'; return n.toLocaleString('ko-KR')+'원';};
+  const nv=e=>+String(e.value).replace(/[^0-9.]/g,'')||0;
+  const fmt=n=>Math.round(n).toLocaleString('ko-KR');
   function calc(){
-    const B=+$('B').value, C=+$('C').value, R=+$('R').value/100, V=+$('V').value, M=+$('M').value/100;
+    const B=nv($('B')), C=nv($('C')), R=+$('R').value/100, V=nv($('V')), M=+$('M').value/100;
     $('vB').textContent=shortWon(B); $('vC').textContent=won(C); $('vR').textContent=(R*100).toFixed(2)+'%'; $('vV').textContent=won(V); $('vM').textContent=M? (M*100)+'%':'미입력';
     const N = C>0? B/C : 0;              // 신규 결제 건수
     const GMV = N*V;                     // 거래액
@@ -378,6 +430,7 @@
     else { $('oPROFIT').textContent='—'; $('oProfitS').textContent='마진 입력 시 산출 (에이블리 내부값)'; }
   }
   ['B','C','R','V','M'].forEach(id=>$(id).addEventListener('input',calc));
+  ['B','C','V'].forEach(id=>$(id).addEventListener('input',()=>{const n=nv($(id)); $(id).value=n?fmt(n):'';}));
   calc();
 </script>
 </body>

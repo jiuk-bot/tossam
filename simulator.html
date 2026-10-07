@@ -93,7 +93,7 @@
         </div>
 
         <label class="fld"><span class="lab">객단가 (1회 구매액) <span class="v" id="vV"></span></span>
-          <input type="number" id="V" step="500"></label>
+          <input type="text" inputmode="numeric" id="V"></label>
         <label class="fld"><span class="lab">마진율 <span class="v" id="vM"></span></span>
           <input type="range" id="M" min="10" max="90" step="1"></label>
           <div class="hint">매출 중 이익으로 남는 비율</div>
@@ -101,9 +101,9 @@
           <input type="range" id="N" min="1" max="12" step="1"></label>
           <div class="hint">첫 구매 포함, 이 고객이 평생 몇 번 사는가 (LTV 기준)</div>
         <label class="fld"><span class="lab">매체 CPA (쿠폰 0%일 때 신규고객 1명 광고비) <span class="v" id="vC"></span></span>
-          <input type="number" id="C" step="500"></label>
+          <input type="text" inputmode="numeric" id="C"></label>
         <label class="fld"><span class="lab">월 매체 예산 <span class="v" id="vB"></span></span>
-          <input type="number" id="B" step="500000"></label>
+          <input type="text" inputmode="numeric" id="B"></label>
         <label class="fld"><span class="lab">쿠폰 전환 민감도 <span class="v" id="vE"></span></span>
           <input type="range" id="E" min="0" max="25" step="1"></label>
           <div class="hint">쿠폰이 전환(신규 유입)을 얼마나 끌어올리는지 (가정값)</div>
@@ -175,8 +175,10 @@ const ids=['V','M','N','C','B','E','D'];
 const el={}; ids.forEach(i=>el[i]=document.getElementById(i));
 const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
 const wonShort=n=>{n=Math.round(n); if(Math.abs(n)>=1e8)return (n/1e8).toFixed(2)+'억원'; if(Math.abs(n)>=1e4)return Math.round(n/1e4).toLocaleString('ko-KR')+'만원'; return n.toLocaleString('ko-KR')+'원';};
+const nv=e=>+String(e.value).replace(/[^0-9.]/g,'')||0;
+const fmt=n=>Math.round(n).toLocaleString('ko-KR');
 
-function read(){return {V:+el.V.value, m:+el.M.value/100, n:+el.N.value, C0:+el.C.value, B:+el.B.value, e:+el.E.value/10, d:+el.D.value/100};}
+function read(){return {V:nv(el.V), m:+el.M.value/100, n:+el.N.value, C0:nv(el.C), B:nv(el.B), e:+el.E.value/10, d:+el.D.value/100};}
 
 function calc(d, p){
   const conv = 1 + p.e*d;
@@ -200,12 +202,11 @@ function bepRate(p){ // per-customer break-even coupon rate (전환효과 고정
 }
 
 function setVals(){
-  el.V.value=el.V.value||15000;
-  document.getElementById('vV').textContent=won(+el.V.value);
+  document.getElementById('vV').textContent=won(nv(el.V));
   document.getElementById('vM').textContent=el.M.value+'%';
   document.getElementById('vN').textContent=el.N.value+'회';
-  document.getElementById('vC').textContent=won(+el.C.value);
-  document.getElementById('vB').textContent=wonShort(+el.B.value);
+  document.getElementById('vC').textContent=won(nv(el.C));
+  document.getElementById('vB').textContent=wonShort(nv(el.B));
   document.getElementById('vE').textContent=(+el.E.value/10).toFixed(1)+'×';
   document.getElementById('vD').textContent=el.D.value+'%';
 }
@@ -265,12 +266,13 @@ function render(){
 }
 
 function loadPreset(key){
-  const v=PRESETS[key]; el.V.value=v.V; el.M.value=v.M; el.N.value=v.N; el.C.value=v.C; el.B.value=v.B; el.E.value=v.E; el.D.value=v.D;
+  const v=PRESETS[key]; el.V.value=fmt(v.V); el.M.value=v.M; el.N.value=v.N; el.C.value=fmt(v.C); el.B.value=fmt(v.B); el.E.value=v.E; el.D.value=v.D;
   document.querySelectorAll('.preset').forEach(b=>b.classList.toggle('on',b.dataset.p===key));
   render();
 }
 document.getElementById('presets').addEventListener('click',e=>{if(e.target.dataset.p)loadPreset(e.target.dataset.p);});
 ids.forEach(i=>el[i].addEventListener('input',render));
+['V','C','B'].forEach(i=>el[i].addEventListener('input',()=>{const n=nv(el[i]); el[i].value=n?fmt(n):'';}));
 loadPreset('ably');
 </script>
 </body>
