@@ -76,8 +76,22 @@
 </header>
 
 <div class="wrap">
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:22px 0">
+    <div style="border:1px solid var(--line); border-radius:14px; padding:16px 18px; background:#fff">
+      <div style="font-weight:800; font-size:14px; margin-bottom:6px">🛠️ 왜 만들었나</div>
+      <p style="font-size:13px; color:var(--gray); margin:0; line-height:1.6">광고주마다 객단가·마진·재구매가 달라 <b>"이 쿠폰율이 당신에게 이득인가"</b>는 광고주 본인 숫자로 증명해야 설득됩니다. 감이 아니라 숫자로 <b>"할인은 비용이 아니라 투자"</b>임을 그 자리에서 보여주는 세일즈 도구입니다.</p>
+    </div>
+    <div style="border:1px solid var(--line); border-radius:14px; padding:16px 18px; background:#fff">
+      <div style="font-weight:800; font-size:14px; margin-bottom:6px">📋 어떻게 쓰나</div>
+      <ol style="font-size:13px; color:var(--gray); margin:0; padding-left:18px; line-height:1.6">
+        <li>업종 프리셋 선택 또는 광고주 숫자 입력(객단가·마진·재구매·매체CPA·예산)</li>
+        <li>🎟️ <b>쿠폰 할인율 슬라이더</b>를 움직이며 CAC·LTV/CAC·월 순이익 변화 확인</li>
+        <li>곡선의 꼭대기 = 월 순이익이 최대인 <b>'최적 쿠폰율'</b> → 제안서에 첨부</li>
+      </ol>
+    </div>
+  </div>
   <div class="note">
-    💡 이 도구는 제가 셀프스토리지(공유창고)에서 <b>라커 점유율에 쿠폰 할인율을 연동</b>했던 로직 — <i>"점유율이 낮을수록(적자 구간) 공격적으로 할인해 진입 허들을 낮추고, 평균 이용기간 동안 회수한다"</i> — 을 <b>토스 광고주 일반 모델로 확장</b>한 것입니다. 수치는 예시 기본값이며, 광고주 실제 값으로 바꿔 쓰면 그대로 제안서가 됩니다.
+    💡 이 도구의 로직 배경 — 셀프스토리지에서 <b>라커 점유율에 쿠폰 할인율을 연동</b>한 경험(점유율 낮을수록 공격적으로 할인해 진입 허들↓, 평균 이용기간 동안 회수)을 <b>토스 광고주 일반 모델로 확장</b>했습니다. 수치는 예시 기본값이며, 광고주 실값으로 바꿔 쓰면 그대로 제안서가 됩니다.
   </div>
 
   <section>
