@@ -134,6 +134,15 @@
 
   .srcs{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px} .src{display:flex; gap:7px; align-items:center; border:1px solid var(--line); border-radius:999px; padding:7px 13px; font-size:12px; background:#fff}
   .closebtn{display:inline-block; background:#fff; color:var(--blue); font-weight:800; padding:14px 26px; border-radius:14px; text-decoration:none; margin-top:20px}
+  /* 상황별 대처 시나리오 */
+  .scns{display:grid; gap:12px; margin-top:4px}
+  .scn{border:1px solid var(--line); border-radius:16px; overflow:hidden; background:#fff; break-inside:avoid}
+  .scn .srow{display:flex; gap:10px; padding:13px 16px; font-size:13px; align-items:flex-start}
+  .scn .srow + .srow{border-top:1px solid #EEF1F4}
+  .scn .stag{flex:none; font-size:11px; font-weight:800; padding:3px 9px; border-radius:7px; margin-top:1px; white-space:nowrap}
+  .scn .s1{background:#FFF6F6} .scn .s1 .stag{background:#FEE2E2; color:#DC2626}
+  .scn .s2 .stag{background:#EAF2FE; color:var(--blue)}
+  .scn .s3{background:#F5FBF8} .scn .s3 .stag{background:#E8F7EE; color:#15803D}
 
   @media print{
     @page{size:A4; margin:0}
@@ -177,19 +186,39 @@
 <!-- ①-b 운영 방식 -->
 <section class="band gray">
   <div class="wrap">
-    <span class="eyebrow">HOW I WORK · 에이블리를 이렇게 운영합니다</span>
-    <div class="dh">제안 → 집행 → 증액 → 유지, <span class="em">광고주와 함께 키웁니다</span></div>
-    <p class="dsub">단발 집행이 아니라 — 데이터로 니즈를 충족하며 예산을 단계적으로 키우는 선순환을 설계합니다.</p>
+    <span class="eyebrow">HOW I'D WORK · 토스페이 Ads AM 직무 수행 시나리오</span>
+    <div class="dh">맡겨주시면, <span class="em">저는 이렇게 일합니다</span></div>
+    <p class="dsub">제안 → 집행 → 증액 → 유지 선순환으로 광고주 성과를 키우고, 성과가 흔들릴 땐 데이터로 선제 대응해 이탈을 막습니다.</p>
     <div class="flow mt">
-      <div class="step"><div class="k">① 제안 (Propose)</div><div class="v">데이터로 니즈 진단 → <b>이미 쓰는 15% 오퍼</b>를 토스로 맞춤 제안</div></div>
+      <div class="step"><div class="k">① 제안 (Propose)</div><div class="v">데이터로 광고주 니즈 진단 → 목적에 맞는 <b>쿠폰 오퍼·구좌</b> 맞춤 제안</div></div>
       <div class="arrow">→</div>
       <div class="step"><div class="k">② 집행 (Launch)</div><div class="v"><b>CPS 성과보장</b>으로 리스크 없이 소액 라이브 → 빠른 검증</div></div>
       <div class="arrow">→</div>
       <div class="step"><div class="k">③ 증액 (Grow)</div><div class="v">GMV·CPS 성과 증명 → 조건 충족 시 예산 <b>+30~50% 증액</b></div></div>
       <div class="arrow">→</div>
-      <div class="step"><div class="k">④ 유지 (Retain)</div><div class="v">정기 리포트 + <b>신규 매체·오퍼 제안</b>으로 니즈 지속 충족 → 장기 파트너십</div></div>
+      <div class="step"><div class="k">④ 유지 (Retain)</div><div class="v">정기 리포트 + <b>신규 구좌·오퍼 제안</b>으로 니즈 지속 충족 → 장기 파트너십</div></div>
     </div>
-    <div class="card mt" style="background:#EAF2FE; border-color:#BBD6FF; font-size:13.5px; color:#1B4FA0">🤝 핵심은 <b>"광고주의 성과가 곧 저의 KPI"</b> — 성과를 증명하며 신뢰를 쌓고, 그 신뢰로 예산을 키우는 선순환을 만듭니다.</div>
+
+    <p style="font-weight:800; margin:28px 0 2px; font-size:17px">⚡ 상황별 대처 플레이북 — <span style="color:var(--ably)">성과가 흔들릴 때</span></p>
+    <p class="dsub" style="margin-bottom:12px">AM의 진짜 실력은 집행이 아니라 <b>‘성과가 안 날 때 어떻게 구하느냐’</b>입니다. 토스의 다양한 타겟팅·구좌를 활용해 이탈 전에 먼저 움직입니다.</p>
+    <div class="scns">
+      <div class="scn">
+        <div class="srow s1"><span class="stag">상황</span><div>광고주: “전환이 안 나오고 <b>결제당 비용(CPS)이 목표보다 높다</b>.”</div></div>
+        <div class="srow s2"><span class="stag">대처</span><div>토스의 <b>연령·성별·결제이력 세그먼트로 타겟 A/B 테스트</b>를 유도해 어떤 고객이 전환이 좋은지 데이터로 규명 → 저효율 세그먼트 예산을 고효율로 이관. 동시에 <b>쿠폰 할인율 10/15/20% A/B</b>로 전환 민감도까지 측정.</div></div>
+        <div class="srow s3"><span class="stag">결과</span><div>고효율 세그먼트·최적 할인율에 집중 → <b>CPS를 목표 이내로 회복</b>, 같은 예산으로 더 많은 결제.</div></div>
+      </div>
+      <div class="scn">
+        <div class="srow s1"><span class="stag">상황</span><div>최상단 AD(노출형)로 <b>노출은 많은데 결제 전환이 약하다</b>.</div></div>
+        <div class="srow s2"><span class="stag">대처</span><div>목적에 맞게 <b>구좌를 재배치</b> — 노출 선점은 유지하되 전환은 <b>오늘딜·기본딜 쿠폰(CPS 성과보장)</b>으로 이동, 앱 유입이 더 필요하면 <b>방문미션(CPC)</b>를 추가 추천. “노출용 구좌 ≠ 전환용 구좌”임을 데이터로 설명.</div></div>
+        <div class="srow s3"><span class="stag">결과</span><div>성과보장 구좌로 <b>비용 리스크↓·전환당 효율↑</b> — 광고주는 결제가 난 만큼만 지불.</div></div>
+      </div>
+      <div class="scn">
+        <div class="srow s1"><span class="stag">상황</span><div>광고주: “성과가 정체됐다. <b>계속할지 고민된다</b>.” (이탈 위험)</div></div>
+        <div class="srow s2"><span class="stag">대처</span><div>이탈 전 <b>선제 대응</b> — 원인을 진단(소재 피로 / 타겟 소진 / 구좌 미스매치)한 리포트 + <b>개선안 2~3개</b>를 먼저 제시. <b>카테고리 티어(뷰티 30%) 조정·시즌 오늘딜(타임딜)·신규 구좌</b>로 환기할 포인트를 제안해 다시 성과를 만듦.</div></div>
+        <div class="srow s3"><span class="stag">결과</span><div>“문제를 먼저 찾아 가져오는 담당자”라는 신뢰 → <b>이탈 방지·재증액</b>으로 전환.</div></div>
+      </div>
+    </div>
+    <div class="card mt" style="background:#EAF2FE; border-color:#BBD6FF; font-size:13.5px; color:#1B4FA0">🤝 핵심은 <b>“광고주의 성과가 곧 저의 KPI”</b> — 글로벌랩스에서 지역·매체·타겟을 A/B로 쪼개 고효율 풀만 남겨 <b>ROAS를 2배 이상</b> 끌어올린 방식을, 토스의 더 정교한 세그먼트·구좌에 그대로 적용합니다.</div>
   </div>
 </section>
 
