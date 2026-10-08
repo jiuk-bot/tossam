@@ -143,6 +143,13 @@
   .scn .s1{background:#FFF6F6} .scn .s1 .stag{background:#FEE2E2; color:#DC2626}
   .scn .s2 .stag{background:#EAF2FE; color:var(--blue)}
   .scn .s3{background:#F5FBF8} .scn .s3 .stag{background:#E8F7EE; color:#15803D}
+  .qt{margin:2px 16px 12px; background:#0E1726; color:#E9EEF5; border-radius:12px; padding:13px 16px; font-size:13px; line-height:1.65}
+  .qt b{color:#7FB2FF}
+  .budviz{padding:2px 16px 14px}
+  .budrow{display:flex; align-items:center; gap:10px; margin:6px 0}
+  .budl{width:52px; flex:none; font-size:11.5px; font-weight:800; color:var(--gray)}
+  .budbar{flex:1; display:flex; height:26px; gap:2px}
+  .seg{display:flex; align-items:center; justify-content:center; color:#fff; font-size:10.5px; font-weight:800; white-space:nowrap; border-radius:5px; overflow:hidden; min-width:0}
 
   @media print{
     @page{size:A4; margin:0}
@@ -202,21 +209,49 @@
     <p style="font-weight:800; margin:28px 0 2px; font-size:17px">⚡ 상황별 대처 플레이북 — <span style="color:var(--ably)">성과가 흔들릴 때</span></p>
     <p class="dsub" style="margin-bottom:12px">AM의 진짜 실력은 집행이 아니라 <b>‘성과가 안 날 때 어떻게 구하느냐’</b>입니다. 토스의 다양한 타겟팅·구좌를 활용해 이탈 전에 먼저 움직입니다.</p>
     <div class="scns">
+
+      <!-- 시나리오 1: 타겟 A/B -->
       <div class="scn">
-        <div class="srow s1"><span class="stag">상황</span><div>광고주: “전환이 안 나오고 <b>결제당 비용(CPS)이 목표보다 높다</b>.”</div></div>
-        <div class="srow s2"><span class="stag">대처</span><div>토스의 <b>연령·성별·결제이력 세그먼트로 타겟 A/B 테스트</b>를 유도해 어떤 고객이 전환이 좋은지 데이터로 규명 → 저효율 세그먼트 예산을 고효율로 이관. 동시에 <b>쿠폰 할인율 10/15/20% A/B</b>로 전환 민감도까지 측정.</div></div>
-        <div class="srow s3"><span class="stag">결과</span><div>고효율 세그먼트·최적 할인율에 집중 → <b>CPS를 목표 이내로 회복</b>, 같은 예산으로 더 많은 결제.</div></div>
+        <div class="srow s1"><span class="stag">상황 ①</span><div>에이블리가 <b>‘패션 관심사’ 타겟으로만</b> 집행 중 — 전환이 약하고 CPS가 목표(8,000원)보다 높다.</div></div>
+        <div class="srow s2"><span class="stag">진단</span><div>관심사는 ‘구경만 하는’ 유저까지 포함 → 허수가 섞인다. 토스는 <b>실제 결제이력</b> 타겟이 되니 ‘진짜 돈 쓰는 유저’를 직접 겨냥할 수 있다.</div></div>
+        <div class="qt">💬 “현재 일 예산 <b>30만원(월 900만)</b>을 100% 관심사에 쓰고 계신데요 — 2주만 <b>관심사 50% / 결제이력 50%</b>로 나눠 A/B 돌려보시죠. 결제 세그먼트 CPS가 낮게 나오면 <b>70:30 → 90:10</b>으로 점진 이관하겠습니다.”</div>
+        <div class="budviz">
+          <div class="budrow"><span class="budl">현재</span><div class="budbar"><div class="seg" style="width:100%; background:#A6AEB8">관심사 100% · 일 30만원</div></div></div>
+          <div class="budrow"><span class="budl">A/B</span><div class="budbar"><div class="seg" style="width:50%; background:#A6AEB8">관심사 · 일 15만</div><div class="seg" style="width:50%; background:var(--ably)">결제이력 · 일 15만</div></div></div>
+          <div class="budrow"><span class="budl">이관</span><div class="budbar"><div class="seg" style="width:30%; background:#A6AEB8">관심사 30%</div><div class="seg" style="width:70%; background:var(--ably)">결제이력 70% (고효율)</div></div></div>
+        </div>
+        <div class="srow s3"><span class="stag">결과</span><div>결제 세그먼트 CPS가 더 낮음을 데이터로 확인 → 고효율로 예산 이관 → <b>전체 CPS 하락·GMV↑</b>.</div></div>
       </div>
+
+      <!-- 시나리오 2: 소재 A/B -->
       <div class="scn">
-        <div class="srow s1"><span class="stag">상황</span><div>최상단 AD(노출형)로 <b>노출은 많은데 결제 전환이 약하다</b>.</div></div>
-        <div class="srow s2"><span class="stag">대처</span><div>목적에 맞게 <b>구좌를 재배치</b> — 노출 선점은 유지하되 전환은 <b>오늘딜·기본딜 쿠폰(CPS 성과보장)</b>으로 이동, 앱 유입이 더 필요하면 <b>방문미션(CPC)</b>를 추가 추천. “노출용 구좌 ≠ 전환용 구좌”임을 데이터로 설명.</div></div>
-        <div class="srow s3"><span class="stag">결과</span><div>성과보장 구좌로 <b>비용 리스크↓·전환당 효율↑</b> — 광고주는 결제가 난 만큼만 지불.</div></div>
+        <div class="srow s1"><span class="stag">상황 ②</span><div>일 예산 <b>10만원</b> 캠페인에 <b>소재 5개</b>를 한 세트에 넣고 ‘A/B 중’이라는데, 어느 소재가 좋은지 판단이 안 선다.</div></div>
+        <div class="srow s2"><span class="stag">진단</span><div>한 세트에 소재가 많으면 ML이 상위 소재에 예산을 몰아, 하위 소재는 <b>일 7천원 수준</b>만 받는다 → 전환 1~2건으론 <b>신뢰 있는 A/B가 불가능</b>.</div></div>
+        <div class="qt">💬 “소재를 <b>광고세트로 나눠</b> 소재당 예산을 균등하게 확보한 뒤 승자를 가리시죠. <b>운영 초기엔 ‘1소재 = 1캠페인’</b>으로 깨끗하게 분리해 비교하고, 이긴 소재에 예산을 몰아주는 게 정석입니다.”</div>
+        <div class="budviz">
+          <div style="font-size:11px; color:var(--gray); font-weight:800; margin-bottom:5px">현재 — 일 10만원 · 소재 5개 한 세트 (ML 자동배분)</div>
+          <div class="budbar"><div class="seg" style="width:42%; background:#8B95A1">소재1 4.2만</div><div class="seg" style="width:25%; background:#A6AEB8">소재2 2.5만</div><div class="seg" style="width:16%; background:#C2C8D0; color:#333">소재3 1.6만</div><div class="seg" style="width:9%; background:#F04452">4 · 9천</div><div class="seg" style="width:8%; background:#F04452">5 · 7천</div></div>
+          <div style="font-size:11px; color:#DC2626; font-weight:700; margin:6px 0 10px">↑ 소재4·5는 일 1만 미만 — 표본 부족으로 승패 판정 불가</div>
+          <div style="font-size:11px; color:var(--blue); font-weight:800; margin-bottom:5px">제안 — 소재를 광고세트로 분리(초기엔 1소재=1캠페인)</div>
+          <div class="budbar"><div class="seg" style="width:33.3%; background:var(--blue)">세트A 소재1</div><div class="seg" style="width:33.3%; background:var(--blue)">세트B 소재2</div><div class="seg" style="width:33.4%; background:var(--blue)">세트C 소재3</div></div>
+        </div>
+        <div class="srow s3"><span class="stag">결과</span><div>소재별 성과를 <b>공정하게 측정</b> → 승자 소재에 집중해 CTR·전환율↑, 소재 피로도 교체 주기도 명확해짐.</div></div>
       </div>
+
+      <!-- 시나리오 3: 구좌 미스매치 -->
       <div class="scn">
-        <div class="srow s1"><span class="stag">상황</span><div>광고주: “성과가 정체됐다. <b>계속할지 고민된다</b>.” (이탈 위험)</div></div>
-        <div class="srow s2"><span class="stag">대처</span><div>이탈 전 <b>선제 대응</b> — 원인을 진단(소재 피로 / 타겟 소진 / 구좌 미스매치)한 리포트 + <b>개선안 2~3개</b>를 먼저 제시. <b>카테고리 티어(뷰티 30%) 조정·시즌 오늘딜(타임딜)·신규 구좌</b>로 환기할 포인트를 제안해 다시 성과를 만듦.</div></div>
-        <div class="srow s3"><span class="stag">결과</span><div>“문제를 먼저 찾아 가져오는 담당자”라는 신뢰 → <b>이탈 방지·재증액</b>으로 전환.</div></div>
+        <div class="srow s1"><span class="stag">상황 ③</span><div>최상단 AD(노출형)로 <b>노출은 많은데 결제 전환이 약하다</b>.</div></div>
+        <div class="srow s2"><span class="stag">대처</span><div>목적에 맞게 <b>구좌 재배치</b> — 노출 선점은 유지하되 전환은 <b>오늘딜·기본딜 쿠폰(CPS 성과보장)</b>으로 이동, 앱 유입이 더 필요하면 <b>방문미션(CPC)</b> 추가. “노출용 구좌 ≠ 전환용 구좌”를 데이터로 설명.</div></div>
+        <div class="srow s3"><span class="stag">결과</span><div>성과보장 구좌로 <b>비용 리스크↓·전환당 효율↑</b> — 결제 난 만큼만 지불.</div></div>
       </div>
+
+      <!-- 시나리오 4: 이탈 징후 -->
+      <div class="scn">
+        <div class="srow s1"><span class="stag">상황 ④</span><div>광고주: “성과가 정체됐다. <b>계속할지 고민된다</b>.” (이탈 위험)</div></div>
+        <div class="srow s2"><span class="stag">대처</span><div>이탈 전 <b>선제 대응</b> — 원인 진단(소재 피로 / 타겟 소진 / 구좌 미스매치) 리포트 + <b>개선안 2~3개</b>를 먼저 제시. <b>카테고리 티어(뷰티 30%) 조정·시즌 오늘딜·신규 구좌</b>로 환기 포인트 제안.</div></div>
+        <div class="srow s3"><span class="stag">결과</span><div>“문제를 먼저 찾아 가져오는 담당자”라는 신뢰 → <b>이탈 방지·재증액</b>.</div></div>
+      </div>
+
     </div>
     <div class="card mt" style="background:#EAF2FE; border-color:#BBD6FF; font-size:13.5px; color:#1B4FA0">🤝 핵심은 <b>“광고주의 성과가 곧 저의 KPI”</b> — 글로벌랩스에서 지역·매체·타겟을 A/B로 쪼개 고효율 풀만 남겨 <b>ROAS를 2배 이상</b> 끌어올린 방식을, 토스의 더 정교한 세그먼트·구좌에 그대로 적용합니다.</div>
   </div>
