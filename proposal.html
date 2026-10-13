@@ -150,6 +150,14 @@
   .budl{width:52px; flex:none; font-size:11.5px; font-weight:800; color:var(--gray)}
   .budbar{flex:1; display:flex; height:26px; gap:2px}
   .seg{display:flex; align-items:center; justify-content:center; color:#fff; font-size:10.5px; font-weight:800; white-space:nowrap; border-radius:5px; overflow:hidden; min-width:0}
+  .sig{display:inline-block; font-size:10.5px; font-weight:800; padding:2px 8px; border-radius:6px; margin:2px 3px 0 0}
+  .sig.bad{background:#FEE2E2; color:#DC2626} .sig.flat{background:#EEF1F4; color:var(--gray)} .sig.good{background:#E8F7EE; color:#15803D}
+  .feat{border:1px solid var(--line); border-radius:12px; padding:14px; background:#fff; text-align:center; break-inside:avoid}
+  .feat .fi{font-size:22px} .feat .ft{font-weight:800; font-size:12.5px; margin-top:6px} .feat .fd{font-size:11px; color:var(--gray); margin-top:3px}
+  .biz{border:1px solid var(--line); border-radius:14px; padding:16px; background:#fff; break-inside:avoid}
+  .biz .bt{font-weight:800; font-size:13.5px} .biz .bd{font-size:12px; color:var(--gray); margin-top:8px}
+  .mA{color:#DC2626; font-weight:900; margin:0 4px}
+  .subh{font-weight:800; font-size:17px; margin:30px 0 2px} .subh .n{color:var(--blue)}
 
   @media print{
     @page{size:A4; margin:0}
@@ -193,68 +201,103 @@
 <!-- ①-b 운영 방식 -->
 <section class="band gray">
   <div class="wrap">
-    <span class="eyebrow">HOW I'D WORK · 토스페이 Ads AM 직무 수행 시나리오</span>
-    <div class="dh">맡겨주시면, <span class="em">저는 이렇게 일합니다</span></div>
-    <p class="dsub">제안 → 집행 → 증액 → 유지 선순환으로 광고주 성과를 키우고, 성과가 흔들릴 땐 데이터로 선제 대응해 이탈을 막습니다.</p>
-    <div class="flow mt">
-      <div class="step"><div class="k">① 제안 (Propose)</div><div class="v">데이터로 광고주 니즈 진단 → 목적에 맞는 <b>쿠폰 오퍼·구좌</b> 맞춤 제안</div></div>
-      <div class="arrow">→</div>
-      <div class="step"><div class="k">② 집행 (Launch)</div><div class="v"><b>CPS 성과보장</b>으로 리스크 없이 소액 라이브 → 빠른 검증</div></div>
-      <div class="arrow">→</div>
-      <div class="step"><div class="k">③ 증액 (Grow)</div><div class="v">GMV·CPS 성과 증명 → 조건 충족 시 예산 <b>+30~50% 증액</b></div></div>
-      <div class="arrow">→</div>
-      <div class="step"><div class="k">④ 유지 (Retain)</div><div class="v">정기 리포트 + <b>신규 구좌·오퍼 제안</b>으로 니즈 지속 충족 → 장기 파트너십</div></div>
+    <span class="eyebrow">HOW I'D WORK · 광고주 운영 전략</span>
+    <div class="dh">제안부터 광고주 성장 전략까지, <span class="em">데이터 기반 동반 성장</span></div>
+    <p class="dsub">토스페이 Ads AM으로서 — 제안·집행·증액·유지 전 과정을 데이터로 판단하고, 성과가 흔들릴 땐 선제 대응합니다.</p>
+
+    <!-- 플라이휠 -->
+    <div class="card mt" style="background:#0E1726; color:#E9EEF5; border:none">
+      <div style="font-weight:800; font-size:14px; color:#7FB2FF">광고주 매출이 커지면 광고비도 커진다 — 성과 증명 → 신뢰 → 증액 ‘플라이휠’</div>
+      <div class="flow" style="margin-top:12px">
+        <div class="step" style="background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); color:#E9EEF5"><div class="k" style="color:#7FB2FF">📋 제안·집행</div><div class="v">데이터로 설계</div></div>
+        <div class="arrow" style="color:#5A6B86">→</div>
+        <div class="step" style="background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); color:#E9EEF5"><div class="k" style="color:#7FB2FF">📈 성과 증명</div><div class="v">숫자로 입증</div></div>
+        <div class="arrow" style="color:#5A6B86">→</div>
+        <div class="step" style="background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); color:#E9EEF5"><div class="k" style="color:#7FB2FF">🤝 신뢰 → 증액</div><div class="v">예산 확대</div></div>
+        <div class="arrow" style="color:#5A6B86">→</div>
+        <div class="step" style="background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); color:#E9EEF5"><div class="k" style="color:#7FB2FF">⚙️ 데이터·최적화</div><div class="v">지속 개선</div></div>
+      </div>
+      <div style="font-size:12.5px; color:#9FB0C6; margin-top:10px">↻ 반복될수록 — <b style="color:#fff">광고주 매출·LTV↑ → 광고비·장기 유지↑</b></div>
     </div>
 
-    <p style="font-weight:800; margin:28px 0 2px; font-size:17px">⚡ 상황별 대처 플레이북 — <span style="color:var(--ably)">성과가 흔들릴 때</span></p>
-    <p class="dsub" style="margin-bottom:12px">AM의 진짜 실력은 <b>‘성과가 안 날 때 어떻게 구하느냐’</b>입니다. 모든 제안은 <b>유사 사례·데이터로 근거</b>를 대고, <b>한 번에 바꾸지 않고 보수적으로 단계 조정</b>합니다.</p>
+    <!-- 증액 -->
+    <p class="subh">💰 증액 — <span class="n">잘 될 땐 ‘데이터 근거로’ 넓히고, 안 될 땐 ‘원인부터’ 살린다</span></p>
+    <div class="card mt" style="background:#EAF2FE; border-color:#BBD6FF; color:#1B4FA0; font-size:13px">
+      <b>증액 원칙 — 주 +10~15% 점진 증액</b> · 가장 우수한 구좌·캠페인부터 1주 단위로. 급격한 증액은 <b>ML 학습을 흔들기에(직접 경험)</b> 학습이 안 깨지는 10~15%만. 그 다음은 순서가 아니라 <b>‘상황별 선택’</b> — 데이터 신호로 결정.
+    </div>
+    <div class="g3 mt">
+      <div class="biz"><div class="bt">소재·타겟팅 확장</div><div style="margin:8px 0"><span class="sig bad">CTR ↓</span><span class="sig bad">CPA ↑</span></div><div class="bd">소재 교체·로테이션 또는 유사 오디언스 확장 → 반응 회복</div></div>
+      <div class="biz"><div class="bt">신규 구좌·캠페인</div><div style="margin:8px 0"><span class="sig bad">CPM ↑</span><span class="sig bad">CVR ↓</span></div><div class="bd">타겟 풀 고갈 → 새 구좌(오늘딜·브랜드관·방문미션)로 도달 풀 확장 → 타겟 소진 돌파</div></div>
+      <div class="biz"><div class="bt">포맷·시즌 집중</div><div style="margin:8px 0"><span class="sig good">성수기</span><span class="sig good">상위 포맷</span></div><div class="bd">전환 우수 포맷·성수기(오늘딜 타임딜)에 예산 집중 → 피크 효율 극대화</div></div>
+    </div>
+    <div class="card mt" style="font-size:12.5px; color:var(--gray)">⚠️ 어떤 선택이든 <b>데이터 근거 + ML 학습 영향 최소화</b>가 기준 — 한 번에 급증 금지.</div>
+
+    <!-- 성과 부진 -->
+    <p class="subh">🩺 성과 부진(이탈 신호) → <span class="n">원인별 처방</span></p>
+    <p class="dsub" style="margin-bottom:12px">“성과가 안 난다” 할 때 — ① 성과 데이터 신호 → ② 진단 → ③ 대응 순으로 풀고, <b>유사 업종 레퍼런스를 근거로 함께</b> 제시합니다.</p>
     <div class="scns">
-
-      <!-- 시나리오 1: 타겟 A/B -->
       <div class="scn">
-        <div class="srow s1"><span class="stag">상황 ①</span><div>에이블리가 <b>‘패션 관심사’ 타겟으로만</b> 집행 중 — 전환이 약하고 CPS가 목표(8,000원)보다 높다.</div></div>
-        <div class="srow s2"><span class="stag">진단</span><div>관심사는 ‘구경만 하는’ 유저까지 포함 → 허수가 섞인다. 토스는 <b>실제 결제이력</b> 타겟이 되니 ‘진짜 돈 쓰는 유저’를 직접 겨냥할 수 있다.</div></div>
-        <div class="qt">💬 “현재 일 예산 <b>30만원(월 900만)</b>을 100% 관심사에 쓰고 계신데요 — 2주만 <b>관심사 50% / 결제이력 50%</b>로 나눠 A/B 돌려보시죠. 고효율 세그먼트로 예산을 점진 이관해 성과를 개선한 사례(글로벌랩스 ROAS 150%→250%+)가 있어 추천드립니다. 한 번에 몰지 않고 <b>성과 확인하며 매주 10%p씩 보수적으로 이관</b>하겠습니다.”</div>
-        <div class="budviz">
-          <div class="budrow"><span class="budl">현재</span><div class="budbar"><div class="seg" style="width:100%; background:#A6AEB8">관심사 100% · 일 30만원</div></div></div>
-          <div class="budrow"><span class="budl">A/B</span><div class="budbar"><div class="seg" style="width:50%; background:#A6AEB8">관심사 · 일 15만</div><div class="seg" style="width:50%; background:var(--ably)">결제이력 · 일 15만</div></div></div>
-          <div class="budrow"><span class="budl">점진</span><div class="budbar"><div class="seg" style="width:40%; background:#A6AEB8">관심사</div><div class="seg" style="width:60%; background:var(--ably)">결제이력 (매주 +10%p)</div></div></div>
-          <div style="font-size:10.5px; color:var(--gray); margin-top:6px">※ 한 번에 바꾸지 않고 <b>매주 +10%p씩</b>, 성과 확인하며 보수적으로 이관</div>
-        </div>
-        <div class="srow s3"><span class="stag">결과</span><div>결제 세그먼트 CPS가 더 낮음을 데이터로 확인 → 고효율로 예산 이관 → <b>전체 CPS 하락·GMV↑</b>.</div></div>
+        <div class="qt">💬 광고주(패션 커머스): “<b>클릭은 되는데 결제가 안 나와요.</b> 광고가 별로인가요?”</div>
+        <div class="srow s1"><span class="stag">① 데이터</span><div>CTR(클릭률) 유지 · <b>결제전환율(CVR) 57% 하락</b> — CVR 2.8%<span class="mA">↘</span><b style="color:#DC2626">1.2%</b> (최근 14일)</div></div>
+        <div class="srow s2"><span class="stag">② 진단</span><div><b>광고 문제 X · 시즌 미스매치</b> — 여름 상품 오늘딜이 아직 라이브. CTR은 유지되는데 CVR만 단독 하락 → 소재가 아니라 <b>‘파는 상품’의 시즌</b>이 안 맞는 신호.</div></div>
+        <div class="srow s3"><span class="stag">③ 대응</span><div><b>여름 캠페인 OFF → F/W(가을·겨울) 상품 쿠폰으로 예산 이관</b>을 먼저 제안. <b>기대</b>: CVR 2%대 회복 + 유사 업종 레퍼런스 함께 제공.</div></div>
       </div>
-
-      <!-- 시나리오 2: 소재 A/B -->
       <div class="scn">
-        <div class="srow s1"><span class="stag">상황 ②</span><div>일 예산 <b>10만원</b> 캠페인에 <b>소재 5개</b>를 한 세트에 넣고 ‘A/B 중’이라는데, 어느 소재가 좋은지 판단이 안 선다.</div></div>
-        <div class="srow s2"><span class="stag">진단</span><div>한 세트에 소재가 많으면 ML이 상위 소재에 예산을 몰아, 하위 소재는 <b>일 7천원 수준</b>만 받는다 → 전환 1~2건으론 <b>신뢰 있는 A/B가 불가능</b>.</div></div>
-        <div class="qt">💬 “소재를 <b>광고세트로 나눠</b> 소재당 예산을 균등하게 확보한 뒤 승자를 가리시죠. 실제로 소재를 분리·교체해 <b>CTR을 6.7%→9.56%(+42.7%)</b> 개선한 경험이 있어 추천드립니다. <b>운영 초기엔 ‘1소재=1캠페인’</b>으로 깨끗하게 비교하고, 승자 확인된 것부터 단계적으로 확대하겠습니다.”</div>
+        <div class="qt">💬 광고주(뷰티): “<b>추천해주신 미디어믹스대로 돌렸는데, 기대만큼 성과가 안 나와요.</b>”</div>
+        <div class="srow s1"><span class="stag">① 데이터</span><div><b>구좌별로 분해</b> — 최상단 AD·오늘딜 = 전환 90% 집중 / 기본딜·방문미션 = 전환 65% 저조. 전체 CPS 3.2만<span class="mA">↗</span><b style="color:#DC2626">4.1만</b> (악화)</div></div>
+        <div class="srow s2"><span class="stag">② 진단</span><div>하위 2개 구좌(기본딜·방문미션)가 <b>전환 비중 10% 미만</b>인데 <b>예산 40% 소진</b> 중. 전체 평균 CPS만 보면 안 보이지만, <b>구좌별로 분해</b>하면 원인이 드러남.</div></div>
+        <div class="srow s3"><span class="stag">③ 대응</span><div>우수 구좌(최상단 AD·오늘딜) 유지, <b>하위 구좌 예산 −30%</b> → 감축분을 우수 구좌 증액·신규 구좌 테스트로 재분배. <b>기대</b>: 전체 CPS −20% + 유사 업종 레퍼런스.</div></div>
+      </div>
+    </div>
+    <p class="dsub" style="font-size:11px; margin-top:8px">※ 본문 수치(증감률·개선폭)는 유사 업종 레퍼런스·벤치마크 기반 예시이며, 실제 수치는 집행 데이터·A/B 검증으로 확인합니다.</p>
+
+    <!-- 유지 — AI 대시보드 -->
+    <p class="subh">🖥️ 유지 — <span class="n">AI 대시보드로 ‘먼저’ 움직인다</span></p>
+    <p class="dsub" style="margin-bottom:12px">광고주가 직접/대행사가 운영하면 깊이 개입이 어렵습니다. 그래서 광고주 성과를 <b>직접 만든 AI 대시보드로 수집</b>해, 운영권이 없어도 데이터로 먼저 움직입니다.</p>
+    <div class="flow">
+      <div class="step"><div class="k">📄 엑셀 업로드</div><div class="v">광고주별 성과·전환 파일 → 자동 집계</div></div>
+      <div class="arrow">+</div>
+      <div class="step"><div class="k">🔌 API 자동 연동</div><div class="v">토스페이 광고 운영 데이터 API 수집</div></div>
+      <div class="arrow">→</div>
+      <div class="step" style="background:#EAF2FE; border-color:#BBD6FF"><div class="k">🤖 AI 성과 대시보드</div><div class="v">통합 수집 · 실시간 KPI · <b>하락 감지</b></div></div>
+    </div>
+    <div class="g3 mt">
+      <div class="feat"><div class="fi">🚨</div><div class="ft">7일 하락 감지</div><div class="fd">KPI 7일 하락세 광고주 자동 감지</div></div>
+      <div class="feat"><div class="fi">🔍</div><div class="ft">원인 분석</div><div class="fd">해당 광고주 데이터로 원인 진단</div></div>
+      <div class="feat"><div class="fi">📬</div><div class="ft">선제 제안</div><div class="fd">요청 전에 개선안을 먼저 제안</div></div>
+    </div>
+    <div style="text-align:center; margin-top:14px"><a href="https://marketing-dashboard-demo-br6gpdt4i2yrshdygxanp8.streamlit.app/" target="_blank" rel="noopener" style="display:inline-block; background:var(--blue); color:#fff; font-weight:800; padding:12px 24px; border-radius:12px; text-decoration:none">▶ AI 대시보드 직접 사용해보기</a></div>
+    <div class="card mt" style="font-size:11.5px; color:var(--gray)">🔒 광고주 데이터는 담당자 로컬(localhost)에서만 구동, 외부 서버·클라우드 미저장 · API 토큰은 <b>.env</b> 분리 · 읽기 전용 조회로 유출 가능성 원천 차단.</div>
+
+    <!-- 제안 시뮬레이션 -->
+    <p class="subh">🧪 제안 시뮬레이션 — <span class="n">“이렇게 구체적으로”</span></p>
+    <p class="dsub" style="margin-bottom:12px">단순 “A/B 해보자”가 아니라 <b>현재 예산·구조를 보고 숫자로 설계</b>해 제안합니다. (예시는 가정 수치)</p>
+    <div class="scns">
+      <div class="scn">
+        <div class="srow s1"><span class="stag">SIM 1</span><div><b>타겟팅 A/B — 관심사만? ‘결제 타겟’도 검증</b> · 캠페인 A가 관심사 단독, 일 30만원(월 900만) 운영 중.</div></div>
+        <div class="qt">💬 “2주만 <b>관심사 50% / 결제이력 50%</b>로 나눠보시죠. 토스는 실제 결제이력 타겟이 되니 ‘진짜 돈 쓰는 유저’를 겨냥할 수 있습니다. 한 번에 몰지 않고 <b>매주 +10%p씩 보수적으로</b>, 유의미한 전환 표본이 쌓이는 시점에 우위군으로 이관하겠습니다.”</div>
         <div class="budviz">
-          <div style="font-size:11px; color:var(--gray); font-weight:800; margin-bottom:5px">현재 — 일 10만원 · 소재 5개 한 세트 (ML 자동배분)</div>
-          <div class="budbar"><div class="seg" style="width:42%; background:#8B95A1">소재1 4.2만</div><div class="seg" style="width:25%; background:#A6AEB8">소재2 2.5만</div><div class="seg" style="width:16%; background:#C2C8D0; color:#333">소재3 1.6만</div><div class="seg" style="width:9%; background:#F04452">4 · 9천</div><div class="seg" style="width:8%; background:#F04452">5 · 7천</div></div>
-          <div style="font-size:11px; color:#DC2626; font-weight:700; margin:6px 0 10px">↑ 소재4·5는 일 1만 미만 — 표본 부족으로 승패 판정 불가</div>
-          <div style="font-size:11px; color:var(--blue); font-weight:800; margin-bottom:5px">제안 — 소재를 광고세트로 분리(초기엔 1소재=1캠페인)</div>
+          <div class="budrow"><span class="budl">현재</span><div class="budbar"><div class="seg" style="width:100%; background:#A6AEB8">관심사 100% · 일 30만</div></div></div>
+          <div class="budrow"><span class="budl">A/B</span><div class="budbar"><div class="seg" style="width:50%; background:#A6AEB8">관심사 15만</div><div class="seg" style="width:50%; background:var(--blue)">결제이력 15만</div></div></div>
+          <div class="budrow"><span class="budl">점진</span><div class="budbar"><div class="seg" style="width:40%; background:#A6AEB8">관심사</div><div class="seg" style="width:60%; background:var(--blue)">결제이력 (매주 +10%p)</div></div></div>
+        </div>
+        <div class="srow s3"><span class="stag">결과</span><div>CPA·결제전환율 이기는 쪽에 예산 집중 → <b>손실 없이 더 좋은 타겟 발굴</b>.</div></div>
+      </div>
+      <div class="scn">
+        <div class="srow s1"><span class="stag">SIM 2</span><div><b>소재 A/B — ‘신뢰할 수 있는’ 테스트 설계</b> · 일 10만원에 소재 5개를 한 세트에 넣으면 ML이 몰아줘 최저 소재는 일 7천원만 → 표본 부족.</div></div>
+        <div class="qt">💬 “소재를 <b>광고세트로 나눠</b> 소재당 최소 예산을 확보한 뒤 공정하게 비교하시죠. 실제로 소재를 분리·교체해 <b>CTR 6.7%→9.56%(+42.7%)</b> 개선한 경험이 있어 추천드립니다. 초기엔 <b>‘1소재=1캠페인’</b>으로 깨끗하게 비교합니다.”</div>
+        <div class="budviz">
+          <div style="font-size:11px; color:var(--gray); font-weight:800; margin-bottom:5px">현재 — 일 10만원 · 소재 5개 한 세트</div>
+          <div class="budbar"><div class="seg" style="width:50%; background:#8B95A1">소재1 5만</div><div class="seg" style="width:25%; background:#A6AEB8">소재2 2.5만</div><div class="seg" style="width:15%; background:#C2C8D0; color:#333">소재3 1.5만</div><div class="seg" style="width:7%; background:#F04452">4·7천</div><div class="seg" style="width:3%; background:#F04452"></div></div>
+          <div style="font-size:11px; color:#DC2626; font-weight:700; margin:6px 0 10px">↑ 소재4·5는 표본 부족 → 효율 소재 판단 불가</div>
+          <div style="font-size:11px; color:var(--blue); font-weight:800; margin-bottom:5px">제안 — 광고세트로 분리(초기엔 1소재=1캠페인)</div>
           <div class="budbar"><div class="seg" style="width:33.3%; background:var(--blue)">세트A 소재1</div><div class="seg" style="width:33.3%; background:var(--blue)">세트B 소재2</div><div class="seg" style="width:33.4%; background:var(--blue)">세트C 소재3</div></div>
         </div>
-        <div class="srow s3"><span class="stag">결과</span><div>소재별 성과를 <b>공정하게 측정</b> → 승자 소재에 집중해 CTR·전환율↑, 소재 피로도 교체 주기도 명확해짐.</div></div>
+        <div class="srow s3"><span class="stag">결과</span><div>효율 소재를 데이터로 확인 → 승자에 집중, 소재 교체 주기도 명확.</div></div>
       </div>
-
-      <!-- 시나리오 3: 구좌 미스매치 -->
-      <div class="scn">
-        <div class="srow s1"><span class="stag">상황 ③</span><div>최상단 AD(노출형)로 <b>노출은 많은데 결제 전환이 약하다</b>.</div></div>
-        <div class="srow s2"><span class="stag">대처</span><div>목적에 맞게 <b>구좌 재배치</b> — 노출 선점은 유지하되 전환은 <b>오늘딜·기본딜 쿠폰(CPS 성과보장)</b>으로 이동, 앱 유입이 더 필요하면 <b>방문미션(CPC)</b> 추가. “노출용 구좌 ≠ 전환용 구좌”를 데이터로 설명.</div></div>
-        <div class="srow s3"><span class="stag">결과</span><div>성과보장 구좌로 <b>비용 리스크↓·전환당 효율↑</b> — 결제 난 만큼만 지불.</div></div>
-      </div>
-
-      <!-- 시나리오 4: 이탈 징후 -->
-      <div class="scn">
-        <div class="srow s1"><span class="stag">상황 ④</span><div>광고주: “성과가 정체됐다. <b>계속할지 고민된다</b>.” (이탈 위험)</div></div>
-        <div class="srow s2"><span class="stag">대처</span><div>이탈 전 <b>선제 대응</b> — 원인 진단(소재 피로 / 타겟 소진 / 구좌 미스매치) 리포트 + <b>개선안 2~3개</b>를 먼저 제시. <b>카테고리 티어(뷰티 30%) 조정·시즌 오늘딜·신규 구좌</b>로 환기 포인트 제안.</div></div>
-        <div class="srow s3"><span class="stag">결과</span><div>“문제를 먼저 찾아 가져오는 담당자”라는 신뢰 → <b>이탈 방지·재증액</b>.</div></div>
-      </div>
-
     </div>
-    <div class="card mt" style="background:#EAF2FE; border-color:#BBD6FF; font-size:13.5px; color:#1B4FA0">🤝 핵심은 <b>“광고주의 성과가 곧 저의 KPI”</b> — 글로벌랩스에서 지역·매체·타겟을 A/B로 쪼개 고효율 풀만 남겨 <b>ROAS를 2배 이상</b> 끌어올린 방식을, 토스의 더 정교한 세그먼트·구좌에 그대로 적용합니다.</div>
+
+    <div class="card mt" style="background:#EAF2FE; border-color:#BBD6FF; font-size:13.5px; color:#1B4FA0">✅ <b>실제 적용</b> — 글로벌랩스에서 데이터로 광고주를 설득하고 매체를 확장해 <b>취급고 9.4배</b>(예산 확장 사이클)를 만들었고, 이 증액·유지 엔진을 직접 구축한 <b>AI 성과 대시보드</b>로 돌립니다.</div>
   </div>
 </section>
 
