@@ -76,7 +76,10 @@ a.inline:hover { text-decoration: underline; }
 .hero h1 { margin-bottom: 18px; }
 .hero h1 .hl { color: var(--blue); }
 .hero .sub { font-size: 18px; max-width: 940px; word-break: keep-all; }
-.hero .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+.hero .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 26px; max-width: 760px; }
+.hero .btns .btn { width: 100%; justify-content: center; padding: 15px 18px; font-size: 15px; text-align: center; }
+.hero .btns .btn-sdr { grid-column: 1 / -1; }
+@media (max-width: 640px){ .hero .btns { grid-template-columns: 1fr; } }
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 13px 20px; border-radius: 14px; font-weight: 700; font-size: 15px;
