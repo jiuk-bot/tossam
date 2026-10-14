@@ -172,6 +172,12 @@
     .band{padding:26px 0; break-inside:avoid} *{-webkit-print-color-adjust:exact; print-color-adjust:exact}
     .card,.prod,.phone,.cse,.wc,.vc,.calc,.fo,.tli,.step,.bench,table{break-inside:avoid} .dh{break-after:avoid}
   }
+  @keyframes ctaPulse{0%,100%{box-shadow:0 6px 18px rgba(49,130,246,.35)}50%{box-shadow:0 10px 30px rgba(49,130,246,.80)}}
+  @keyframes ctaShine{0%{left:-60%}55%,100%{left:130%}}
+  .cta-pulse{position:relative; overflow:hidden; animation:ctaPulse 1.7s ease-in-out infinite}
+  .cta-pulse::after{content:''; position:absolute; top:0; left:-60%; width:45%; height:100%; background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent); transform:skewX(-20deg); animation:ctaShine 2.6s ease-in-out infinite; pointer-events:none}
+  .cta-pulse:hover{transform:translateY(-2px); transition:transform .15s}
+  @media (prefers-reduced-motion:reduce){.cta-pulse,.cta-pulse::after{animation:none}}
 </style>
 </head>
 <body>
@@ -182,7 +188,7 @@
       <a href="index.html" style="color:#4E5968;text-decoration:none;font-weight:600;padding:7px 11px;border-radius:9px">Home</a>
       <a href="portfolio.html" style="color:#4E5968;text-decoration:none;font-weight:600;padding:7px 11px;border-radius:9px">Portfolio</a>
       <a href="resume.html" style="color:#4E5968;text-decoration:none;font-weight:600;padding:7px 11px;border-radius:9px">이력서</a>
-      <a href="dashboard.html" style="color:#4E5968;text-decoration:none;font-weight:600;padding:7px 11px;border-radius:9px">광고주 대시보드</a><a href="prd.html" style="color:#4E5968;text-decoration:none;font-weight:600;padding:7px 11px;border-radius:9px">PRD</a>
+      <a href="simulator.html" style="color:#4E5968;text-decoration:none;font-weight:600;padding:7px 11px;border-radius:9px">시뮬레이터</a>
       <a href="proposal.html" style="background:#3182F6;color:#fff;text-decoration:none;font-weight:700;padding:7px 13px;border-radius:9px">🎟️ 제안서</a>
     </div>
   </div>
@@ -300,7 +306,7 @@
       <div class="feat" style="background:#E8F7EE; border-color:#B7E7CC; padding:18px 16px"><div class="fi" style="font-size:26px; font-weight:900; color:#15803D">04</div><div class="ft" style="font-size:17px; margin-top:9px">히스토리 인수인계</div><div class="fd" style="font-size:13.2px; margin-top:7px">담당자가 바뀌어도 운영 메모·히스토리를 <b style="color:#15803D">엑셀 리포트로 그대로 전달</b></div></div>
     </div>
     <div class="card mt" style="font-size:12.5px; color:var(--gray)">선제 제안 액션 — <b style="color:var(--navy)">A/B 테스트 · 소재 교체 · 구좌 확장 · 예산 재배분</b>(일시 축소 → 다른 구좌 라이브)</div>
-    <a href="dashboard.html" target="_blank" rel="noopener" style="display:block; width:100%; text-align:center; box-sizing:border-box; background:var(--blue); color:#fff; font-weight:800; font-size:16px; padding:16px 24px; border-radius:12px; text-decoration:none; margin-top:14px; box-shadow:0 6px 18px rgba(49,130,246,.28)">▶ 광고주 성과관리 대시보드 직접 사용해보기</a>
+    <a href="dashboard.html" target="_blank" rel="noopener" class="cta-pulse" style="display:block; width:100%; text-align:center; box-sizing:border-box; background:var(--blue); color:#fff; font-weight:800; font-size:16px; padding:16px 24px; border-radius:12px; text-decoration:none; margin-top:14px">▶ 광고주 성과관리 대시보드 직접 사용해보기</a>
     <p style="font-weight:800; font-size:16px; margin:24px 0 8px">대시보드의 장점</p>
     <div class="g4">
       <div class="feat" style="background:#EAF2FE; border-color:#BBD6FF"><div class="fi" style="font-size:17px">◆</div><div class="ft" style="font-size:15px">통합 모니터링</div><div class="fd" style="font-size:12.5px">여러 광고주·구좌 한 화면</div></div>
