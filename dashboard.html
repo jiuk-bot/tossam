@@ -95,15 +95,22 @@
 <div class="wrap">
   <section>
     <div class="bar">
-      <div class="advsel" id="advsel">
-        <div class="cur" id="advCur"></div>
-        <div class="advlist" id="advList">
-          <input id="advSearch" placeholder="광고주 이름 검색..." autocomplete="off">
-          <div id="advItems"></div>
+      <div style="display:flex; align-items:center; gap:9px">
+        <span style="font-weight:800; font-size:13.5px; color:var(--gray)">광고주</span>
+        <div class="advsel" id="advsel">
+          <div class="cur" id="advCur"></div>
+          <div class="advlist" id="advList">
+            <input id="advSearch" placeholder="광고주 이름 검색..." autocomplete="off">
+            <div id="advItems"></div>
+          </div>
         </div>
       </div>
-      <div class="seg" id="period">
-        <button data-p="d" class="on">일</button><button data-p="w">주</button><button data-p="m">월</button>
+      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap">
+        <span style="font-weight:800; font-size:13.5px; color:var(--gray)">기간</span>
+        <div class="seg" id="period">
+          <button data-p="d" class="on">일</button><button data-p="w">주</button><button data-p="m">월</button><button data-p="all">전체</button>
+        </div>
+        <button class="btn" id="cmpBtn">⇄ 비교</button>
       </div>
     </div>
 
@@ -128,9 +135,9 @@
     </div>
 
     <div class="card">
-      <div class="h"><div class="ct">구좌별 성과</div><div class="mini">행을 클릭하면 소재별로 드릴다운</div></div>
+      <div class="h"><div class="ct">구좌별 성과</div><div class="mini" id="placeMini">행을 클릭하면 소재별로 드릴다운</div></div>
       <table id="placeTable">
-        <thead><tr><th>구좌</th><th>노출</th><th>클릭</th><th>결제</th><th>CPS</th><th>GMV</th><th>비중</th></tr></thead>
+        <thead id="placeHead"></thead>
         <tbody></tbody>
       </table>
     </div>
@@ -150,7 +157,7 @@
     <div id="view-daily" style="display:none">
       <div class="card">
         <div class="h"><div class="ct">일자별 성과</div><div class="mini">최근 30일 · <span id="dailyName"></span> · 하락 구간 표시</div></div>
-        <table id="dailyTable"><thead><tr><th>날짜</th><th>노출</th><th>클릭</th><th>결제</th><th>CPS</th><th>GMV</th><th>ROAS</th></tr></thead><tbody></tbody></table>
+        <table id="dailyTable"><thead><tr><th>날짜</th><th>노출</th><th>클릭</th><th>결제</th><th>CPA</th><th>CTR</th><th>CVR</th></tr></thead><tbody></tbody></table>
       </div>
     </div>
 
@@ -161,7 +168,7 @@
       </div>
     </div>
 
-    <div class="note">※ 본 대시보드는 윤지욱이 직접 만든 데모이며 모든 수치는 가상 데이터입니다. 실제 운영 시 토스페이 광고 데이터 API·엑셀 업로드로 연동됩니다.</div>
+    <div class="note">※ 본 대시보드는 윤지욱이 직접 만든 데모이며 모든 수치는 가상 데이터입니다. 실제 운영 시 토스페이 광고 데이터 API·엑셀 업로드로 연동됩니다. 지표는 토스가 측정 가능한 <b>결제·CPA·CTR·CVR</b> 기준입니다 (GMV·ROAS는 광고주 거래 데이터 필요).</div>
   </section>
 </div>
 
@@ -221,13 +228,14 @@ function build(a){
 }
 const DATA={}; ADV.forEach(a=>DATA[a.name]=build(a));
 
-let curAdv=ADV[0].name, curPeriod='d', curKPI='pay', drill=-1;
+let curAdv=ADV[0].name, curPeriod='d', curKPI='pay', drill=-1, compare=false;
 
 // 기간별 윈도우(현재/직전)
 function windows(period){
-  if(period==='d') return {n:14, step:1, cur:[DAYS-14,DAYS], prev:[DAYS-28,DAYS-14], label:'일'};
-  if(period==='w') return {n:8, step:7, cur:[DAYS-56,DAYS], prev:[DAYS-112<0?0:DAYS-112,DAYS-56], label:'주'};
-  return {n:3, step:30, cur:[DAYS-90,DAYS], prev:[DAYS-90,DAYS], label:'월'};
+  if(period==='d') return {cur:[DAYS-14,DAYS], prev:[DAYS-28,DAYS-14], label:'일'};
+  if(period==='w') return {cur:[DAYS-28,DAYS], prev:[DAYS-56,DAYS-28], label:'주'};
+  if(period==='m') return {cur:[DAYS-30,DAYS], prev:[DAYS-60,DAYS-30], label:'월'};
+  return {cur:[0,DAYS], prev:[0,DAYS], label:'전체'};
 }
 function sumRange(days,s,e){
   let o={imp:0,clicks:0,pay:0,spend:0}, places=PLACES.map(()=>({imp:0,clicks:0,pay:0,spend:0,mats:MATS.map(()=>({imp:0,clicks:0,pay:0,spend:0}))}));
@@ -240,20 +248,20 @@ function sumRange(days,s,e){
   }
   return {o,places};
 }
-function kpiOf(o,aov){
-  return {pay:o.pay, gmv:o.pay*aov, cps:o.pay?o.spend/o.pay:0, roas:o.spend?(o.pay*aov)/o.spend*100:0, ctr:o.imp?o.clicks/o.imp*100:0, cvr:o.clicks?o.pay/o.clicks*100:0, spend:o.spend};
+function kpiOf(o){
+  return {pay:o.pay, cpa:o.pay?o.spend/o.pay:0, ctr:o.imp?o.clicks/o.imp*100:0, cvr:o.clicks?o.pay/o.clicks*100:0, spend:o.spend};
 }
 const KPIDEF=[
   {k:'pay', t:'쿠폰 사용 결제', fmt:v=>num(v)+'건', better:'up'},
-  {k:'gmv', t:'GMV(거래액)', fmt:v=>short(v)+'원', better:'up'},
-  {k:'cps', t:'CPS(결제당 비용)', fmt:v=>won(v), better:'down'},
-  {k:'roas', t:'광고 ROAS', fmt:v=>Math.round(v)+'%', better:'up'},
+  {k:'cpa', t:'CPA(결제당 광고비)', fmt:v=>won(v), better:'down'},
+  {k:'ctr', t:'CTR(클릭률)', fmt:v=>v.toFixed(2)+'%', better:'up'},
+  {k:'cvr', t:'CVR(결제전환율)', fmt:v=>v.toFixed(2)+'%', better:'up'},
 ];
 
 function render(){
   const a=ADV.find(x=>x.name===curAdv), days=DATA[curAdv], w=windows(curPeriod);
   const cur=sumRange(days,w.cur[0],w.cur[1]), prev=sumRange(days,w.prev[0],w.prev[1]);
-  const kc=kpiOf(cur.o,a.aov), kp=kpiOf(prev.o,a.aov);
+  const kc=kpiOf(cur.o), kp=kpiOf(prev.o);
   // KPI 카드
   document.getElementById('kpis').innerHTML=KPIDEF.map(def=>{
     const v=kc[def.k], pv=kp[def.k], ch=pv?((v-pv)/pv*100):0;
@@ -261,7 +269,7 @@ function render(){
     const arrow = ch>=0?'▲':'▼';
     return `<div class="kpi ${def.k===curKPI?'sel':''}" data-k="${def.k}">
       <div class="t">${def.t}</div><div class="n">${def.fmt(v)}</div>
-      <div class="delta ${good?'up':'down'}">${arrow} ${Math.abs(ch).toFixed(1)}% <span style="color:var(--muted);font-weight:600">vs 직전 ${w.label==='월'?'기간':'동기간'}</span></div>
+      <div class="delta ${good?'up':'down'}">${arrow} ${Math.abs(ch).toFixed(1)}% <span style="color:var(--muted);font-weight:600">vs 직전 동기간</span></div>
     </div>`;
   }).join('');
   document.querySelectorAll('.kpi').forEach(el=>el.onclick=()=>{curKPI=el.dataset.k; render();});
@@ -275,23 +283,34 @@ function render(){
   if(dropPct>=12){
     al.classList.add('show');
     document.getElementById('alertName').textContent=`${a.name} · 결제 KPI 7일 하락 -${dropPct.toFixed(0)}%`;
-    document.getElementById('alertDesc').innerHTML=`최근 7일 평균 결제가 직전 7일 대비 <b style="color:var(--red)">-${dropPct.toFixed(0)}%</b>. CTR은 유지되나 하위 구좌(기본딜·방문미션)에서 CPS가 악화 중 — 요청 전에 먼저 제안 필요.`;
+    document.getElementById('alertDesc').innerHTML=`최근 7일 평균 결제가 직전 7일 대비 <b style="color:var(--red)">-${dropPct.toFixed(0)}%</b>. CTR은 유지되나 하위 구좌(기본딜·방문미션)에서 CPA가 악화 중 — 요청 전에 먼저 제안 필요.`;
     document.getElementById('alertActs').innerHTML=['타겟 A/B(관심사→결제이력)','소재 교체·세트 분리','하위 구좌 예산 -30% 재배분','우수 구좌 증액'].map(x=>`<span class="chip">${x}</span>`).join('');
   } else al.classList.remove('show');
 
-  // 구좌 테이블
+  // 구좌 테이블 (비교 모드 분기)
   const tot=cur.o.pay||1;
-  const tb=document.querySelector('#placeTable tbody');
-  tb.innerHTML=cur.places.map((p,pi)=>{
-    const cps=p.pay?p.spend/p.pay:0, share=p.pay/tot*100;
-    const bad = pi>=2 && cps>a.cps*1.25;
-    let html=`<tr class="row" data-pi="${pi}"><td>${PLACES[pi]} ${bad?'<span class="badge b-bad">비효율</span>':(pi<2?'<span class="badge b-good">우수</span>':'')}</td><td>${short(p.imp)}</td><td>${num(p.clicks)}</td><td><b>${num(p.pay)}</b></td><td>${won(cps)}</td><td>${short(p.pay*a.aov)}원</td><td>${share.toFixed(0)}%</td></tr>`;
-    if(drill===pi){
-      html+=p.mats.map((m,mi)=>{const mcps=m.pay?m.spend/m.pay:0; return `<tr class="sub"><td>↳ ${MATS[mi]}</td><td>${short(m.imp)}</td><td>${num(m.clicks)}</td><td>${num(m.pay)}</td><td>${won(mcps)}</td><td>${short(m.pay*a.aov)}원</td><td>${(m.pay/p.pay*100).toFixed(0)}%</td></tr>`;}).join('');
-    }
-    return html;
-  }).join('');
-  tb.querySelectorAll('tr.row').forEach(tr=>tr.onclick=()=>{const pi=+tr.dataset.pi; drill=drill===pi?-1:pi; render();});
+  const head=document.getElementById('placeHead'), tb=document.querySelector('#placeTable tbody');
+  document.getElementById('placeMini').textContent = compare? '현재 vs 직전 동기간 비교 · 기간: '+w.label : '행을 클릭하면 소재별로 드릴다운';
+  if(compare){
+    head.innerHTML='<tr><th>구좌(캠페인)</th><th>결제·현재</th><th>결제·비교</th><th>증감</th><th>CPA·현재</th><th>CPA·비교</th><th>증감</th></tr>';
+    tb.innerHTML=cur.places.map((p,pi)=>{
+      const pp=prev.places[pi];
+      const cps=p.pay?p.spend/p.pay:0, pcps=pp.pay?pp.spend/pp.pay:0;
+      const payCh=pp.pay?((p.pay-pp.pay)/pp.pay*100):0, cpsCh=pcps?((cps-pcps)/pcps*100):0;
+      const pc=payCh>=0?'up':'down', cc=cpsCh<=0?'up':'down';
+      return `<tr><td>${PLACES[pi]}</td><td><b>${num(p.pay)}</b></td><td>${num(pp.pay)}</td><td class="${pc}">${payCh>=0?'▲':'▼'}${Math.abs(payCh).toFixed(0)}%</td><td>${won(cps)}</td><td>${won(pcps)}</td><td class="${cc}">${cpsCh>=0?'▲':'▼'}${Math.abs(cpsCh).toFixed(0)}%</td></tr>`;
+    }).join('');
+  } else {
+    head.innerHTML='<tr><th>구좌(캠페인)</th><th>노출</th><th>클릭</th><th>결제</th><th>CPA</th><th>CTR</th><th>비중</th></tr>';
+    tb.innerHTML=cur.places.map((p,pi)=>{
+      const cpa=p.pay?p.spend/p.pay:0, share=p.pay/tot*100, ctr=p.imp?p.clicks/p.imp*100:0;
+      const bad = pi>=2 && cpa>a.cps*1.25;
+      let html=`<tr class="row" data-pi="${pi}"><td>${PLACES[pi]} ${bad?'<span class="badge b-bad">비효율</span>':(pi<2?'<span class="badge b-good">우수</span>':'')}</td><td>${short(p.imp)}</td><td>${num(p.clicks)}</td><td><b>${num(p.pay)}</b></td><td>${won(cpa)}</td><td>${ctr.toFixed(2)}%</td><td>${share.toFixed(0)}%</td></tr>`;
+      if(drill===pi){ html+=p.mats.map((m,mi)=>{const mcpa=m.pay?m.spend/m.pay:0, mctr=m.imp?m.clicks/m.imp*100:0; return `<tr class="sub"><td>↳ ${MATS[mi]}</td><td>${short(m.imp)}</td><td>${num(m.clicks)}</td><td>${num(m.pay)}</td><td>${won(mcpa)}</td><td>${mctr.toFixed(2)}%</td><td>${(m.pay/p.pay*100).toFixed(0)}%</td></tr>`;}).join(''); }
+      return html;
+    }).join('');
+    tb.querySelectorAll('tr.row').forEach(tr=>tr.onclick=()=>{const pi=+tr.dataset.pi; drill=drill===pi?-1:pi; render();});
+  }
 
   // 제안
   document.getElementById('propose').innerHTML = dropPct>=12
@@ -305,7 +324,7 @@ function render(){
 
 function dayKPI(day,a,k){
   let o={imp:0,clicks:0,pay:0,spend:0}; day.places.forEach(p=>{o.imp+=p.imp;o.clicks+=p.clicks;o.pay+=p.pay;o.spend+=p.spend;});
-  return kpiOf(o,a.aov)[k];
+  return kpiOf(o)[k];
 }
 function drawChart(days,a){
   const cv=document.getElementById('chart'), ctx=cv.getContext('2d');
@@ -323,7 +342,7 @@ function drawChart(days,a){
   ctx.lineTo(X(N-1),H-pad); ctx.lineTo(X(0),H-pad); ctx.closePath();
   ctx.fillStyle='rgba(49,130,246,.08)'; ctx.fill();
   // last 7 red (하락 강조, pay/gmv/roas는 하락이 나쁨)
-  const worseDown = (curKPI!=='cps');
+  const worseDown = (curKPI!=='cpa');
   ctx.beginPath(); for(let i=N-7;i<N;i++){const v=vals[i]; i===N-7?ctx.moveTo(X(i),Y(v)):ctx.lineTo(X(i),Y(v));}
   ctx.strokeStyle = (a.drop && worseDown)?'#F04452':'#3182F6'; ctx.lineWidth=3; ctx.stroke();
   // dots
@@ -337,9 +356,9 @@ function drawChart(days,a){
 document.getElementById('csvBtn').onclick=()=>{
   const a=ADV.find(x=>x.name===curAdv), days=DATA[curAdv], w=windows(curPeriod);
   const cur=sumRange(days,w.cur[0],w.cur[1]);
-  let rows=[['구좌','노출','클릭','결제','CPS','GMV','비중%']];
+  let rows=[['구좌','노출','클릭','결제','CPA','CTR%','비중%']];
   const tot=cur.o.pay||1;
-  cur.places.forEach((p,pi)=>{const cps=p.pay?p.spend/p.pay:0; rows.push([PLACES[pi],Math.round(p.imp),Math.round(p.clicks),Math.round(p.pay),Math.round(cps),Math.round(p.pay*a.aov),(p.pay/tot*100).toFixed(0)]);});
+  cur.places.forEach((p,pi)=>{const cpa=p.pay?p.spend/p.pay:0, ctr=p.imp?p.clicks/p.imp*100:0; rows.push([PLACES[pi],Math.round(p.imp),Math.round(p.clicks),Math.round(p.pay),Math.round(cpa),ctr.toFixed(2),(p.pay/tot*100).toFixed(0)]);});
   const csv='﻿'+rows.map(r=>r.join(',')).join('\n');
   const b=new Blob([csv],{type:'text/csv'}), u=URL.createObjectURL(b), el=document.createElement('a');
   el.href=u; el.download=`토스페이_${curAdv}_${w.label}_리포트.csv`; el.click(); URL.revokeObjectURL(u);
@@ -369,11 +388,11 @@ function renderDaily(){
   let rows='';
   for(let d=DAYS-1; d>=DAYS-30; d--){
     let o={imp:0,clicks:0,pay:0,spend:0}; days[d].places.forEach(p=>{o.imp+=p.imp;o.clicks+=p.clicks;o.pay+=p.pay;o.spend+=p.spend;});
-    const k=kpiOf(o,a.aov);
+    const k=kpiOf(o);
     const dt=new Date(today); dt.setDate(today.getDate()-(DAYS-1-d));
     const ds=(dt.getMonth()+1)+'/'+dt.getDate();
     const warn = a.drop && (DAYS-1-d)<7;
-    rows+='<tr'+(warn?' style="background:#FFF6F6"':'')+'><td>'+ds+(warn?' <span class="badge b-bad">하락</span>':'')+'</td><td>'+short(k.imp)+'</td><td>'+num(k.clicks)+'</td><td><b>'+num(k.pay)+'</b></td><td>'+won(k.cps)+'</td><td>'+short(k.gmv)+'원</td><td>'+Math.round(k.roas)+'%</td></tr>';
+    rows+='<tr'+(warn?' style="background:#FFF6F6"':'')+'><td>'+ds+(warn?' <span class="badge b-bad">하락</span>':'')+'</td><td>'+short(o.imp)+'</td><td>'+num(o.clicks)+'</td><td><b>'+num(o.pay)+'</b></td><td>'+won(k.cpa)+'</td><td>'+k.ctr.toFixed(2)+'%</td><td>'+k.cvr.toFixed(2)+'%</td></tr>';
   }
   document.querySelector('#dailyTable tbody').innerHTML=rows;
 }
@@ -384,7 +403,7 @@ function histEvents(a){
     {d:76,dot:'#15C47E',t:'1차 증액',x:'최상단 AD CPS 목표 이내 안정 → 예산 +15% 점진 증액',tag:'증액',bg:'#E7F9F0',fg:'#0B8457'},
     {d:58,dot:'#3182F6',t:'구좌 확장',x:'기본딜 쿠폰 + 방문미션 추가 → 도달 풀 확장',tag:'집행',bg:'#EAF2FE',fg:'#1B4FA0'},
     {d:40,dot:'#F59E0B',t:'소재 교체',x:'CTR 하락 소재 2종 OFF → 신규 소재 세트 분리 A/B',tag:'최적화',bg:'#FEF3C7',fg:'#B45309'},
-    {d:22,dot:'#15C47E',t:'타겟 이관 완료',x:'관심사 → 결제이력 타겟 매주 +10%p 이관 완료 (CPS -14%)',tag:'최적화',bg:'#FEF3C7',fg:'#B45309'},
+    {d:22,dot:'#15C47E',t:'타겟 이관 완료',x:'관심사 → 결제이력 타겟 매주 +10%p 이관 완료 (CPA -14%)',tag:'최적화',bg:'#FEF3C7',fg:'#B45309'},
   ];
   if(a.drop){
     ev.push({d:6,dot:'#F04452',t:'7일 하락 감지',x:'결제 KPI 7일 하락 → 하위 구좌 비효율 진단',tag:'알림',bg:'#FDEAEA',fg:'#F04452'});
@@ -430,6 +449,8 @@ advSearch.oninput=()=>renderAdvItems(advSearch.value);
 document.addEventListener('click',e=>{if(!advsel.contains(e.target)) advList.classList.remove('open');});
 renderAdvCur();
 document.querySelectorAll('#period button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#period button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); curPeriod=b.dataset.p; rerender();});
+const cmpBtn=document.getElementById('cmpBtn');
+cmpBtn.onclick=()=>{compare=!compare; cmpBtn.classList.toggle('blue',compare); cmpBtn.textContent=compare?'⇄ 비교 해제':'⇄ 비교'; if(curView!=='overview'){curView='overview'; document.querySelectorAll('.mtab').forEach(x=>x.classList.toggle('on',x.dataset.v==='overview')); document.getElementById('view-overview').style.display=''; document.getElementById('view-daily').style.display='none'; document.getElementById('view-history').style.display='none';} render();};
 
 loadMemo(); render();
 </script>
