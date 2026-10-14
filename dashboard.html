@@ -87,7 +87,7 @@
   table.dt th,table.dt td{ padding:9px 12px; text-align:right; border-bottom:1px solid #eef0f3; } table.dt th:first-child,table.dt td:first-child{ text-align:left; } table.dt th:nth-child(2),table.dt td:nth-child(2){ text-align:left; }
   table.dt th{ background:#fafafa; font-weight:700; font-size:12px; color:#555; } table.dt tr.recent td{ background:#f0f6ff; }
   .wktag{ font-size:9.5px; font-weight:800; padding:2px 7px; border-radius:5px; } .wktag.prev{ color:var(--sub); background:#eef0f3; } .wktag.cur{ color:var(--primary); background:var(--soft); }
-  .dtscroll{ overflow-x:auto; } table.dt.wide{ min-width:780px; }
+  .dtscroll{ overflow-x:auto; } table.dt.wide{ min-width:780px; } table.dt.wide th:nth-child(2),table.dt.wide td:nth-child(2){ text-align:right; }
 
   /* 히스토리 */
   .histbar{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:8px; }
@@ -173,14 +173,14 @@
       <div><label>광고세트</label><select id="selSet"></select></div>
       <div><label>소재</label><select id="selCr"></select></div>
       <div><label>지표</label><select id="selMetric"></select></div>
-      <div><label>차트 기간</label><select id="selRange">
-        <option value="14">최근 14일</option><option value="30">최근 30일</option><option value="60">최근 60일</option></select></div>
+      <div><label>조회 기간</label><input type="date" id="drs"> ~ <input type="date" id="dre">
+        <span class="seg" id="dqseg" style="margin-left:6px"><button data-r="14">14일</button><button data-r="30">30일</button><button data-r="60">60일</button></span></div>
     </div>
     <div class="dnode" id="dnode"></div>
     <div class="cmp" id="cmp"></div>
     <div class="chartbox"><canvas id="chart" height="110"></canvas></div>
     <div class="dtscroll"><table class="dt wide" id="dtable"></table></div>
-    <div class="histnote" style="margin-top:8px;">※ 표는 <b>전주(위) → 이번주(아래)</b> 순으로 14일치를 모두 표시합니다. 차트 기간은 위 드롭다운으로 조정.</div>
+    <div class="histnote" style="margin-top:8px;">※ <b>조회 기간(시작~종료 날짜)</b>을 직접 선택하면 차트·표·비교가 해당 기간으로 갱신됩니다. 비교는 <b>직전 동기간(동일 길이)</b> 자동 산출 · 최근 7일은 강조 표시.</div>
   </div>
 
   <!-- History -->
@@ -454,29 +454,33 @@ function dailyNode(){
 }
 function renderDaily(){
   const {node:o,label:nodeLabel}=dailyNode();
-  const m=el('selMetric').value,range=+el('selRange').value;
-  const full=dseries(o,m),s=DAYS-range,labels=DATES.slice(s).map(d=>d.label),series=full.slice(s);
+  const m=el('selMetric').value;
+  let s=idx(el('drs').value), e=idx(el('dre').value);
+  if(s<0)s=DAYS-14; if(e<0)e=DAYS-1; if(s>e){const t=s;s=e;e=t;}
+  const len=e-s+1;
+  const full=dseries(o,m),labels=DATES.slice(s,e+1).map(d=>d.label),series=full.slice(s,e+1);
   const isRate=MET[m].t==='rate';
-  const cur=mval(o,m,DAYS-7,DAYS-1),prev=mval(o,m,DAYS-14,DAYS-8),ch=change(cur,prev);
+  const ps=Math.max(0,s-len), pe=s-1, hasPrev=pe>=0&&pe>=ps;
+  const cur=mval(o,m,s,e),prev=hasPrev?mval(o,m,ps,pe):null,ch=change(cur,prev);
   const vf=v=>mfmt(m,v),L=MET[m].l,good=MET[m].g;
   const chGood=ch===null?true:(good==='up'?ch>=0:ch<=0);
-  el('dnode').innerHTML=`🔎 조회 대상 — <b>${nodeLabel}</b>`;
+  el('dnode').innerHTML=`🔎 조회 대상 — <b>${nodeLabel}</b> · 기간 <b>${DATES[s].label}~${DATES[e].label}</b> (${len}일)`;
   el('cmp').innerHTML=
-    `<div class="cmpc prev"><div class="cl">${L} · 전주 (${DATES[DAYS-14].label}~${DATES[DAYS-8].label})</div><div class="cvv" style="color:var(--sub)">${vf(prev)}</div></div>
-     <div class="cmpc"><div class="cl">${L} · 이번주 (${DATES[DAYS-7].label}~${DATES[DAYS-1].label})</div><div class="cvv">${vf(cur)}</div></div>
-     <div class="cmpc"><div class="cl">변화율 (이번주 vs 전주)</div><div class="cvv" style="color:${chGood?'var(--ok)':'var(--warn)'}">${ch===null?'–':(ch>=0?'+':'')+ch.toFixed(1)+'%'}</div><div class="cd" style="color:${chGood?'var(--ok)':'var(--warn)'}">${ch===null?'':(ch>0?'▲':'▼')} ${chGood?'양호':'주의'}</div></div>`;
-  const n=series.length;
+    `<div class="cmpc prev"><div class="cl">${L} · 직전 동기간 ${hasPrev?`(${DATES[ps].label}~${DATES[pe].label})`:'(데이터 없음)'}</div><div class="cvv" style="color:var(--sub)">${hasPrev?vf(prev):'–'}</div></div>
+     <div class="cmpc"><div class="cl">${L} · 선택 기간 (${DATES[s].label}~${DATES[e].label})</div><div class="cvv">${vf(cur)}</div></div>
+     <div class="cmpc"><div class="cl">변화율 (선택 vs 직전 동기간)</div><div class="cvv" style="color:${chGood?'var(--ok)':'var(--warn)'}">${ch===null?'–':(ch>=0?'+':'')+ch.toFixed(1)+'%'}</div><div class="cd" style="color:${chGood?'var(--ok)':'var(--warn)'}">${ch===null?'':(ch>0?'▲':'▼')} ${ch===null?'비교 불가':(chGood?'양호':'주의')}</div></div>`;
+  const n=series.length,rec=Math.min(7,n);
   if(chart)chart.destroy();
   chart=new Chart(el('chart'),{type:'line',
-    data:{labels,datasets:[{label:L,data:series,borderColor:'#3182F6',backgroundColor:'rgba(49,130,246,.10)',fill:true,tension:.3,pointRadius:series.map((_,i)=>i>=n-7?3:0),pointBackgroundColor:'#3182F6',borderWidth:2.5}]},
+    data:{labels,datasets:[{label:L,data:series,borderColor:'#3182F6',backgroundColor:'rgba(49,130,246,.10)',fill:true,tension:.3,pointRadius:series.map((_,i)=>i>=n-rec?3:0),pointBackgroundColor:'#3182F6',borderWidth:2.5}]},
     options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${L}: ${mfmt(m,isRate?c.parsed.y/100:c.parsed.y)}`}}},
       scales:{y:{beginAtZero:MET[m].t==='cnt',grid:{color:'#f0f0f0'},ticks:{callback:v=>isRate?v+'%':fmt(v)}},x:{grid:{display:false}}}}});
-  // 표: 전주(위) → 이번주(아래), 14일 전체
-  let rows='<tr><th>주차</th><th>날짜</th><th>노출</th><th>클릭</th><th>CTR</th><th>CVR</th><th>전환</th><th>CPC</th><th>CPM</th><th>CPA</th></tr>';
-  for(let i=DAYS-14;i<=DAYS-1;i++){const isCur=i>=DAYS-7;
+  // 표: 선택 기간 전체 (최근 7일 강조)
+  let rows='<tr><th>날짜</th><th>노출</th><th>클릭</th><th>CTR</th><th>CVR</th><th>전환</th><th>CPC</th><th>CPM</th><th>CPA</th></tr>';
+  for(let i=s;i<=e;i++){const isRec=i>e-7;
     const ctr=o.imp[i]?o.clicks[i]/o.imp[i]*100:0,cvr=o.clicks[i]?o.conv[i]/o.clicks[i]*100:0,
       cpc=o.clicks[i]?o.spend[i]/o.clicks[i]:0,cpm=o.imp[i]?o.spend[i]/o.imp[i]*1000:0,cpa=o.conv[i]?o.spend[i]/o.conv[i]:0;
-    rows+=`<tr class="${isCur?'recent':''}"><td><span class="wktag ${isCur?'cur':'prev'}">${isCur?'이번주':'전주'}</span></td><td>${DATES[i].label}</td>
+    rows+=`<tr class="${isRec?'recent':''}"><td>${DATES[i].label}${isRec?' <span class="wktag cur">최근</span>':''}</td>
       <td>${o.imp[i].toLocaleString()}</td><td>${o.clicks[i].toLocaleString()}</td><td>${ctr.toFixed(2)}%</td><td>${cvr.toFixed(2)}%</td><td>${o.conv[i].toLocaleString()}</td><td>${Math.round(cpc).toLocaleString()}원</td><td>${Math.round(cpm).toLocaleString()}원</td><td>${Math.round(cpa).toLocaleString()}원</td></tr>`;}
   el('dtable').innerHTML=rows;
 }
@@ -537,7 +541,10 @@ syncDailySelectors(1);
 el('selAdv').onchange=()=>{syncDailySelectors(1);renderDaily();};
 el('selCamp').onchange=()=>{syncDailySelectors(2);renderDaily();};
 el('selSet').onchange=()=>{syncDailySelectors(3);renderDaily();};
-['selCr','selMetric','selRange'].forEach(id=>el(id).onchange=renderDaily);
+['drs','dre'].forEach(id=>{const e=el(id);e.min=DATES[0].iso;e.max=DATES[DAYS-1].iso;e.onchange=renderDaily;});
+el('drs').value=DATES[DAYS-14].iso; el('dre').value=DATES[DAYS-1].iso;
+document.querySelectorAll('#dqseg button').forEach(b=>b.onclick=()=>{const r=+b.dataset.r;el('drs').value=DATES[DAYS-r].iso;el('dre').value=DATES[DAYS-1].iso;renderDaily();});
+['selCr','selMetric'].forEach(id=>el(id).onchange=renderDaily);
 
 // history select
 el('selHist').innerHTML=`<option value="__all__">전체 광고주</option>`+DATA.map(a=>`<option value="${a.name}">${a.name}</option>`).join('');
