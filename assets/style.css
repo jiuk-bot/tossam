@@ -26,7 +26,10 @@ body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   letter-spacing: -.01em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
+p, li, td, th, h1, h2, h3, h4, span, a, div { word-break: keep-all; overflow-wrap: break-word; }
 .num { font-variant-numeric: tabular-nums; }
 
 /* ── 네비 ── */
