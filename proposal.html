@@ -22,7 +22,7 @@
   .dh{font-size:31px; font-weight:800; line-height:1.24; margin:16px 0 8px; letter-spacing:-.025em}
   @media(max-width:720px){.dh{font-size:25px}}
   .dh .em{color:var(--blue)} .dh .pk{color:var(--ably)} .band.blue .dh .em{color:#fff; text-decoration:underline; text-decoration-color:rgba(255,255,255,.5)}
-  .dsub{font-size:15px; color:var(--gray); max-width:620px}
+  .dsub{font-size:15.5px; color:var(--gray); max-width:700px; line-height:1.65}
   .band.navy .dsub,.band.blue .dsub{color:rgba(255,255,255,.82)}
   .huge{font-size:60px; font-weight:900; line-height:1; letter-spacing:-.04em}
   @media(max-width:720px){.huge{font-size:44px}}
@@ -106,10 +106,10 @@
   /* 왜 15% 카드 */
   .wc{border:1px solid #FFCFE0; border-radius:16px; padding:18px; background:#fff} .wc.key{border:2px solid var(--ably); background:#FFF1F6}
   .wc .wnum{width:30px; height:30px; border-radius:9px; background:#FFE1EC; color:var(--ably); font-weight:900; display:flex; align-items:center; justify-content:center} .wc.key .wnum{background:var(--ably); color:#fff}
-  .wc .wh2{font-weight:800; font-size:14px; margin-top:10px} .wc .wp{font-size:12px; color:var(--gray); margin-top:5px} .wc .wchip{display:inline-block; margin-top:10px; font-size:11px; font-weight:700; padding:3px 9px; border-radius:999px; background:#FFE1EC; color:var(--ably)}
+  .wc .wh2{font-weight:800; font-size:15px; margin-top:10px} .wc .wp{font-size:13px; color:var(--gray); margin-top:5px; line-height:1.55} .wc .wchip{display:inline-block; margin-top:10px; font-size:11px; font-weight:700; padding:3px 9px; border-radius:999px; background:#FFE1EC; color:var(--ably)}
   .vc{border:1px solid var(--line); border-radius:14px; padding:16px; background:#fff} .vc.us{border:2px solid var(--ably); background:#FFF1F6}
   .vc .vtag{font-size:11px; font-weight:800; color:var(--gray)} .vc.us .vtag{color:var(--ably)} .vc .vt{font-weight:900; font-size:17px; margin-top:2px} .vc.us .vt{color:var(--ably)}
-  .vc ul{margin:8px 0 0; padding-left:16px} .vc li{font-size:12px; margin:3px 0; color:var(--gray)}
+  .vc ul{margin:8px 0 0; padding-left:16px} .vc li{font-size:13px; margin:4px 0; color:var(--gray); line-height:1.5}
 
   /* 예상성과(GMV) */
   .roas{margin-top:16px} .rbrow{display:flex; align-items:center; gap:12px; margin:9px 0} .rbl{width:150px; flex:none; font-size:12.5px; font-weight:700; color:rgba(255,255,255,.85)}
@@ -124,7 +124,7 @@
   .oc.locked{background:#F7F8FA; border:1px dashed #cfd8e3}
 
   /* 집행/타임라인 */
-  .flow{display:flex; align-items:stretch; gap:8px; flex-wrap:wrap} .step{flex:1; min-width:150px; border:1px solid var(--line); border-radius:14px; padding:14px 16px; background:#fff} .step .k{font-size:11px; color:var(--blue); font-weight:800} .step .v{font-size:12.5px; margin-top:3px} .arrow{display:flex; align-items:center; color:#C2C8D0; font-size:20px; font-weight:800}
+  .flow{display:flex; align-items:stretch; gap:8px; flex-wrap:wrap} .step{flex:1; min-width:150px; border:1px solid var(--line); border-radius:14px; padding:14px 16px; background:#fff} .step .k{font-size:12px; color:var(--blue); font-weight:800} .step .v{font-size:13.5px; margin-top:4px; line-height:1.5} .arrow{display:flex; align-items:center; color:#C2C8D0; font-size:20px; font-weight:800}
   .tli{border:1px solid var(--line); border-radius:14px; padding:16px; background:#fff} .tli .te{font-size:24px} .tli .tk{font-weight:800; font-size:14px; margin-top:6px} .tli .tv{font-size:12px; color:var(--gray); margin-top:4px}
 
   /* 성공사례 */
@@ -137,13 +137,13 @@
   /* 상황별 대처 시나리오 */
   .scns{display:grid; gap:12px; margin-top:4px}
   .scn{border:1px solid var(--line); border-radius:16px; overflow:hidden; background:#fff; break-inside:avoid}
-  .scn .srow{display:flex; gap:10px; padding:13px 16px; font-size:13px; align-items:flex-start}
+  .scn .srow{display:flex; gap:11px; padding:14px 17px; font-size:13.8px; line-height:1.6; align-items:flex-start}
   .scn .srow + .srow{border-top:1px solid #EEF1F4}
-  .scn .stag{flex:none; font-size:11px; font-weight:800; padding:3px 9px; border-radius:7px; margin-top:1px; white-space:nowrap}
+  .scn .stag{flex:none; font-size:12px; font-weight:800; padding:4px 10px; border-radius:7px; margin-top:1px; white-space:nowrap}
   .scn .s1{background:#FFF6F6} .scn .s1 .stag{background:#FEE2E2; color:#DC2626}
   .scn .s2 .stag{background:#EAF2FE; color:var(--blue)}
   .scn .s3{background:#F5FBF8} .scn .s3 .stag{background:#E8F7EE; color:#15803D}
-  .qt{margin:2px 16px 12px; background:#0E1726; color:#E9EEF5; border-radius:12px; padding:13px 16px; font-size:13px; line-height:1.65}
+  .qt{margin:2px 16px 14px; background:#0E1726; color:#E9EEF5; border-radius:12px; padding:15px 18px; font-size:14.5px; line-height:1.7}
   .qt b{color:#7FB2FF}
   .budviz{padding:2px 16px 14px}
   .budrow{display:flex; align-items:center; gap:10px; margin:6px 0}
@@ -153,11 +153,11 @@
   .sig{display:inline-block; font-size:10.5px; font-weight:800; padding:2px 8px; border-radius:6px; margin:2px 3px 0 0}
   .sig.bad{background:#FEE2E2; color:#DC2626} .sig.flat{background:#EEF1F4; color:var(--gray)} .sig.good{background:#E8F7EE; color:#15803D}
   .feat{border:1px solid var(--line); border-radius:12px; padding:14px; background:#fff; text-align:center; break-inside:avoid}
-  .feat .fi{font-size:19px; color:var(--blue)} .feat .ft{font-weight:800; font-size:12.5px; margin-top:6px} .feat .fd{font-size:11px; color:var(--gray); margin-top:3px}
+  .feat .fi{font-size:20px; color:var(--blue)} .feat .ft{font-weight:800; font-size:13.5px; margin-top:7px} .feat .fd{font-size:12px; color:var(--gray); margin-top:4px; line-height:1.5}
   .biz{border:1px solid var(--line); border-radius:14px; padding:16px; background:#fff; break-inside:avoid}
-  .biz .bt{font-weight:800; font-size:13.5px} .biz .bd{font-size:12px; color:var(--gray); margin-top:8px}
+  .biz .bt{font-weight:800; font-size:15px} .biz .bd{font-size:13px; color:var(--gray); margin-top:8px; line-height:1.55}
   .mA{color:#DC2626; font-weight:900; margin:0 4px}
-  .subh{font-weight:800; font-size:17px; margin:30px 0 2px} .subh .n{color:var(--blue)}
+  .subh{font-weight:800; font-size:21px; margin:38px 0 6px; letter-spacing:-.01em} .subh .n{color:var(--blue)}
 
   @media print{
     @page{size:A4; margin:0}
@@ -278,7 +278,7 @@
       <div class="feat"><div class="fi" style="font-size:15px; font-weight:900">03</div><div class="ft">선제 제안</div><div class="fd">주간·월간 단위로 개선안을 먼저 제안</div></div>
     </div>
     <div class="card mt" style="font-size:12.5px; color:var(--gray)">선제 제안 액션 — <b style="color:var(--navy)">A/B 테스트 · 소재 교체 · 구좌 확장 · 예산 재배분</b>(일시 축소 → 다른 구좌 라이브)</div>
-    <div style="text-align:center; margin-top:14px"><a href="https://marketing-dashboard-demo-br6gpdt4i2yrshdygxanp8.streamlit.app/" target="_blank" rel="noopener" style="display:inline-block; background:var(--blue); color:#fff; font-weight:800; padding:12px 24px; border-radius:12px; text-decoration:none">▶ 광고주 성과관리 대시보드 직접 사용해보기</a></div>
+    <div style="text-align:center; margin-top:14px"><a href="dashboard.html" target="_blank" rel="noopener" style="display:inline-block; background:var(--blue); color:#fff; font-weight:800; padding:12px 24px; border-radius:12px; text-decoration:none">▶ 광고주 성과관리 대시보드 직접 사용해보기</a></div>
     <p style="font-weight:800; font-size:13.5px; margin:22px 0 6px">대시보드의 장점</p>
     <div class="g4">
       <div class="feat"><div class="ft">통합 모니터링</div><div class="fd">여러 광고주·구좌 한 화면</div></div>

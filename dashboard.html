@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토스페이 광고주 성과관리 대시보드 (데모) · 윤지욱</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  *{box-sizing:border-box; margin:0; padding:0; word-break:keep-all}
+  :root{--blue:#3182F6; --blue2:#1B64DA; --navy:#191F28; --gray:#4E5968; --muted:#8B95A1; --line:#E5E8EB; --bg:#F2F4F6; --green:#15C47E; --red:#F04452; --amber:#F59E0B}
+  body{font-family:Pretendard,-apple-system,sans-serif; color:var(--navy); background:#F7F8FA; line-height:1.5; font-size:14px}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px}
+  header{background:linear-gradient(120deg,#1B5FD6,#3E7BF6); color:#fff; padding:22px 0}
+  header .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px}
+  header h1{font-size:20px; font-weight:800} header .sub{font-size:12.5px; color:#DCEAFF; margin-top:3px}
+  header a{color:#fff; font-size:12.5px; text-decoration:none; background:rgba(255,255,255,.16); padding:8px 13px; border-radius:9px; font-weight:700}
+  section{padding:18px 0}
+  .bar{display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:space-between}
+  .tabs{display:flex; gap:6px; flex-wrap:wrap}
+  .tab{border:1px solid var(--line); background:#fff; border-radius:999px; padding:8px 15px; font-size:13px; font-weight:700; color:var(--gray); cursor:pointer}
+  .tab.on{background:var(--blue); color:#fff; border-color:var(--blue)}
+  .seg{display:inline-flex; border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#fff}
+  .seg button{border:none; background:#fff; padding:8px 15px; font-size:13px; font-weight:700; color:var(--gray); cursor:pointer}
+  .seg button.on{background:var(--blue); color:#fff}
+  .alert{display:none; background:#FFF4F4; border:1px solid #FBD5D5; border-left:4px solid var(--red); border-radius:12px; padding:14px 16px; margin-top:14px}
+  .alert.show{display:block}
+  .alert .t{font-weight:800; color:var(--red); font-size:14px}
+  .alert .d{font-size:13px; color:var(--gray); margin-top:5px}
+  .alert .acts{margin-top:9px; display:flex; gap:7px; flex-wrap:wrap}
+  .chip{font-size:11.5px; font-weight:700; background:#EAF2FE; color:var(--blue); padding:5px 11px; border-radius:999px}
+  .kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:14px}
+  @media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px 18px}
+  .kpi.sel{border-color:var(--blue); box-shadow:0 0 0 2px rgba(49,130,246,.12); cursor:pointer}
+  .kpi .t{font-size:12px; color:var(--muted); font-weight:700}
+  .kpi .n{font-size:24px; font-weight:800; margin-top:5px; letter-spacing:-.02em}
+  .kpi .delta{font-size:12px; font-weight:800; margin-top:4px}
+  .up{color:var(--green)} .down{color:var(--red)}
+  .card{background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px; margin-top:14px}
+  .card .h{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px}
+  .card .h .ct{font-weight:800; font-size:15px}
+  .card .h .mini{font-size:12px; color:var(--muted)}
+  canvas{width:100%; height:220px; display:block; margin-top:8px}
+  table{width:100%; border-collapse:collapse; font-size:13px; margin-top:6px}
+  th,td{padding:10px 10px; border-bottom:1px solid var(--line); text-align:right}
+  th:first-child,td:first-child{text-align:left}
+  th{color:var(--muted); font-weight:700; font-size:12px}
+  td b{color:var(--blue)}
+  tr.row{cursor:pointer} tr.row:hover{background:#FAFBFC}
+  tr.sub td{background:#F7F9FC; font-size:12px; color:var(--gray)}
+  tr.sub td:first-child{padding-left:26px}
+  .btn{border:1px solid var(--line); background:#fff; border-radius:10px; padding:9px 15px; font-size:13px; font-weight:700; color:var(--navy); cursor:pointer}
+  .btn.blue{background:var(--blue); color:#fff; border-color:var(--blue)}
+  .flex{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+  textarea{width:100%; border:1px solid var(--line); border-radius:10px; padding:11px; font-family:inherit; font-size:13px; min-height:70px; resize:vertical}
+  .propose{background:#EAF2FE; border:1px solid #BBD6FF; border-radius:14px; padding:14px 16px; margin-top:12px; font-size:13px; color:#1B4FA0}
+  .propose b{color:#1B4FA0}
+  .note{font-size:11px; color:var(--muted); margin-top:16px; text-align:center}
+  .badge{font-size:10.5px; font-weight:800; padding:2px 8px; border-radius:6px}
+  .b-good{background:#E7F9F0; color:#0B8457} .b-bad{background:#FDEaea; color:var(--red)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div>
+      <h1>토스페이 광고주 성과관리 대시보드</h1>
+      <div class="sub">여러 광고주·구좌를 한 화면에서 모니터링하고, KPI 하락을 먼저 감지해 선제 제안합니다 · 데모(가상 데이터)</div>
+    </div>
+    <a href="proposal.html">← 제안서로</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <section>
+    <div class="bar">
+      <div class="tabs" id="advTabs"></div>
+      <div class="seg" id="period">
+        <button data-p="d" class="on">일</button><button data-p="w">주</button><button data-p="m">월</button>
+      </div>
+    </div>
+
+    <div class="alert" id="alert">
+      <div class="t">🚨 하락 감지 — <span id="alertName"></span></div>
+      <div class="d" id="alertDesc"></div>
+      <div class="acts" id="alertActs"></div>
+    </div>
+
+    <div class="kpis" id="kpis"></div>
+
+    <div class="card">
+      <div class="h"><div class="ct" id="chartTitle">추이</div><div class="mini">KPI 카드를 클릭하면 추이가 바뀝니다 · 최근 7일 하락 구간은 빨강</div></div>
+      <canvas id="chart" width="1040" height="220"></canvas>
+    </div>
+
+    <div class="card">
+      <div class="h"><div class="ct">구좌별 성과</div><div class="mini">행을 클릭하면 소재별로 드릴다운</div></div>
+      <table id="placeTable">
+        <thead><tr><th>구좌</th><th>노출</th><th>클릭</th><th>결제</th><th>CPS</th><th>GMV</th><th>비중</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="propose" id="propose"></div>
+
+    <div class="card">
+      <div class="h"><div class="ct">리포트 · 메모</div></div>
+      <div class="flex" style="margin:10px 0">
+        <button class="btn blue" id="csvBtn">📥 엑셀(CSV) 리포트 다운로드</button>
+        <span class="mini" style="color:var(--muted)">현재 광고주·기간 기준 구좌별 성과</span>
+      </div>
+      <textarea id="memo" placeholder="이 광고주 운영 메모 (자동 저장)"></textarea>
+    </div>
+
+    <div class="note">※ 본 대시보드는 윤지욱이 직접 만든 데모이며 모든 수치는 가상 데이터입니다. 실제 운영 시 토스페이 광고 데이터 API·엑셀 업로드로 연동됩니다.</div>
+  </section>
+</div>
+
+<script>
+// ---- 유틸: 시드 난수 ----
+function rng(seed){return function(){seed|=0; seed=seed+0x6D2B79F5|0; let t=Math.imul(seed^seed>>>15,1|seed); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296;};}
+const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
+const short=n=>{n=Math.round(n); if(Math.abs(n)>=1e8)return(n/1e8).toFixed(2)+'억'; if(Math.abs(n)>=1e4)return Math.round(n/1e4).toLocaleString('ko-KR')+'만'; return n.toLocaleString('ko-KR');};
+const num=n=>Math.round(n).toLocaleString('ko-KR');
+
+// ---- 데이터 모델 ----
+const PLACES=['최상단 AD','오늘딜 쿠폰','기본딜 쿠폰','방문미션'];
+const MATS=['소재 A','소재 B','소재 C','소재 D'];
+const ADV=[
+  {name:'에이블리', ind:'패션 커머스', aov:38000, cps:8000, drop:true,  seed:11},
+  {name:'솔드아웃', ind:'패션·한정판 리셀', aov:120000, cps:14000, drop:false, seed:23},
+  {name:'올리브영', ind:'뷰티', aov:45000, cps:9000, drop:false, seed:37},
+];
+const DAYS=90;
+// 광고주별 일자 데이터 생성 (구좌×소재)
+function build(a){
+  const r=rng(a.seed);
+  const pshare=[0.42,0.30,0.18,0.10]; // 구좌 비중
+  const days=[];
+  for(let d=0;d<DAYS;d++){
+    const dayIdx=d;
+    // 기본 결제 볼륨 + 주간 사이클 + 노이즈
+    let base=120+Math.sin(d/7)*14+(r()-0.5)*18;
+    // 마지막 7일 하락(해당 광고주만)
+    const tail=DAYS-1-d;
+    if(a.drop && tail<7) base*=(1-(7-tail)*0.07); // 하루 7%씩 하락
+    const places=PLACES.map((p,pi)=>{
+      let pay=Math.max(2, base*pshare[pi]*(0.85+r()*0.3));
+      // 하위 구좌는 전환 효율 더 낮게
+      const effPenalty = pi>=2 ? 1.5 : 1.0;
+      const spend=pay*a.cps*effPenalty*(0.9+r()*0.2);
+      const clicks=pay*(18+r()*10);
+      const imp=clicks*(40+r()*30);
+      const mats=MATS.map((m,mi)=>{
+        const w=[0.5,0.25,0.15,0.1][mi]*(0.8+r()*0.4);
+        return {pay:pay*w, spend:spend*w, clicks:clicks*w, imp:imp*w};
+      });
+      return {imp,clicks,pay,spend,mats};
+    });
+    days.push({places});
+  }
+  return days;
+}
+const DATA={}; ADV.forEach(a=>DATA[a.name]=build(a));
+
+let curAdv=ADV[0].name, curPeriod='d', curKPI='pay', drill=-1;
+
+// 기간별 윈도우(현재/직전)
+function windows(period){
+  if(period==='d') return {n:14, step:1, cur:[DAYS-14,DAYS], prev:[DAYS-28,DAYS-14], label:'일'};
+  if(period==='w') return {n:8, step:7, cur:[DAYS-56,DAYS], prev:[DAYS-112<0?0:DAYS-112,DAYS-56], label:'주'};
+  return {n:3, step:30, cur:[DAYS-90,DAYS], prev:[DAYS-90,DAYS], label:'월'};
+}
+function sumRange(days,s,e){
+  let o={imp:0,clicks:0,pay:0,spend:0}, places=PLACES.map(()=>({imp:0,clicks:0,pay:0,spend:0,mats:MATS.map(()=>({imp:0,clicks:0,pay:0,spend:0}))}));
+  for(let d=Math.max(0,s);d<Math.min(DAYS,e);d++){
+    days[d].places.forEach((p,pi)=>{
+      o.imp+=p.imp;o.clicks+=p.clicks;o.pay+=p.pay;o.spend+=p.spend;
+      places[pi].imp+=p.imp;places[pi].clicks+=p.clicks;places[pi].pay+=p.pay;places[pi].spend+=p.spend;
+      p.mats.forEach((m,mi)=>{['imp','clicks','pay','spend'].forEach(k=>places[pi].mats[mi][k]+=m[k]);});
+    });
+  }
+  return {o,places};
+}
+function kpiOf(o,aov){
+  return {pay:o.pay, gmv:o.pay*aov, cps:o.pay?o.spend/o.pay:0, roas:o.spend?(o.pay*aov)/o.spend*100:0, ctr:o.imp?o.clicks/o.imp*100:0, cvr:o.clicks?o.pay/o.clicks*100:0, spend:o.spend};
+}
+const KPIDEF=[
+  {k:'pay', t:'쿠폰 사용 결제', fmt:v=>num(v)+'건', better:'up'},
+  {k:'gmv', t:'GMV(거래액)', fmt:v=>short(v)+'원', better:'up'},
+  {k:'cps', t:'CPS(결제당 비용)', fmt:v=>won(v), better:'down'},
+  {k:'roas', t:'광고 ROAS', fmt:v=>Math.round(v)+'%', better:'up'},
+];
+
+function render(){
+  const a=ADV.find(x=>x.name===curAdv), days=DATA[curAdv], w=windows(curPeriod);
+  const cur=sumRange(days,w.cur[0],w.cur[1]), prev=sumRange(days,w.prev[0],w.prev[1]);
+  const kc=kpiOf(cur.o,a.aov), kp=kpiOf(prev.o,a.aov);
+  // KPI 카드
+  document.getElementById('kpis').innerHTML=KPIDEF.map(def=>{
+    const v=kc[def.k], pv=kp[def.k], ch=pv?((v-pv)/pv*100):0;
+    const good = def.better==='up'? ch>=0 : ch<=0;
+    const arrow = ch>=0?'▲':'▼';
+    return `<div class="kpi ${def.k===curKPI?'sel':''}" data-k="${def.k}">
+      <div class="t">${def.t}</div><div class="n">${def.fmt(v)}</div>
+      <div class="delta ${good?'up':'down'}">${arrow} ${Math.abs(ch).toFixed(1)}% <span style="color:var(--muted);font-weight:600">vs 직전 ${w.label==='월'?'기간':'동기간'}</span></div>
+    </div>`;
+  }).join('');
+  document.querySelectorAll('.kpi').forEach(el=>el.onclick=()=>{curKPI=el.dataset.k; render();});
+
+  // 하락 감지(최근 7일 결제 추세)
+  const last7=[]; for(let d=DAYS-7;d<DAYS;d++) last7.push(days[d].places.reduce((s,p)=>s+p.pay,0));
+  const prev7=[]; for(let d=DAYS-14;d<DAYS-7;d++) prev7.push(days[d].places.reduce((s,p)=>s+p.pay,0));
+  const avg=arr=>arr.reduce((s,x)=>s+x,0)/arr.length;
+  const dropPct=(avg(prev7)-avg(last7))/avg(prev7)*100;
+  const al=document.getElementById('alert');
+  if(dropPct>=12){
+    al.classList.add('show');
+    document.getElementById('alertName').textContent=`${a.name} · 결제 KPI 7일 하락 -${dropPct.toFixed(0)}%`;
+    document.getElementById('alertDesc').innerHTML=`최근 7일 평균 결제가 직전 7일 대비 <b style="color:var(--red)">-${dropPct.toFixed(0)}%</b>. CTR은 유지되나 하위 구좌(기본딜·방문미션)에서 CPS가 악화 중 — 요청 전에 먼저 제안 필요.`;
+    document.getElementById('alertActs').innerHTML=['타겟 A/B(관심사→결제이력)','소재 교체·세트 분리','하위 구좌 예산 -30% 재배분','우수 구좌 증액'].map(x=>`<span class="chip">${x}</span>`).join('');
+  } else al.classList.remove('show');
+
+  // 구좌 테이블
+  const tot=cur.o.pay||1;
+  const tb=document.querySelector('#placeTable tbody');
+  tb.innerHTML=cur.places.map((p,pi)=>{
+    const cps=p.pay?p.spend/p.pay:0, share=p.pay/tot*100;
+    const bad = pi>=2 && cps>a.cps*1.25;
+    let html=`<tr class="row" data-pi="${pi}"><td>${PLACES[pi]} ${bad?'<span class="badge b-bad">비효율</span>':(pi<2?'<span class="badge b-good">우수</span>':'')}</td><td>${short(p.imp)}</td><td>${num(p.clicks)}</td><td><b>${num(p.pay)}</b></td><td>${won(cps)}</td><td>${short(p.pay*a.aov)}원</td><td>${share.toFixed(0)}%</td></tr>`;
+    if(drill===pi){
+      html+=p.mats.map((m,mi)=>{const mcps=m.pay?m.spend/m.pay:0; return `<tr class="sub"><td>↳ ${MATS[mi]}</td><td>${short(m.imp)}</td><td>${num(m.clicks)}</td><td>${num(m.pay)}</td><td>${won(mcps)}</td><td>${short(m.pay*a.aov)}원</td><td>${(m.pay/p.pay*100).toFixed(0)}%</td></tr>`;}).join('');
+    }
+    return html;
+  }).join('');
+  tb.querySelectorAll('tr.row').forEach(tr=>tr.onclick=()=>{const pi=+tr.dataset.pi; drill=drill===pi?-1:pi; render();});
+
+  // 제안
+  document.getElementById('propose').innerHTML = dropPct>=12
+    ? `📌 <b>AM 제안</b> — 하위 구좌(기본딜·방문미션) 예산 <b>-30%</b> 감축 → 우수 구좌(최상단 AD·오늘딜) 증액. 동시에 <b>타겟 A/B(관심사 50% → 결제이력 50%)</b>를 매주 +10%p 보수적 이관. 유사 업종 성공사례·레퍼런스 첨부해 제시.`
+    : `✓ <b>안정</b> — KPI 정상 범위. 우수 구좌 중심으로 <b>주 +10~15% 점진 증액</b> 여력 검토(ML 학습 영향 최소화).`;
+
+  // 차트 (선택 KPI 일별 추이)
+  drawChart(days,a);
+  document.getElementById('chartTitle').textContent = KPIDEF.find(d=>d.k===curKPI).t + ' 추이';
+}
+
+function dayKPI(day,a,k){
+  let o={imp:0,clicks:0,pay:0,spend:0}; day.places.forEach(p=>{o.imp+=p.imp;o.clicks+=p.clicks;o.pay+=p.pay;o.spend+=p.spend;});
+  return kpiOf(o,a.aov)[k];
+}
+function drawChart(days,a){
+  const cv=document.getElementById('chart'), ctx=cv.getContext('2d');
+  const W=cv.width, H=cv.height, pad=38; ctx.clearRect(0,0,W,H);
+  const N=30, start=DAYS-N;
+  const vals=[]; for(let d=start;d<DAYS;d++) vals.push(dayKPI(days[d],a,curKPI));
+  const mx=Math.max(...vals), mn=Math.min(...vals)*0.9;
+  const X=i=>pad+i/(N-1)*(W-pad-14), Y=v=>H-pad-((v-mn)/((mx-mn)||1))*(H-pad-16);
+  // grid
+  ctx.strokeStyle='#EEF1F4'; ctx.lineWidth=1;
+  for(let g=0;g<=3;g++){const y=16+g*(H-pad-16)/3; ctx.beginPath();ctx.moveTo(pad,y);ctx.lineTo(W-14,y);ctx.stroke();}
+  // area+line
+  ctx.beginPath(); vals.forEach((v,i)=>{i?ctx.lineTo(X(i),Y(v)):ctx.moveTo(X(i),Y(v));});
+  ctx.strokeStyle='#3182F6'; ctx.lineWidth=2.5; ctx.stroke();
+  ctx.lineTo(X(N-1),H-pad); ctx.lineTo(X(0),H-pad); ctx.closePath();
+  ctx.fillStyle='rgba(49,130,246,.08)'; ctx.fill();
+  // last 7 red (하락 강조, pay/gmv/roas는 하락이 나쁨)
+  const worseDown = (curKPI!=='cps');
+  ctx.beginPath(); for(let i=N-7;i<N;i++){const v=vals[i]; i===N-7?ctx.moveTo(X(i),Y(v)):ctx.lineTo(X(i),Y(v));}
+  ctx.strokeStyle = (a.drop && worseDown)?'#F04452':'#3182F6'; ctx.lineWidth=3; ctx.stroke();
+  // dots
+  vals.forEach((v,i)=>{ctx.beginPath();ctx.arc(X(i),Y(v),i>=N-7&&a.drop&&worseDown?3.2:2,0,7);ctx.fillStyle=i>=N-7&&a.drop&&worseDown?'#F04452':'#3182F6';ctx.fill();});
+  // labels
+  ctx.fillStyle='#8B95A1'; ctx.font='10px Pretendard';
+  ctx.fillText('30일 전',pad,H-pad+16); ctx.fillText('오늘',W-44,H-pad+16);
+}
+
+// CSV
+document.getElementById('csvBtn').onclick=()=>{
+  const a=ADV.find(x=>x.name===curAdv), days=DATA[curAdv], w=windows(curPeriod);
+  const cur=sumRange(days,w.cur[0],w.cur[1]);
+  let rows=[['구좌','노출','클릭','결제','CPS','GMV','비중%']];
+  const tot=cur.o.pay||1;
+  cur.places.forEach((p,pi)=>{const cps=p.pay?p.spend/p.pay:0; rows.push([PLACES[pi],Math.round(p.imp),Math.round(p.clicks),Math.round(p.pay),Math.round(cps),Math.round(p.pay*a.aov),(p.pay/tot*100).toFixed(0)]);});
+  const csv='﻿'+rows.map(r=>r.join(',')).join('\n');
+  const b=new Blob([csv],{type:'text/csv'}), u=URL.createObjectURL(b), el=document.createElement('a');
+  el.href=u; el.download=`토스페이_${curAdv}_${w.label}_리포트.csv`; el.click(); URL.revokeObjectURL(u);
+};
+
+// 메모(localStorage)
+const memo=document.getElementById('memo');
+function loadMemo(){memo.value=localStorage.getItem('memo_'+curAdv)||'';}
+memo.addEventListener('input',()=>localStorage.setItem('memo_'+curAdv,memo.value));
+
+// 탭/기간
+document.getElementById('advTabs').innerHTML=ADV.map((a,i)=>`<button class="tab ${i===0?'on':''}" data-a="${a.name}">${a.name} <span style="color:var(--muted);font-weight:600;font-size:11px">${a.ind}</span></button>`).join('');
+document.querySelectorAll('#advTabs .tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('#advTabs .tab').forEach(x=>x.classList.remove('on')); t.classList.add('on'); curAdv=t.dataset.a; drill=-1; loadMemo(); render();});
+document.querySelectorAll('#period button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#period button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); curPeriod=b.dataset.p; render();});
+
+loadMemo(); render();
+</script>
+</body>
+</html>
