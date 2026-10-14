@@ -57,7 +57,18 @@
   .propose b{color:#1B4FA0}
   .note{font-size:11px; color:var(--muted); margin-top:16px; text-align:center}
   .badge{font-size:10.5px; font-weight:800; padding:2px 8px; border-radius:6px}
-  .b-good{background:#E7F9F0; color:#0B8457} .b-bad{background:#FDEaea; color:var(--red)}
+  .b-good{background:#E7F9F0; color:#0B8457} .b-bad{background:#FDEAEA; color:var(--red)}
+  .maintabs{display:flex; gap:4px; margin:16px 0 6px; border-bottom:1px solid var(--line)}
+  .mtab{border:none; background:none; padding:11px 16px; font-size:14.5px; font-weight:800; color:var(--muted); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px}
+  .mtab.on{color:var(--blue); border-bottom-color:var(--blue)}
+  .hist{display:flex; gap:12px; padding:13px 2px; border-bottom:1px solid var(--line)}
+  .hist:last-child{border-bottom:none}
+  .hist .hd{flex:none; width:70px; font-size:12px; color:var(--muted); font-weight:700; padding-top:2px}
+  .hist .hdot{flex:none; width:10px; height:10px; border-radius:50%; margin-top:5px}
+  .hist .hc{flex:1}
+  .hist .ht{font-weight:800; font-size:14px}
+  .hist .hx{font-size:13px; color:var(--gray); margin-top:3px; line-height:1.5}
+  .htag{font-size:10.5px; font-weight:800; padding:2px 8px; border-radius:6px; margin-left:7px}
 </style>
 </head>
 <body>
@@ -80,6 +91,13 @@
       </div>
     </div>
 
+    <div class="maintabs">
+      <button class="mtab on" data-v="overview">성과 개요</button>
+      <button class="mtab" data-v="daily">일자별 성과</button>
+      <button class="mtab" data-v="history">광고주 히스토리</button>
+    </div>
+
+    <div id="view-overview">
     <div class="alert" id="alert">
       <div class="t">🚨 하락 감지 — <span id="alertName"></span></div>
       <div class="d" id="alertDesc"></div>
@@ -110,6 +128,21 @@
         <span class="mini" style="color:var(--muted)">현재 광고주·기간 기준 구좌별 성과</span>
       </div>
       <textarea id="memo" placeholder="이 광고주 운영 메모 (자동 저장)"></textarea>
+    </div>
+    </div><!-- /view-overview -->
+
+    <div id="view-daily" style="display:none">
+      <div class="card">
+        <div class="h"><div class="ct">일자별 성과</div><div class="mini">최근 30일 · <span id="dailyName"></span> · 하락 구간 표시</div></div>
+        <table id="dailyTable"><thead><tr><th>날짜</th><th>노출</th><th>클릭</th><th>결제</th><th>CPS</th><th>GMV</th><th>ROAS</th></tr></thead><tbody></tbody></table>
+      </div>
+    </div>
+
+    <div id="view-history" style="display:none">
+      <div class="card">
+        <div class="h"><div class="ct">광고주 히스토리</div><div class="mini">운영 이벤트 · 제안 · 알림 타임라인 (최신순)</div></div>
+        <div id="historyList" style="margin-top:6px"></div>
+      </div>
     </div>
 
     <div class="note">※ 본 대시보드는 윤지욱이 직접 만든 데모이며 모든 수치는 가상 데이터입니다. 실제 운영 시 토스페이 광고 데이터 API·엑셀 업로드로 연동됩니다.</div>
@@ -292,10 +325,63 @@ const memo=document.getElementById('memo');
 function loadMemo(){memo.value=localStorage.getItem('memo_'+curAdv)||'';}
 memo.addEventListener('input',()=>localStorage.setItem('memo_'+curAdv,memo.value));
 
+let curView='overview';
+function rerender(){ if(curView==='daily') renderDaily(); else if(curView==='history') renderHistory(); else render(); }
+function switchView(v){
+  curView=v;
+  document.querySelectorAll('.mtab').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+  document.getElementById('view-overview').style.display=v==='overview'?'':'none';
+  document.getElementById('view-daily').style.display=v==='daily'?'':'none';
+  document.getElementById('view-history').style.display=v==='history'?'':'none';
+  rerender();
+}
+document.querySelectorAll('.mtab').forEach(b=>b.onclick=()=>switchView(b.dataset.v));
+
+function renderDaily(){
+  const a=ADV.find(x=>x.name===curAdv), days=DATA[curAdv];
+  document.getElementById('dailyName').textContent=a.name;
+  const today=new Date();
+  let rows='';
+  for(let d=DAYS-1; d>=DAYS-30; d--){
+    let o={imp:0,clicks:0,pay:0,spend:0}; days[d].places.forEach(p=>{o.imp+=p.imp;o.clicks+=p.clicks;o.pay+=p.pay;o.spend+=p.spend;});
+    const k=kpiOf(o,a.aov);
+    const dt=new Date(today); dt.setDate(today.getDate()-(DAYS-1-d));
+    const ds=(dt.getMonth()+1)+'/'+dt.getDate();
+    const warn = a.drop && (DAYS-1-d)<7;
+    rows+='<tr'+(warn?' style="background:#FFF6F6"':'')+'><td>'+ds+(warn?' <span class="badge b-bad">하락</span>':'')+'</td><td>'+short(k.imp)+'</td><td>'+num(k.clicks)+'</td><td><b>'+num(k.pay)+'</b></td><td>'+won(k.cps)+'</td><td>'+short(k.gmv)+'원</td><td>'+Math.round(k.roas)+'%</td></tr>';
+  }
+  document.querySelector('#dailyTable tbody').innerHTML=rows;
+}
+
+function renderHistory(){
+  const a=ADV.find(x=>x.name===curAdv);
+  const today=new Date();
+  const dayAgo=n=>{const d=new Date(today); d.setDate(today.getDate()-n); return (d.getMonth()+1)+'/'+d.getDate();};
+  let ev=[
+    {d:90,dot:'#3182F6',t:'집행 시작',x:a.name+' · 최상단 AD + 오늘딜 쿠폰 2구좌 론칭 (소액 검증)',tag:'집행',bg:'#EAF2FE',fg:'#1B4FA0'},
+    {d:76,dot:'#15C47E',t:'1차 증액',x:'최상단 AD CPS 목표 이내 안정 → 예산 +15% 점진 증액',tag:'증액',bg:'#E7F9F0',fg:'#0B8457'},
+    {d:58,dot:'#3182F6',t:'구좌 확장',x:'기본딜 쿠폰 + 방문미션 추가 → 도달 풀 확장',tag:'집행',bg:'#EAF2FE',fg:'#1B4FA0'},
+    {d:40,dot:'#F59E0B',t:'소재 교체',x:'CTR 하락 소재 2종 OFF → 신규 소재 세트 분리 A/B',tag:'최적화',bg:'#FEF3C7',fg:'#B45309'},
+    {d:22,dot:'#15C47E',t:'타겟 이관 완료',x:'관심사 → 결제이력 타겟 매주 +10%p 이관 완료 (CPS -14%)',tag:'최적화',bg:'#FEF3C7',fg:'#B45309'},
+  ];
+  if(a.drop){
+    ev.push({d:6,dot:'#F04452',t:'7일 하락 감지',x:'결제 KPI 7일 하락 → 하위 구좌 비효율 진단',tag:'알림',bg:'#FDEAEA',fg:'#F04452'});
+    ev.push({d:5,dot:'#3182F6',t:'선제 제안 발송',x:'하위 구좌 -30% 재분배 + 타겟 A/B 제안서 발송 (유사 성공사례·레퍼런스 첨부)',tag:'제안',bg:'#EAF2FE',fg:'#1B4FA0'});
+  } else {
+    ev.push({d:8,dot:'#15C47E',t:'성수기 버스트 제안',x:'전환 우수 포맷·오늘딜 타임딜에 예산 집중 제안',tag:'제안',bg:'#EAF2FE',fg:'#1B4FA0'});
+  }
+  ev.sort((x,y)=>x.d-y.d);
+  let html='';
+  const memo=localStorage.getItem('memo_'+a.name);
+  if(memo) html+='<div class="hist"><div class="hd">오늘</div><div class="hdot" style="background:#8B95A1"></div><div class="hc"><div class="ht">내 메모</div><div class="hx">'+memo.replace(/</g,'&lt;')+'</div></div></div>';
+  ev.forEach(e=>{ html+='<div class="hist"><div class="hd">'+dayAgo(e.d)+'</div><div class="hdot" style="background:'+e.dot+'"></div><div class="hc"><div class="ht">'+e.t+'<span class="htag" style="background:'+e.bg+';color:'+e.fg+'">'+e.tag+'</span></div><div class="hx">'+e.x+'</div></div></div>'; });
+  document.getElementById('historyList').innerHTML=html;
+}
+
 // 탭/기간
 document.getElementById('advTabs').innerHTML=ADV.map((a,i)=>`<button class="tab ${i===0?'on':''}" data-a="${a.name}">${a.name} <span style="color:var(--muted);font-weight:600;font-size:11px">${a.ind}</span></button>`).join('');
-document.querySelectorAll('#advTabs .tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('#advTabs .tab').forEach(x=>x.classList.remove('on')); t.classList.add('on'); curAdv=t.dataset.a; drill=-1; loadMemo(); render();});
-document.querySelectorAll('#period button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#period button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); curPeriod=b.dataset.p; render();});
+document.querySelectorAll('#advTabs .tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('#advTabs .tab').forEach(x=>x.classList.remove('on')); t.classList.add('on'); curAdv=t.dataset.a; drill=-1; loadMemo(); rerender();});
+document.querySelectorAll('#period button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#period button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); curPeriod=b.dataset.p; rerender();});
 
 loadMemo(); render();
 </script>
