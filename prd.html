@@ -82,6 +82,8 @@
   .evc-sol .evarr{ font-weight:800; font-size:10px; color:#fff; background:var(--primary); border-radius:5px; padding:2px 7px; margin-right:7px; white-space:nowrap; }
   .evbalance{ margin-top:14px; background:#fffdf7; border:1px dashed #e8c98f; border-radius:12px; padding:14px 16px; font-size:13px; color:#8a6d33; line-height:1.65; } .evbalance b{ color:#6b5316; }
   .pmbox{ background:#f0f7ff; border:1px solid #c9ddff; border-left:4px solid var(--primary); border-radius:12px; padding:14px 18px; margin-bottom:18px; font-size:13.5px; color:#3a4654; line-height:1.65; } .pmbox b{ color:var(--primary-dark); }
+  .srcline{ font-size:11.5px; color:var(--sub); margin-top:14px; line-height:1.9; } .srcline b{ color:var(--ink); }
+  .srcline a, .evc-src a{ color:var(--primary-dark); font-weight:700; text-decoration:underline; text-underline-offset:2px; } .srcline a:hover, .evc-src a:hover{ color:var(--primary); }
   @media(max-width:860px){ .evgrid{ grid-template-columns:1fr; } }
 
   /* 폰 목업 */
@@ -281,29 +283,29 @@
     <div class="evc">
       <div class="evc-rank">근거 ①</div>
       <div class="evc-theme">리테일 미디어는 커머스의 핵심 수익원</div>
-      <blockquote class="evq">아마존 리테일 미디어 광고 규모 <b>연 약 600억 달러</b>, 광고수익 증가율 <b>약 17.7%</b>. 스폰서 상품은 검색 결과 CPC 모델의 대표 사례.</blockquote>
-      <div class="evc-src">출처 · 공개 리테일 미디어 보고 (재검증 전제)</div>
+      <blockquote class="evq">아마존 리테일 미디어 광고 규모 <b>연 약 600억 달러</b>(2025 전망), 광고 매출 <b>2024년 전년比 약 +18%</b>. 스폰서 상품은 검색 결과 CPC 모델의 대표 사례.</blockquote>
+      <div class="evc-src">출처 · <a href="https://www.emarketer.com/content/amazon-retail-media-ad-revenues-will-pass-60-billion-2025" target="_blank" rel="noopener">eMarketer</a> · <a href="https://www.adweek.com/commerce/amazons-ad-revenue-was-56-billion-last-year/" target="_blank" rel="noopener">Adweek</a> (재검증 전제)</div>
       <div class="evc-sol"><span class="evarr">가설 지지</span>커머스 트래픽의 검색 지점은 <b>CPC 광고</b>로 수익화되는 것이 표준</div>
     </div>
     <div class="evc">
       <div class="evc-rank">근거 ②</div>
       <div class="evc-theme">상품이 많아지면 검색·상단에 집중된다</div>
-      <blockquote class="evq">공개 소비자 실험 — 구매의 <b>약 51.7%가 상위 5개</b>에 집중, 필터 미사용률 <b>약 83.8%</b>. 상단 노출은 가격 프리미엄에도 구매 가능성을 높임.</blockquote>
-      <div class="evc-src">출처 · 공개 소비자 행동 실험 (재검증 전제)</div>
+      <blockquote class="evq">공정위 RCT(소비자 3,072명) — 구매의 <b>약 51.7%가 상위 5개</b>에 집중, 필터 미사용률 <b>약 83.8%</b>. 상단 배치 상품은 <b>10% 비싸도</b> 구매율 +34%p.</blockquote>
+      <div class="evc-src">출처 · 공정거래위원회 RCT — <a href="https://www.thepublic.kr/news/articleView.html?idxno=309316" target="_blank" rel="noopener">더퍼블릭</a> · <a href="https://biz.heraldcorp.com/article/10790410" target="_blank" rel="noopener">헤럴드경제</a></div>
       <div class="evc-sol"><span class="evarr">가설 지지</span>쿠폰 과잉 → <b>검색 + 상단 노출</b> 수요 = 광고 지면 성립</div>
     </div>
     <div class="evc">
       <div class="evc-rank">근거 ③</div>
       <div class="evc-theme">쿠폰은 능동적으로 찾아 소진된다</div>
-      <blockquote class="evq">소비쿠폰 공개 보도 — <b>4주 소진율 약 75%, 8주 약 90%</b>. 배달·커머스에서 할인 혜택이 선택 요인으로 작동.</blockquote>
-      <div class="evc-src">출처 · 소비쿠폰 관련 공개 보도 (재검증 전제)</div>
+      <blockquote class="evq">민생회복 소비쿠폰 — <b>4주 내 약 75%, 8주 내 약 90%</b> 사용(최종 99.8%). 사람들은 할인 혜택을 <b>빠르게 찾아 쓴다</b>.</blockquote>
+      <div class="evc-src">출처 · 정부 발표·보도 — <a href="https://www.khan.co.kr/article/202512042049005" target="_blank" rel="noopener">경향신문</a></div>
       <div class="evc-sol"><span class="evarr">가설 지지</span>사용자가 쿠폰을 <b>직접 탐색</b> → 검색 의도 트래픽 존재</div>
     </div>
     <div class="evc">
       <div class="evc-rank">근거 ④</div>
       <div class="evc-theme">커머스 검색광고 = CPC 경매가 표준</div>
-      <blockquote class="evq">네이버 쇼핑검색·쿠팡·아마존의 공개 광고 사례에서 <b>검색광고의 높은 효율</b>과 <b>롱테일 광고주 성과</b>가 제시됨.</blockquote>
-      <div class="evc-src">출처 · 각 사 공개 광고 소개 (재검증 전제)</div>
+      <blockquote class="evq">네이버 커머스 광고 비중 <b>2019년 18.2% → 2025년 30.6%</b>로 급증 — 커머스 검색·쇼핑 광고가 CPC 경매로 핵심 수익원이 되는 흐름.</blockquote>
+      <div class="evc-src">출처 · <a href="https://www.datanews.co.kr/news/article.html?no=143883" target="_blank" rel="noopener">데이터뉴스</a> (네이버 커머스 매출구조) · 재검증 전제</div>
       <div class="evc-sol"><span class="evarr">가설 지지</span>고의도 검색엔 <b>CPC 경매</b>가 클릭 낭비를 최소화</div>
     </div>
   </div>
@@ -383,6 +385,37 @@
       <div class="m3"><span class="k g">증분</span><span class="v">홀드아웃 순증 효과는 <b>확대 의사결정 지표</b>(과금 아님)</span></div>
     </div>
   </div>
+</div></section>
+
+<!-- 광고주 핵심 우려 · 증분성 -->
+<section><div class="wrap">
+  <div class="eyebrow"><span class="no" style="background:#e8414f;">!</span> 광고주 핵심 우려 · 증분성</div>
+  <h2>원래 살 고객이 쿠폰만 받아간다 — <span class="hl">광고비 누수</span> 우려.</h2>
+  <p class="lead">쿠폰·성과형 광고는 <b>구매 직전</b>에 노출됩니다. 그래서 "어차피 살 고객"에게도 할인을 줘버리고, 그 전환이 광고 성과로 잡힙니다. 광고주의 진짜 질문은 <b>"이게 광고 덕에 늘어난 매출인가, 원래 살 사람이었나?"</b> — 이 검색광고도 반드시 이걸 구분해야 합니다.</p>
+  <div class="headcopy"><span class="hl">"ROAS는 높은데 진짜 늘어난 매출인지 모르겠다"</span> — 이 숙제를 안 풀면 검색광고도 신뢰받지 못한다</div>
+  <div class="how">
+    <div class="howc">
+      <div class="hn">① 처음엔 이런 목소리가 있었다</div>
+      <div class="ht">"원래 살 사람에게 할인만"</div>
+      <blockquote class="evq" style="margin:9px 0 2px;">광고주 <b>71%</b>가 증분성(incrementality)을 리테일 미디어 <b>1순위 KPI</b>로 꼽았다 — "어차피 일어났을 전환엔 돈 내고 싶지 않다" (ANA, 2024)</blockquote>
+      <div class="m3"><span class="k">근거</span><span class="v">쿠폰 프로모션 매출의 상당수가 <b>'원래 살 고객'</b> = 비증분 (학술연구·CPG)</span></div>
+    </div>
+    <div class="howc">
+      <div class="hn">② 진짜 문제는 '측정'이다</div>
+      <div class="ht">자연 전환 ≠ 광고 전환</div>
+      <div class="hd">구매 직전 노출이라 <b>광고를 봐서 산 건지 / 어차피 살 사람이었는지</b> 구분이 안 됩니다. ROAS(상관)는 높아도 <b>증분(인과)</b>은 낮을 수 있고, 그 차이가 곧 <b>누수되는 광고비</b>입니다.</div>
+      <div class="m3"><span class="k g">핵심</span><span class="v"><b>attribution(귀속) ≠ incrementality(순증)</b></span></div>
+    </div>
+    <div class="howc">
+      <div class="hn">③ 이렇게 검증·해결한다</div>
+      <div class="ht">홀드아웃으로 순증만</div>
+      <div><span class="chip g">홀드아웃 A/B</span><span class="chip n">신규 vs 기존 고객</span><span class="chip n">클릭→발급→결제 연결</span></div>
+      <div class="m3"><span class="k">순증</span><span class="v">광고 안 본 <b>대조군</b> 대비 <b>더 생긴 발급·결제만</b> 순증 집계</span></div>
+      <div class="m3"><span class="k g">구분</span><span class="v">클릭 ID·전환 ID로 여정 연결 + <b>신규/기존·재유입 보정</b></span></div>
+    </div>
+  </div>
+  <div class="pmbox" style="border-left-color:#2e9e52; background:#eefaf0; border-color:#cdebd4; color:#2a6b3f;"><b>✅ 핵심 설계 — 광고주 신뢰는 얻되, 토스 광고 매출은 안 깎는다.</b> 증분성은 <b>과금 기준이 아니라 '확대·축소 의사결정 지표'</b>로만 씁니다. 과금은 <b>유효 클릭당 CPC</b> 그대로 — 광고주에겐 "진짜 성과"를 투명하게 보여주되, 증분성으로 광고비를 깎지는 않습니다. <b>투명성 ↔ 광고 매출</b>을 동시에 잡는 포지션입니다.</div>
+  <p class="srcline"><b>자료</b> · 광고주 71% 증분성 1순위 KPI(ANA) <a href="https://www.topsort.com/post/post-roas-vs-incrementality-retail-media" target="_blank" rel="noopener">Topsort</a> · 리테일 미디어 증분성 <a href="https://www.adexchanger.com/content-studio/the-retail-media-reckoning-why-incrementality-is-the-metric-that-matters/" target="_blank" rel="noopener">AdExchanger</a> · 쿠폰 자기잠식 연구 <a href="https://www.aeaweb.org/conference/2016/retrieve.php?pdfid=11553&amp;tk=5fZsHk9T" target="_blank" rel="noopener">AEA</a> · <a href="https://www.cpgscout.ai/sales-cannibalization" target="_blank" rel="noopener">CPG Scout</a></p>
 </div></section>
 
 <!-- 04 왜 토스 -->
