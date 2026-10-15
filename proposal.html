@@ -516,13 +516,15 @@
     <div class="dh">광고비 청구 비율 / <span class="em">순이익</span> 즉석 계산</div>
     <p class="dsub">성과형 광고는 결제금액의 n%를 광고비로 청구합니다. 미팅·협상 중 광고비율을 조정하며 <b>토스/에이블리 분배와 광고주 순이익</b>을 그 자리에서 함께 확인합니다.</p>
     <div class="g2 mt">
-      <div style="background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.22); border-radius:16px; padding:18px 20px">
-        <div style="font-size:13px; font-weight:800; color:#BBD6FF; margin-bottom:9px; letter-spacing:.02em">◆ 왜 만들었나</div>
-        <div style="font-size:14.5px; line-height:1.65; color:#fff">성과형 광고는 <b>결제금액의 일정 %를 광고비로</b> 청구합니다. 광고주의 진짜 질문은 <b>"내 마진에서 광고비를 떼면 얼마가 남나"</b> — 이걸 미팅에서 즉석으로 못 풀면 협상이 멈춥니다.</div>
+      <div style="background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.22); border-radius:18px; padding:24px 26px">
+        <div style="font-size:12.5px; font-weight:800; color:#BBD6FF; margin-bottom:14px; letter-spacing:.05em">◆ 왜 만들었나</div>
+        <div style="font-size:19px; font-weight:800; color:#fff; line-height:1.42; margin-bottom:12px">광고주가 결국 궁금한 건<br><span style="color:#9FC2FF">결국 내 ROI</span>입니다.</div>
+        <div style="font-size:14px; line-height:1.6; color:rgba(255,255,255,.8)">"광고비를 내면 내 손에 얼마가 남나?" — 이 답을 미팅에서 <b style="color:#fff">즉석 데이터로 못 주면 협상이 멈춥니다.</b></div>
       </div>
-      <div style="background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.22); border-radius:16px; padding:18px 20px">
-        <div style="font-size:13px; font-weight:800; color:#BBD6FF; margin-bottom:9px; letter-spacing:.02em">◆ 어떻게 쓰나</div>
-        <div style="font-size:14.5px; line-height:1.65; color:#fff">협상 테이블에서 <b>광고비율 슬라이더</b>를 움직이며 <b>토스/에이블리 분배·순이익</b>을 실시간으로 보여주고, <b>손익분기(마진율)</b>를 기준으로 광고주가 납득하는 광고비율을 그 자리에서 합의합니다.</div>
+      <div style="background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.22); border-radius:18px; padding:24px 26px">
+        <div style="font-size:12.5px; font-weight:800; color:#BBD6FF; margin-bottom:14px; letter-spacing:.05em">◆ 어떻게 쓰나</div>
+        <div style="font-size:19px; font-weight:800; color:#fff; line-height:1.42; margin-bottom:12px">그래서 <span style="color:#9FC2FF">ROI를 그 자리에서</span><br>데이터로 보여줍니다.</div>
+        <div style="font-size:14px; line-height:1.6; color:rgba(255,255,255,.8)">광고비 청구 비율만 움직이면 <b style="color:#fff">순이익·분배·ROI가 실시간 계산</b> → 납득하는 비율을 바로 합의.</div>
       </div>
     </div>
     <div class="g4 mt">
@@ -547,7 +549,7 @@
             </div>
             <div class="s">결제금액이 원가 · 에이블리 순이익 · 토스 광고비로 나뉩니다</div></div>
           <div class="oc"><div class="t">토스 — 광고비 (결제당)</div><div class="n" id="oAdPer"></div><div class="s">결제금액 × 광고비율</div></div>
-          <div class="oc"><div class="t">에이블리 — 순이익률</div><div class="n" id="oNetRate"></div><div class="s">마진율 − 광고비율</div></div>
+          <div class="oc"><div class="t">광고 ROI (순이익 ÷ 광고비)</div><div class="n" id="oROI"></div><div class="s">광고비 1원당 순이익</div></div>
           <div class="oc"><div class="t">손익분기 광고비율</div><div class="n" id="oBEP"></div><div class="s">이 이상이면 적자</div></div>
           <div class="oc locked"><div class="t">월 순이익 (에이블리)</div><div class="n" id="oMonthProfit"></div><div class="s" id="oMonthS"></div></div>
         </div>
@@ -633,8 +635,9 @@
     $('oProfitPer').textContent=(loss?'−':'')+won(Math.abs(profitPer));
     $('oProfitPer').style.color=loss?'#DC2626':'';
     $('oAdPer').textContent=won(adPer);
-    $('oNetRate').textContent=((m-r)*100).toFixed(0)+'%';
-    $('oNetRate').style.color=loss?'#DC2626':'';
+    const roi=r>0?(m-r)/r:0;
+    $('oROI').textContent=(loss?'−':'')+Math.abs(roi).toFixed(1)+'배';
+    $('oROI').style.color=loss?'#DC2626':'';
     $('oBEP').textContent=(m*100).toFixed(0)+'%';
     if(Q>0){ $('oMonthProfit').textContent=shortWon(Q*profitPer); $('oMonthS').textContent='월 매출 '+shortWon(Q*V)+' · 토스 광고비 '+shortWon(Q*adPer); }
     else{ $('oMonthProfit').textContent='—'; $('oMonthS').textContent='월 결제 건수 입력 시'; }
