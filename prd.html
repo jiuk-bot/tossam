@@ -476,11 +476,11 @@
 <!-- 06 리스크 & 로드맵 -->
 <section><div class="wrap">
   <div class="eyebrow"><span class="no">06</span> 프리모템 &amp; 로드맵</div>
-  <h2>6개월 뒤 이 상품이 죽는다면, <span class="hl">사인(死因)</span>은 무엇일까.</h2>
-  <div class="headcopy">프리모템 — <span class="hl">'이미 실패했다'</span>고 가정하고 사인을 거꾸로 짚어 <span class="hl">7개 예방책</span>을 미리 심는다</div>
-  <div class="pmbox"><b>🔍 프리모템(Pre-mortem)</b> — "파일럿 6개월 후, 이 상품은 중단됐다"고 <b>먼저 실패를 가정</b>합니다. 그리고 부검하듯 사인을 거꾸로 추적해, 출시 <b>전에</b> 7개 예방책을 설계에 심습니다. 가장 유력한 사인 1개는 4중 설계로, 나머지 6개는 각각의 처방으로 막습니다.</div>
+  <h2>프리모템 — <span class="hl">실패를 먼저 가정</span>하고 거꾸로 막는다.</h2>
+  <div class="headcopy"><span class="hl">가장 큰 리스크 1개</span>는 4중 설계로, <span class="hl">나머지 리스크</span>는 각각 사전 처방으로 차단</div>
+  <div class="pmbox"><b>🔍 프리모템(Pre-mortem)</b> — "파일럿 6개월 후, 이 상품이 중단됐다"고 <b>먼저 실패를 가정</b>하고, 실패 원인을 거꾸로 추적해 출시 <b>전에</b> 예방책을 설계에 심는 기법입니다. 가장 큰 리스크 1개는 4중 설계로, 나머지는 각각의 가드레일로 막습니다.</div>
   <div class="lcwrap">
-    <div class="lctitle">☠️ 가장 유력한 사인 ① — <b>대형 광고주가 최상단 구좌를 단독점유해 신규·롱테일이 떠났다</b> <span class="lcnote">(4중 설계로 예방)</span></div>
+    <div class="lctitle">🛡 가장 큰 리스크 ① — <b>대형 광고주의 최상단 구좌 단독점유</b> <span class="lcnote">(4중 설계로 예방)</span></div>
     <div class="funnel">
       <div class="fn"><span class="fnlbl">1차</span><b>관련성 최소 기준</b><span class="fnsub">적합도 미달은<br>입찰 높아도 제외</span></div>
       <span class="fnar">→</span>
@@ -492,14 +492,12 @@
     </div>
   </div>
   <table class="rtbl">
-    <thead><tr><th>그 밖의 예상 사인 6가지</th><th>사전 예방 (프리모템 처방)</th></tr></thead>
+    <thead><tr><th>그 밖의 리스크 4가지</th><th>사전 예방 (가드레일)</th></tr></thead>
     <tbody>
-      <tr><td>② 검색량이 안 나왔다<span class="sub">쿠폰 검색 수요가 기대보다 작아 광고가 안 팔림</span></td><td>쇼핑·리테일/뷰티 1개 업종 먼저 검증 + 홀드아웃 A/B로 순증 효과 측정</td></tr>
-      <tr><td>③ 제 살을 깎았다<span class="sub">검색광고가 기존 디스플레이 예산만 옮겨와 전체 매출 제자리</span></td><td>통합 매출 KPI 관리 + 디스플레이 최소 노출·예산 이동 모니터링</td></tr>
-      <tr><td>④ 광고비가 샜다<span class="sub">무효·헛클릭에 광고비가 빠져 광고주 이탈</span></td><td>품질점수·검색 적합도·무효 클릭 탐지·예산 페이싱 적용</td></tr>
-      <tr><td>⑤ 성과를 못 믿었다<span class="sub">발급·결제 귀속이 꼬여 리포트 신뢰 붕괴</span></td><td>클릭 ID·전환 ID·멱등키·환불 이벤트로 중복·취소 보정</td></tr>
-      <tr><td>⑥ 개인정보 논란이 터졌다<span class="sub">마이데이터 활용이 침해로 오해</span></td><td>동의·목적 제한·역할기반 접근(RBAC)·집계 리포팅 적용</td></tr>
-      <tr><td>⑦ 보장형에서 적자가 났다<span class="sub">CPS 부정 전환·보장 손실</span></td><td>초기에는 제한된 광고주·한도 내에서만 검증</td></tr>
+      <tr><td>② 쿠폰 검색량 부족<span class="sub">검색 수요가 가정보다 작아 광고 인벤토리 미형성</span></td><td>쇼핑·리테일/뷰티 1개 업종 먼저 검증 + 홀드아웃 A/B로 순증 효과 측정</td></tr>
+      <tr><td>③ 기존 광고 구좌와의 자가잠식<span class="sub">검색광고가 디스플레이·CPT 예산을 이전시켜 순증 없음</span></td><td>통합 매출 KPI 관리 + 디스플레이 최소 노출·예산 이동 모니터링</td></tr>
+      <tr><td>④ 무효 클릭에 의한 광고비 누수<span class="sub">봇·중복·오클릭으로 유효 과금 왜곡</span></td><td>품질점수·검색 적합도·무효 클릭 탐지·예산 페이싱 적용</td></tr>
+      <tr><td>⑤ CPS 보장형 재무 리스크<span class="sub">부정 전환·보장 손실로 정산 손해</span></td><td>초기에는 제한된 광고주·한도 내에서만 검증</td></tr>
     </tbody>
   </table>
   <div class="road" style="margin-top:16px;">
