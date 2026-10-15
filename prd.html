@@ -260,7 +260,7 @@
       <tr><td>노출 결정</td><td>편집 큐레이션 + 고정 슬롯</td><td>검색어·카테고리 기반 <b>eCPM 경매</b></td></tr>
       <tr><td>과금 형태</td><td>기간 고정(CPT) · 보장형(CPS) · CPC 등 혼재</td><td>검색 의도 기반 유효 클릭당 <b>CPC 경매</b></td></tr>
       <tr><td>롱테일 광고주</td><td>슬롯 제약으로 진입 어려움</td><td>검색 수요 있으면 진입 가능</td></tr>
-      <tr><td>상단 독식</td><td>—</td><td>품질·적합도·다양성 캡으로 <b>방지</b></td></tr>
+      <tr><td>최상단 구좌 단독점유</td><td>—</td><td>품질·적합도·다양성 캡으로 <b>방지</b></td></tr>
       <tr><td>기존 상품</td><td>—</td><td>그대로 유지 · <b>검색 레이어만 추가</b></td></tr>
     </tbody>
   </table>
@@ -446,7 +446,7 @@
   <div class="headcopy">프리모템 — <span class="hl">'이미 실패했다'</span>고 가정하고 사인을 거꾸로 짚어 <span class="hl">7개 예방책</span>을 미리 심는다</div>
   <div class="pmbox"><b>🔍 프리모템(Pre-mortem)</b> — "파일럿 6개월 후, 이 상품은 중단됐다"고 <b>먼저 실패를 가정</b>합니다. 그리고 부검하듯 사인을 거꾸로 추적해, 출시 <b>전에</b> 7개 예방책을 설계에 심습니다. 가장 유력한 사인 1개는 4중 설계로, 나머지 6개는 각각의 처방으로 막습니다.</div>
   <div class="lcwrap">
-    <div class="lctitle">☠️ 가장 유력한 사인 ① — <b>대형 광고주가 상단을 독식해 신규·롱테일이 떠났다</b> <span class="lcnote">(4중 설계로 예방)</span></div>
+    <div class="lctitle">☠️ 가장 유력한 사인 ① — <b>대형 광고주가 최상단 구좌를 단독점유해 신규·롱테일이 떠났다</b> <span class="lcnote">(4중 설계로 예방)</span></div>
     <div class="funnel">
       <div class="fn"><span class="fnlbl">1차</span><b>관련성 최소 기준</b><span class="fnsub">적합도 미달은<br>입찰 높아도 제외</span></div>
       <span class="fnar">→</span>
@@ -484,7 +484,7 @@
     <tr><th style="width:190px;">기능</th><th>핵심 요구사항</th></tr>
     <tr><td class="ft">1 · 캠페인 생성·심사·운영</td><td>쿠폰·기간·일/총예산·CPC 입찰가·카테고리·키워드·랜딩 URL·문구 등록. 상태 <b>초안→심사→집행중→소진/중단</b>. 쿠폰 유효기간·재고·토스페이 결제 가능 여부 심사, 허위·과장 할인·금지 업종·가격 오류 검수. <b>사업자·업종 심사 미통과 시 캠페인 생성 차단 + 반려 사유 노출.</b></td></tr>
     <tr><td class="ft">2 · 키워드·카테고리 입찰 &amp; 검색 경매</td><td>키워드·카테고리 단위 CPC 입찰. 랭킹 <b>eCPM = CPC 입찰가 × 예상 전환율 품질점수 × 검색 적합도</b>. 적합도 최소 기준 미달은 미노출, 신규·데이터 부족엔 보수적 사전값 + 탐색 노출. eCPM 구성요소 <b>감사 로그</b> 기록. 자동입찰은 후속 단계.</td></tr>
-    <tr><td class="ft">3 · 검색 노출·일반 혼합 &amp; 독식 방지</td><td>입찰 상단·일반 노출 혼합 영역 배치 + <b>광고 표지</b>. 입찰 상단 비중 최대 30%(파일럿 가정), 초과분 일반 노출 우선. 광고주별 상단 점유·동일 쿠폰 반복 제한, 콜드스타트 탐색, 롱테일 분산. 디스플레이·큐레이션 성과·예산 이동 동반 모니터링.</td></tr>
+    <tr><td class="ft">3 · 검색 노출·일반 혼합 &amp; 단독점유 방지</td><td>입찰 상단·일반 노출 혼합 영역 배치 + <b>광고 표지</b>. 입찰 상단 비중 최대 30%(파일럿 가정), 초과분 일반 노출 우선. 광고주별 최상단 구좌 점유·동일 쿠폰 반복 제한, 콜드스타트 탐색, 롱테일 분산. 디스플레이·큐레이션 성과·예산 이동 동반 모니터링.</td></tr>
     <tr><td class="ft">4 · CPC·CPS 과금 &amp; 정산</td><td>기본 과금 <b>유효 클릭당 CPC 1회</b>(멱등키), 중복·봇·비정상 제외. CPS는 검증된 광고주 선택 티어 — 토스페이 결제 확정·환불 차감까지 전환 기준. <b>쿠폰 할인액 부담과 CPC 광고비는 별개 관리.</b> 정산은 캠페인·광고주·클릭/전환 ID·단가·세금·환불·조정 기준 재현 가능.</td></tr>
     <tr><td class="ft">5 · 성과 리포팅 &amp; 토스페이 결제 측정</td><td>노출·클릭·발급·사용·결제 확정·거래액·비용·CPC·CTR·CVR·ROAS·환불·잠식률을 <b>권한별 집계</b> 제공. 클릭 ID·전환 ID로 결제 여정 연결, <b>홀드아웃 A/B 순증 효과</b> 분석. 원시 개인정보 미제공. 신선도 일반 1h/결제·정산 24h(파일럿 가정, SLA 추후).</td></tr>
     <tr><td class="ft">6 · 공통 데이터·상태·API·비기능</td><td>검색 경매·클릭·전환·환불·리포트 API, 모든 이벤트 수집 <b>멱등키</b>. 캠페인/전환 상태 머신 관리. 경매 응답 목표 <b>300ms 이내</b>(파일럿 가정, 부하 테스트 후 확정). <b>장애 시 광고 과금 없이 일반 노출 폴백</b>, RBAC·감사 로그·개인정보 정책 기본.</td></tr>
@@ -492,11 +492,11 @@
   </table>
 
   <h3 style="margin:26px 0 12px; font-size:16px; font-weight:800;">프로덕트 정책 4종</h3>
-  <details class="pol"><summary>검색 경매 랭킹 &amp; 독식 방지 정책</summary><div class="pbody">
+  <details class="pol"><summary>검색 경매 랭킹 &amp; 단독점유 방지 정책</summary><div class="pbody">
     <div class="polchips"><span class="pc">eCPM = CPC × 예상전환율 품질점수 × 검색 적합도</span><span class="pc alt">광고 비중 ≤ 30%</span></div>
     <div class="polrow"><span class="polk">랭킹</span><span class="polv">입찰가만으로 순위 X — <b>품질점수·적합도 반영 eCPM</b>으로 결정, 구성요소 감사 로그 기록</span></div>
     <div class="polrow"><span class="polk">하한</span><span class="polv">검색 적합도 <b>최소 기준 미만</b>은 입찰 높아도 노출 제외</span></div>
-    <div class="polrow"><span class="polk">독식 방지</span><span class="polv">광고주별 상단 점유 캡 · 동일 쿠폰 반복 제한 · <b>신규 콜드스타트 탐색</b> · 롱테일 분산</span></div>
+    <div class="polrow"><span class="polk">점유 분산</span><span class="polv">광고주별 최상단 구좌 점유 캡 · 동일 쿠폰 반복 제한 · <b>신규 콜드스타트 탐색</b> · 롱테일 분산</span></div>
     <div class="polrow"><span class="polk g">비중</span><span class="polv">검색 결과 입찰 상단 비중 <b>최대 30%</b>(파일럿 가정), 초과분은 일반 노출 우선</span></div>
   </div></details>
   <details class="pol"><summary>CPC·CPS 과금 &amp; 정산 정책</summary><div class="pbody">
