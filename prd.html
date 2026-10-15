@@ -81,6 +81,7 @@
   .evc-sol{ font-size:12.5px; color:var(--primary-dark); background:var(--soft); border-radius:10px; padding:9px 12px; font-weight:600; line-height:1.5; }
   .evc-sol .evarr{ font-weight:800; font-size:10px; color:#fff; background:var(--primary); border-radius:5px; padding:2px 7px; margin-right:7px; white-space:nowrap; }
   .evbalance{ margin-top:14px; background:#fffdf7; border:1px dashed #e8c98f; border-radius:12px; padding:14px 16px; font-size:13px; color:#8a6d33; line-height:1.65; } .evbalance b{ color:#6b5316; }
+  .pmbox{ background:#f0f7ff; border:1px solid #c9ddff; border-left:4px solid var(--primary); border-radius:12px; padding:14px 18px; margin-bottom:18px; font-size:13.5px; color:#3a4654; line-height:1.65; } .pmbox b{ color:var(--primary-dark); }
   @media(max-width:860px){ .evgrid{ grid-template-columns:1fr; } }
 
   /* 폰 목업 */
@@ -440,11 +441,12 @@
 
 <!-- 06 리스크 & 로드맵 -->
 <section><div class="wrap">
-  <div class="eyebrow"><span class="no">06</span> 리스크 &amp; 로드맵</div>
-  <h2>가장 큰 위험 <span class="hl">'상단 독식'</span>을 설계로 막는다.</h2>
-  <div class="headcopy"><span class="hl">7개 리스크 전부</span> 가드레일로 매핑, 확장은 <span class="hl">3단계</span>로</div>
+  <div class="eyebrow"><span class="no">06</span> 프리모템 &amp; 로드맵</div>
+  <h2>6개월 뒤 이 상품이 죽는다면, <span class="hl">사인(死因)</span>은 무엇일까.</h2>
+  <div class="headcopy">프리모템 — <span class="hl">'이미 실패했다'</span>고 가정하고 사인을 거꾸로 짚어 <span class="hl">7개 예방책</span>을 미리 심는다</div>
+  <div class="pmbox"><b>🔍 프리모템(Pre-mortem)</b> — "파일럿 6개월 후, 이 상품은 중단됐다"고 <b>먼저 실패를 가정</b>합니다. 그리고 부검하듯 사인을 거꾸로 추적해, 출시 <b>전에</b> 7개 예방책을 설계에 심습니다. 가장 유력한 사인 1개는 4중 설계로, 나머지 6개는 각각의 처방으로 막습니다.</div>
   <div class="lcwrap">
-    <div class="lctitle">🛡 독식 방지 설계 — <b>전환율 높은 대형 광고주의 상단 독점을 차단</b> <span class="lcnote">(인기 키워드를 소수가 독식하는 것이 최대 위험)</span></div>
+    <div class="lctitle">☠️ 가장 유력한 사인 ① — <b>대형 광고주가 상단을 독식해 신규·롱테일이 떠났다</b> <span class="lcnote">(4중 설계로 예방)</span></div>
     <div class="funnel">
       <div class="fn"><span class="fnlbl">1차</span><b>관련성 최소 기준</b><span class="fnsub">적합도 미달은<br>입찰 높아도 제외</span></div>
       <span class="fnar">→</span>
@@ -456,15 +458,14 @@
     </div>
   </div>
   <table class="rtbl">
-    <thead><tr><th>리스크</th><th>가드레일 (선제 대응)</th></tr></thead>
+    <thead><tr><th>그 밖의 예상 사인 6가지</th><th>사전 예방 (프리모템 처방)</th></tr></thead>
     <tbody>
-      <tr><td>쿠폰 검색량 부족<span class="sub">검색 수요가 가정보다 작음</span></td><td>쇼핑·리테일/뷰티 1개 업종 먼저 검증 + 홀드아웃 A/B로 순증 효과 측정</td></tr>
-      <tr><td>디스플레이 예산 잠식<span class="sub">검색광고가 기존 예산 흡수</span></td><td>통합 매출 KPI 관리 + 디스플레이 최소 노출·예산 이동 모니터링</td></tr>
-      <tr><td>클릭 낭비<span class="sub">검색이라도 무효 클릭 발생</span></td><td>품질점수·검색 적합도·무효 클릭 탐지·예산 페이싱 적용</td></tr>
-      <tr><td>대형 광고주 상단 독식<span class="sub">인기 키워드 소수 독점</span></td><td><b>관련성 최소 기준 + 콜드스타트 탐색 + 광고주별 다양성 캡 + 롱테일 분산</b></td></tr>
-      <tr><td>어트리뷰션 오류<span class="sub">발급·결제 사이 귀속 혼선</span></td><td>클릭 ID·전환 ID·멱등키·환불 이벤트로 중복·취소 보정</td></tr>
-      <tr><td>개인정보·마이데이터 오해</td><td>동의·목적 제한·역할기반 접근(RBAC)·집계 리포팅 적용</td></tr>
-      <tr><td>CPS 보장형 재무 리스크<span class="sub">부정 전환·보장 손실</span></td><td>초기에는 제한된 광고주·한도 내에서만 검증</td></tr>
+      <tr><td>② 검색량이 안 나왔다<span class="sub">쿠폰 검색 수요가 기대보다 작아 광고가 안 팔림</span></td><td>쇼핑·리테일/뷰티 1개 업종 먼저 검증 + 홀드아웃 A/B로 순증 효과 측정</td></tr>
+      <tr><td>③ 제 살을 깎았다<span class="sub">검색광고가 기존 디스플레이 예산만 옮겨와 전체 매출 제자리</span></td><td>통합 매출 KPI 관리 + 디스플레이 최소 노출·예산 이동 모니터링</td></tr>
+      <tr><td>④ 광고비가 샜다<span class="sub">무효·헛클릭에 광고비가 빠져 광고주 이탈</span></td><td>품질점수·검색 적합도·무효 클릭 탐지·예산 페이싱 적용</td></tr>
+      <tr><td>⑤ 성과를 못 믿었다<span class="sub">발급·결제 귀속이 꼬여 리포트 신뢰 붕괴</span></td><td>클릭 ID·전환 ID·멱등키·환불 이벤트로 중복·취소 보정</td></tr>
+      <tr><td>⑥ 개인정보 논란이 터졌다<span class="sub">마이데이터 활용이 침해로 오해</span></td><td>동의·목적 제한·역할기반 접근(RBAC)·집계 리포팅 적용</td></tr>
+      <tr><td>⑦ 보장형에서 적자가 났다<span class="sub">CPS 부정 전환·보장 손실</span></td><td>초기에는 제한된 광고주·한도 내에서만 검증</td></tr>
     </tbody>
   </table>
   <div class="road" style="margin-top:16px;">
