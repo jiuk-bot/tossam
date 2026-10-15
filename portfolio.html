@@ -434,6 +434,9 @@ p,h1,h2,h3,h4,li,span,div,td,th{
   .pvt3 .pc .ic{ font-size:22px; } .pvt3 .pc .tt{ font-weight:800; margin:8px 0 5px; color:var(--ink); font-size:14px; }
   .pvt3 .pc .dd{ font-size:12.8px; color:var(--body); line-height:1.55; } .pvt3 .pc .dd b{ color:var(--primary-dark); font-weight:800; }
   @media(max-width:680px){ .pvt3{ grid-template-columns:1fr; } }
+  .steps{ gap:11px !important; }
+  .steps li{ background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:13px 15px 13px 48px !important; font-size:14px !important; line-height:1.6 !important; }
+  .steps li::before{ left:12px !important; top:12px !important; width:26px !important; height:26px !important; border-radius:8px !important; background:var(--soft) !important; border:0 !important; color:var(--primary-dark) !important; font-size:12.5px !important; }
 </style>
 </head>
 <body>
@@ -507,7 +510,7 @@ p,h1,h2,h3,h4,li,span,div,td,th{
       </div>
       <div class="sec">
         <div class="sec-label"><span class="sec-num">②</span>무엇이 문제였나</div>
-        <p>대행 <b>제로베이스(ROAS 103%)</b>에서 시작. 리드는 쌓이는데 <b>'CPA 단가'만 보면 진짜 효율이 안 보였다</b>. 리드가 많아도 <b>내원·매출로 안 이어지면</b> 광고주에겐 의미가 없었다.</p>
+        <p>광고주는 <b>리드 볼륨</b>(일 300개+)을, 내부적으로는 <b>CPA 6만 이내</b>를 둘 다 지켜야 했다 — 구글 단독으론 둘이 <b>충돌</b>.</p>
         <div class="dc-cap">볼륨 vs 효율 — 구글 단독으로는 둘 다 벽</div>
         <div class="dc-ba">
           <div class="dc-bac before"><div class="t">광고주 요구</div><div class="v">일 리드 300개+<br><span style="font-size:11.5px;font-weight:600;color:#999">최대 500개까지 필요</span></div></div>
@@ -526,15 +529,6 @@ p,h1,h2,h3,h4,li,span,div,td,th{
       </div>
       <div class="sec">
         <div class="sec-label"><span class="sec-num">④</span>무엇을 했나 — 실행 과정</div>
-        <ol class="steps">
-          <li>리드 → 상담 → 내원 → 시술로 이어지는 <b>전환 퍼널을 역산</b>해, 광고를 <b>'내원'까지 책임지는 구조</b>로 재정의</li>
-          <li>오프라인 방문이 가능한 고객을 <b>지역 단위로 캠페인을 분리</b>·분류해 <b>지역별 성과를 독립적으로 측정</b>할 수 있게 설계</li>
-          <li><b>지역별 내원율·CAC·ROAS</b>를 데이터로 집계 — 리드 CPA가 아닌 <b>'지역별 CAC'까지 추적</b></li>
-          <li>내원율이 높아 <b>ROAS가 우수한 핵심 지역을 식별</b>하고, <b>저효율 지역은 감액·정리</b>로 예산 누수 차단</li>
-          <li>구글·메타·틱톡 <b>3개 매체</b> × 매체별 소재·오디언스를 <b>A/B 테스트</b>하며 <b>리드 볼륨과 품질을 동시 관리</b></li>
-          <li><b>신규 매체(틱톡)</b>의 주 타겟(시니어) 규모를 <b>데이터로 검증 후 확장 제안</b></li>
-          <li>핵심 지역에 <b>광고비 볼륨 증액을 데이터로 광고주에게 설득</b> → 고효율 지역 중심으로 <b>취급고 확대</b></li>
-        </ol>
         <div class="dc-cap">실행 — 단계적 매체 확장 (구글애즈 단독 → 메타 → 틱톡, 1개 → 4개 매체)</div>
         <p style="font-size:13.5px;color:var(--sub);line-height:1.55;margin:-4px 0 10px">광고주 목표 성과(CPA 6만 이내) 달성을 위해, 한 번에 늘리지 않고 매체를 하나씩 더하며 <b style="color:var(--primary-dark)">단계적으로</b> 볼륨을 끌어올렸습니다. 각 단계는 앞 단계 데이터를 보고 결정했습니다.</p>
         <div class="exsteps">
