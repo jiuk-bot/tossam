@@ -512,32 +512,36 @@
 <!-- ⑥ 예상성과 GMV (블루) -->
 <section class="band blue">
   <div class="wrap">
-    <span class="eyebrow">06 · 성과 기준 = GMV(거래액)</span>
-    <div class="dh">쿠폰 광고로 <span class="em">GMV를 얼마나 키우나</span></div>
-    <p class="dsub">이커머스 핵심 KPI는 GMV. 에이블리 내부 데이터 없이 유사 패션 커머스 토스 벤치마크로 추정합니다.</p>
+    <span class="eyebrow">06 · 미팅용 — 매출 분배 & 순이익 계산기</span>
+    <div class="dh">광고비율을 넣으면 <span class="em">순이익이 얼마 남는지</span> 즉석 계산</div>
+    <p class="dsub">성과형 광고는 결제금액의 n%를 광고비로 청구합니다. 미팅·협상 중 광고비율을 조정하며 <b>토스/에이블리 분배와 광고주 순이익</b>을 그 자리에서 함께 확인합니다.</p>
     <div class="g4 mt">
-      <div class="stat" style="background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:16px; padding:18px"><div class="n" style="color:#fff">4,750만</div><div class="t" style="color:rgba(255,255,255,.75)">월 GMV(거래액)</div></div>
-      <div class="stat" style="background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:16px; padding:18px"><div class="n" style="color:#fff">~1,250건</div><div class="t" style="color:rgba(255,255,255,.75)">월 신규 결제</div></div>
-      <div class="stat" style="background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:16px; padding:18px"><div class="n" style="color:#fff">475%</div><div class="t" style="color:rgba(255,255,255,.75)">광고 ROAS</div></div>
-      <div class="stat" style="background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:16px; padding:18px"><div class="n" style="color:#fff">CPS</div><div class="t" style="color:rgba(255,255,255,.75)">결제 시에만 과금</div></div>
+      <div class="stat" style="background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:16px; padding:18px"><div class="n" style="color:#fff">3,800원</div><div class="t" style="color:rgba(255,255,255,.75)">결제당 광고비 (토스·10%)</div></div>
+      <div class="stat" style="background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:16px; padding:18px"><div class="n" style="color:#fff">3,800원</div><div class="t" style="color:rgba(255,255,255,.75)">결제당 순이익 (에이블리)</div></div>
+      <div class="stat" style="background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:16px; padding:18px"><div class="n" style="color:#fff">20%</div><div class="t" style="color:rgba(255,255,255,.75)">손익분기 광고비율</div></div>
+      <div class="stat" style="background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:16px; padding:18px"><div class="n" style="color:#fff">0원</div><div class="t" style="color:rgba(255,255,255,.75)">미전환 시 광고비</div></div>
     </div>
-    <p class="dsub" style="font-size:12.5px; margin-top:12px; color:rgba(255,255,255,.8)">GMV = 월 예산 ÷ CPS × 객단가 · ROAS = 객단가 ÷ CPS. 아래에서 예산·CPS·객단가를 직접 조정해 보세요.</p>
+    <p class="dsub" style="font-size:12.5px; margin-top:12px; color:rgba(255,255,255,.8)">광고비 = 결제금액 × 광고비율 · 순이익 = 매출 × (마진율 − 광고비율). 아래에서 객단가·광고비율·마진을 직접 조정해 보세요.</p>
     <div class="calc">
       <div class="panel">
-        <div class="fld"><div class="lab"><span>월 예산</span><span class="v" id="vB"></span></div><input type="text" inputmode="numeric" id="B" value="10,000,000"></div>
-        <div class="fld"><div class="lab"><span>목표 CPS (결제당 비용)</span><span class="v" id="vC"></span></div><input type="text" inputmode="numeric" id="C" value="8,000"></div>
         <div class="fld"><div class="lab"><span>평균 객단가</span><span class="v" id="vV"></span></div><input type="text" inputmode="numeric" id="V" value="38,000"><div class="hint">토스페이 결제 데이터 <span class="label lbB">토스 내부</span></div></div>
-        <div class="fld"><div class="lab"><span>에이블리 마진 (선택)</span><span class="v" id="vM"></span></div><input type="range" id="M" min="0" max="60" step="1" value="0"><div class="hint">이 한 칸만 넣으면 순이익까지 <span class="label lbA">광고주 내부</span></div></div>
+        <div class="fld"><div class="lab"><span>광고비율 (결제금액의 %)</span><span class="v" id="vr"></span></div><input type="range" id="r" min="0" max="30" step="1" value="10"><div class="hint">결제금액의 몇 %를 광고비로 <span class="label lbC">협의 대상</span></div></div>
+        <div class="fld"><div class="lab"><span>광고주 순수익률 (마진)</span><span class="v" id="vm"></span></div><input type="range" id="m" min="0" max="60" step="1" value="20"><div class="hint">광고주 마진율 <span class="label lbA">광고주 내부</span></div></div>
+        <div class="fld"><div class="lab"><span>월 결제 건수 (선택)</span><span class="v" id="vQ"></span></div><input type="text" inputmode="numeric" id="Q" value="1,000"><div class="hint">월 단위 합계 계산용</div></div>
       </div>
       <div>
         <div class="outcards">
-          <div class="oc hero2"><div class="t">★ 예상 월 GMV (거래액)</div><div class="n" id="oGMV"></div><div class="s">신규 결제 × 객단가 · 에이블리 핵심 KPI</div></div>
-          <div class="oc"><div class="t">예상 신규 결제</div><div class="n" id="oN"></div><div class="s">월 예산 ÷ CPS</div></div>
-          <div class="oc"><div class="t">광고 ROAS</div><div class="n" id="oROAS"></div><div class="s">객단가 ÷ CPS</div></div>
-          <div class="oc"><div class="t">결제당 광고비</div><div class="n" id="oCPS"></div><div class="s">성과보장</div></div>
-          <div class="oc locked"><div class="t">월 순이익 (마진 필요)</div><div class="n" id="oPROFIT"></div><div class="s" id="oProfitS">마진 입력 시</div></div>
+          <div class="oc hero2"><div class="t">★ 결제 1건당 — 에이블리 순이익</div><div class="n" id="oProfitPer"></div>
+            <div style="display:flex;height:22px;border-radius:7px;overflow:hidden;margin:10px 0 6px;font-size:9px;font-weight:800;color:#fff;text-align:center;line-height:22px">
+              <div id="sbCost" style="background:#9AA3B2">원가</div><div id="sbProfit" style="background:#FF3D77">에이블리</div><div id="sbAd" style="background:#3182F6">토스</div>
+            </div>
+            <div class="s">결제금액이 원가 · 에이블리 순이익 · 토스 광고비로 나뉩니다</div></div>
+          <div class="oc"><div class="t">토스 — 광고비 (결제당)</div><div class="n" id="oAdPer"></div><div class="s">결제금액 × 광고비율</div></div>
+          <div class="oc"><div class="t">에이블리 — 순이익률</div><div class="n" id="oNetRate"></div><div class="s">마진율 − 광고비율</div></div>
+          <div class="oc"><div class="t">손익분기 광고비율</div><div class="n" id="oBEP"></div><div class="s">이 이상이면 적자</div></div>
+          <div class="oc locked"><div class="t">월 순이익 (에이블리)</div><div class="n" id="oMonthProfit"></div><div class="s" id="oMonthS"></div></div>
         </div>
-        <div style="margin-top:12px; font-size:13px; color:var(--gray)"><b>GMV까지 토스가 예측</b> → 마지막 '순이익' 한 칸만 <b>에이블리 마진</b>을 곱하면 끝.</div>
+        <div id="verdict" style="margin-top:12px; font-size:13px; color:var(--gray)"></div>
       </div>
     </div>
   </div>
@@ -606,18 +610,30 @@
   const nv=e=>+String(e.value).replace(/[^0-9.]/g,'')||0;
   const fmt=n=>Math.round(n).toLocaleString('ko-KR');
   function calc(){
-    const B=nv($('B')), C=nv($('C')), V=nv($('V')), M=+$('M').value/100;
-    $('vB').textContent=shortWon(B); $('vC').textContent=won(C); $('vV').textContent=won(V); $('vM').textContent=M?(M*100)+'%':'미입력';
-    const N=C>0?B/C:0, GMV=N*V, ROAS=C>0?V/C:0;
-    $('oGMV').textContent=shortWon(GMV);
-    $('oN').textContent=Math.round(N).toLocaleString('ko-KR')+'명';
-    $('oROAS').textContent=ROAS.toFixed(1)+'배';
-    $('oCPS').textContent=won(C);
-    if(M>0){const p=GMV*M-B; $('oPROFIT').textContent=shortWon(p); $('oProfitS').textContent='GMV×마진 − 광고비';}
-    else{$('oPROFIT').textContent='—'; $('oProfitS').textContent='마진 입력 시 (에이블리 내부값)';}
+    const V=nv($('V')), r=+$('r').value/100, m=+$('m').value/100, Q=nv($('Q'));
+    $('vV').textContent=won(V);
+    $('vr').textContent=(r*100).toFixed(0)+'%';
+    $('vm').textContent=(m*100).toFixed(0)+'%';
+    $('vQ').textContent=Q?Q.toLocaleString('ko-KR')+'건':'미입력';
+    const adPer=V*r, profitPer=V*(m-r), loss=(m-r)<0;
+    const cost=Math.max(0,1-m), prof=Math.max(0,m-r);
+    $('sbCost').style.width=(cost*100)+'%';
+    $('sbProfit').style.width=(prof*100)+'%';
+    $('sbAd').style.width=(r*100)+'%';
+    $('oProfitPer').textContent=(loss?'−':'')+won(Math.abs(profitPer));
+    $('oProfitPer').style.color=loss?'#DC2626':'';
+    $('oAdPer').textContent=won(adPer);
+    $('oNetRate').textContent=((m-r)*100).toFixed(0)+'%';
+    $('oNetRate').style.color=loss?'#DC2626':'';
+    $('oBEP').textContent=(m*100).toFixed(0)+'%';
+    if(Q>0){ $('oMonthProfit').textContent=shortWon(Q*profitPer); $('oMonthS').textContent='월 매출 '+shortWon(Q*V)+' · 토스 광고비 '+shortWon(Q*adPer); }
+    else{ $('oMonthProfit').textContent='—'; $('oMonthS').textContent='월 결제 건수 입력 시'; }
+    $('verdict').innerHTML = loss
+      ? '⚠ <b>적자</b> — 광고비율('+(r*100).toFixed(0)+'%)이 마진율('+(m*100).toFixed(0)+'%)을 초과합니다. 광고비율을 낮춰 협의해야 합니다.'
+      : '✓ 결제 1건마다 <b>에이블리 '+won(profitPer)+'</b> 순이익 · <b>토스 '+won(adPer)+'</b> 광고비 — 광고비율이 마진율('+(m*100).toFixed(0)+'%) 밑이면 흑자입니다.';
   }
-  ['B','C','V','M'].forEach(id=>$(id).addEventListener('input',calc));
-  ['B','C','V'].forEach(id=>$(id).addEventListener('input',()=>{const n=nv($(id)); $(id).value=n?fmt(n):'';}));
+  ['V','r','m','Q'].forEach(id=>$(id).addEventListener('input',calc));
+  ['V','Q'].forEach(id=>$(id).addEventListener('input',()=>{const n=nv($(id)); $(id).value=n?fmt(n):'';}));
   calc();
 </script>
 </body>
