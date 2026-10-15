@@ -431,7 +431,7 @@ p,h1,h2,h3,h4,li,span,div,td,th{
   .pvt3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:2px; }
   .pvt3 .pc{ background:#fff; border:1px solid var(--line); border-radius:12px; padding:15px; }
   .pvt3 .pc.soft{ background:var(--soft); border-color:transparent; }
-  .pvt3 .pc .ic{ font-size:22px; } .pvt3 .pc .tt{ font-weight:800; margin:8px 0 5px; color:var(--ink); font-size:14px; }
+  .pvt3 .pc .ic{ font-size:20px; color:var(--primary); } .pvt3 .pc .tt{ font-weight:800; margin:8px 0 5px; color:var(--ink); font-size:14px; }
   .pvt3 .pc .dd{ font-size:12.8px; color:var(--body); line-height:1.55; } .pvt3 .pc .dd b{ color:var(--primary-dark); font-weight:800; }
   @media(max-width:680px){ .pvt3{ grid-template-columns:1fr; } }
   .steps{ gap:11px !important; }
@@ -514,7 +514,7 @@ p,h1,h2,h3,h4,li,span,div,td,th{
         <div class="dc-cap">볼륨 vs 효율 — 구글 단독으로는 둘 다 벽</div>
         <div class="dc-ba">
           <div class="dc-bac before"><div class="t">광고주 요구</div><div class="v">일 리드 300개+<br><span style="font-size:11.5px;font-weight:600;color:#999">최대 500개까지 필요</span></div></div>
-          <div class="ar" style="color:#F04452">⚡</div>
+          <div class="ar" style="color:#F04452">↯</div>
           <div class="dc-bac before"><div class="t">내부 목표</div><div class="v">CPA ≤ 6만원<br><span style="font-size:11.5px;font-weight:600;color:#999">구글 단독 = 일 70개가 한계</span></div></div>
         </div>
         <div class="gapbar">
@@ -529,6 +529,15 @@ p,h1,h2,h3,h4,li,span,div,td,th{
       </div>
       <div class="sec">
         <div class="sec-label"><span class="sec-num">④</span>무엇을 했나 — 실행 과정</div>
+        <ol class="steps">
+          <li>리드 → 상담 → 내원 → 시술로 이어지는 <b>전환 퍼널을 역산</b>해, 광고를 <b>'내원'까지 책임지는 구조</b>로 재정의</li>
+          <li>오프라인 방문이 가능한 고객을 <b>지역 단위로 캠페인을 분리</b>·분류해 <b>지역별 성과를 독립적으로 측정</b>할 수 있게 설계</li>
+          <li><b>지역별 내원율·CAC·ROAS</b>를 데이터로 집계 — 리드 CPA가 아닌 <b>'지역별 CAC'까지 추적</b></li>
+          <li>내원율이 높아 <b>ROAS가 우수한 핵심 지역을 식별</b>하고, <b>저효율 지역은 감액·정리</b>로 예산 누수 차단</li>
+          <li>구글·메타·틱톡 <b>3개 매체</b> × 매체별 소재·오디언스를 <b>A/B 테스트</b>하며 <b>리드 볼륨과 품질을 동시 관리</b></li>
+          <li><b>신규 매체(틱톡)</b>의 주 타겟(시니어) 규모를 <b>데이터로 검증 후 확장 제안</b></li>
+          <li>핵심 지역에 <b>광고비 볼륨 증액을 데이터로 광고주에게 설득</b> → 고효율 지역 중심으로 <b>취급고 확대</b></li>
+        </ol>
         <div class="dc-cap">실행 — 단계적 매체 확장 (구글애즈 단독 → 메타 → 틱톡, 1개 → 4개 매체)</div>
         <p style="font-size:13.5px;color:var(--sub);line-height:1.55;margin:-4px 0 10px">광고주 목표 성과(CPA 6만 이내) 달성을 위해, 한 번에 늘리지 않고 매체를 하나씩 더하며 <b style="color:var(--primary-dark)">단계적으로</b> 볼륨을 끌어올렸습니다. 각 단계는 앞 단계 데이터를 보고 결정했습니다.</p>
         <div class="exsteps">
@@ -679,18 +688,21 @@ p,h1,h2,h3,h4,li,span,div,td,th{
         <div class="sec-label"><span class="sec-num">④</span>무엇을 했나 — 실행 과정</div>
         <ol class="steps">
           <li>유튜브·인스타·토스·틱톡 <b>4채널로 라이브</b></li>
-          <li>학생 타겟에 맞는 <b>신규 매체 10대 교육앱 '콴다'를 직접 발굴·제안</b>해 <b>5채널로 확장</b></li>
           <li>타겟을 연령(13-19)·관심사(학부모/자녀/가족)·<b>KB DMP(학원비 납부·상품 가입)</b>·콘텐츠 타겟으로 설계, 예산 균등 분배로 라이브</li>
           <li>앱실행 단가·CPV·전환 볼륨을 매일 추적하며 <b>저효율 타겟 감액, 고효율로 이관</b> (<b>타겟·소재·매체 3단계 능동 재배분</b>)</li>
           <li>'틱톡=10대' 통념과 달리 <b>노출·조회 69%가 45세+임을 실측 검증</b> → <b>연령 축소·학부모 관심사 재집중</b></li>
           <li>모수 적어 CPV 높던 리타겟 예산을 관심사 타겟으로 이관 (<b>관심사 CPV -38%</b>)</li>
+          <li>학생 타겟에 맞는 <b>신규 매체 10대 교육앱 '콴다'를 직접 발굴·제안</b>해 <b>5채널로 확장</b></li>
         </ol>
-        <div class="dc-cap">오디언스 맞춤 매체 — 미디어믹스 재편</div>
+        <div class="dc-cap">◆ 상세 케이스 — 신규 매체 '콴다' 발굴·제안 (오디언스 기반 미디어믹스)</div>
+        <p style="font-size:14px;color:var(--body);line-height:1.6;margin-bottom:10px">핵심 타겟이 <b>10대</b>인데 기존 금융 매체(검색·디스플레이)는 주 사용층이 달라 적합도가 낮았다. 포화가 아니라 <b>'10대가 실제 모여 있는 매체를 고르는 것'</b>이 진짜 과제였다.</p>
         <div class="dc-ba">
           <div class="dc-bac before"><div class="t">기존 믹스</div><div class="v">검색·디스플레이 중심<br><span style="font-size:11.5px;font-weight:600;color:#999">10대 적합도 낮음</span></div></div>
           <div class="ar">→</div>
           <div class="dc-bac after"><div class="t">+ 콴다 편성</div><div class="v">10대 교육앱 정조준<br><span style="font-size:11.5px;font-weight:600;color:var(--primary-dark)">신규 매체 = 효율 1위</span></div></div>
         </div>
+        <p style="font-size:14px;color:var(--body);line-height:1.6;margin-top:10px">매체 조사 → 광고주 제안 → 세팅·소재·집행까지 주도. 단순히 매체를 늘린 게 아니라 <b>타겟이 실제로 있는 곳에 예산을 배치한 '오디언스 기반 미디어믹스'</b>였다.</p>
+        <p class="insight" style="margin-top:12px">미디어믹스는 '예산을 얼마나'가 아니라 <b>'타겟이 있는 매체를 고르는 것'</b>. 오디언스에 맞는 매체라면 — 새 매체여도 — <b>가장 좋은 성과</b>를 만든다.</p>
       </div>
       <div class="sec">
         <div class="sec-label"><span class="sec-num">⑥</span>무엇을 배웠나</div>
@@ -821,9 +833,9 @@ p,h1,h2,h3,h4,li,span,div,td,th{
         <p style="font-size:12.5px;color:var(--sub);margin:8px 0 2px">· 손익 구조: 락커 점유율 <b style="color:var(--primary-dark)">50%+ 손익분기</b>, <b style="color:var(--primary-dark)">70%+면 순수익</b> → 임대료 부담 없는 '공실 상가 임대인'이 비즈니스와 가장 핏.</p>
         <div class="dc-cap">페인포인트 → 가설 → 피벗</div>
         <div class="pvt3">
-          <div class="pc"><div class="ic">❓</div><div class="tt">페인포인트</div><div class="dd">국내에 생소한 짐 보관 서비스 — 모든 리드의 공통 불안 <b>"정말 되나? 수익률은?"</b></div></div>
-          <div class="pc"><div class="ic">💡</div><div class="tt">가설</div><div class="dd">통화보다 <b>본사 1층 직영점의 실물·실이용 고객</b>을 직접 보면 신뢰가 오른다 → 대면이 전환을 만든다</div></div>
-          <div class="pc soft"><div class="ic">🔄</div><div class="tt">피벗</div><div class="dd">월 1회 고정 설명회는 스케줄 제각각이라 비효율 → <b>1차 콜 고지 후 개별 맞춤 '실시간 대면 컨설팅'</b>으로 전환</div></div>
+          <div class="pc"><div class="ic">◆</div><div class="tt">페인포인트</div><div class="dd">국내에 생소한 짐 보관 서비스 — 모든 리드의 공통 불안 <b>"정말 되나? 수익률은?"</b></div></div>
+          <div class="pc"><div class="ic">✦</div><div class="tt">가설</div><div class="dd">통화보다 <b>본사 1층 직영점의 실물·실이용 고객</b>을 직접 보면 신뢰가 오른다 → 대면이 전환을 만든다</div></div>
+          <div class="pc soft"><div class="ic">↻</div><div class="tt">피벗</div><div class="dd">월 1회 고정 설명회는 스케줄 제각각이라 비효율 → <b>1차 콜 고지 후 개별 맞춤 '실시간 대면 컨설팅'</b>으로 전환</div></div>
         </div>
         <div class="dc-cap">구조 재설계 — '참석자 수'가 아니라 '전환 구조'를 바꿈</div>
         <div class="dc-ba">
