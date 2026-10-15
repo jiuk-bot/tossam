@@ -408,6 +408,19 @@ p,h1,h2,h3,h4,li,span,div,td,th{
   .insight{ font-size:15px; } .insight b{ color:var(--primary-dark); font-weight:800; }
   .case-head h2{ font-size:23px; }
   .stat .big .bq{ font-size:14px; font-weight:800; color:var(--primary-dark); margin-left:3px; letter-spacing:0; white-space:nowrap; }
+  .exsteps{ margin-top:12px; display:flex; flex-direction:column; gap:12px; }
+  .exstep{ display:grid; grid-template-columns:168px 1fr; gap:14px; align-items:stretch; }
+  .mstep{ border:1px solid var(--line); border-radius:14px; padding:16px 12px; text-align:center; background:#fff; }
+  .mstep .mnum{ font-size:11.5px; font-weight:800; color:var(--primary); }
+  .mstep .mmed{ font-size:14.5px; font-weight:800; margin:6px 0 10px; color:var(--ink); }
+  .mstep .mlead{ font-size:24px; font-weight:800; color:var(--primary); line-height:1; }
+  .mstep .mlead span{ font-size:12px; color:var(--sub); font-weight:600; }
+  .mstep .mcpa{ font-size:11.5px; color:#555; margin-top:8px; background:#F2F4F6; border-radius:999px; padding:3px 9px; display:inline-block; }
+  .exstep-body{ background:#fff; border:1px solid var(--line); border-left:3px solid var(--primary); border-radius:12px; padding:14px 17px; display:flex; flex-direction:column; justify-content:center; }
+  .exstep-body .es-t{ font-size:12.5px; font-weight:800; color:var(--primary); margin-bottom:5px; }
+  .exstep-body p{ font-size:13.5px !important; color:#444; line-height:1.6; }
+  .exstep-body p b{ color:var(--primary-dark); font-weight:800; }
+  @media(max-width:680px){ .exstep{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -504,12 +517,25 @@ p,h1,h2,h3,h4,li,span,div,td,th{
           <li><b>신규 매체(틱톡)</b>의 주 타겟(시니어) 규모를 <b>데이터로 검증 후 확장 제안</b></li>
           <li>핵심 지역에 <b>광고비 볼륨 증액을 데이터로 광고주에게 설득</b> → 고효율 지역 중심으로 <b>취급고 확대</b></li>
         </ol>
-        <div class="dc-cap">매체 확장 — 단계별 일 리드 볼륨 (효율 유지하며 확장)</div>
-        <div class="dc-flow">
-          <div class="dc-step"><div class="n">START</div><div class="m">구글 단독</div><div class="v">70<span>/일</span></div><div class="c">CPA 6만 이내</div></div>
-          <div class="dc-step"><div class="n">+ META</div><div class="m">메타 확장</div><div class="v">150<span>/일</span></div><div class="c">CPA 4.5만</div></div>
-          <div class="dc-step"><div class="n">+ 구글 2계정</div><div class="m">계정 분리</div><div class="v">200<span>/일</span></div><div class="c">자가잠식↓</div></div>
-          <div class="dc-step"><div class="n">+ TikTok</div><div class="m">틱톡 확장</div><div class="v">250<span>/일</span></div><div class="c">CPA 4만대</div></div>
+        <div class="dc-cap">실행 — 단계적 매체 확장 (구글애즈 단독 → 메타 → 틱톡, 1개 → 4개 매체)</div>
+        <p style="font-size:13.5px;color:var(--sub);line-height:1.55;margin:-4px 0 10px">광고주 목표 성과(CPA 6만 이내) 달성을 위해, 한 번에 늘리지 않고 매체를 하나씩 더하며 <b style="color:var(--primary-dark)">단계적으로</b> 볼륨을 끌어올렸습니다. 각 단계는 앞 단계 데이터를 보고 결정했습니다.</p>
+        <div class="exsteps">
+          <div class="exstep">
+            <div class="mstep"><div class="mnum">START</div><div class="mmed">구글애즈 단독</div><div class="mlead">70<span>개/일</span></div><div class="mcpa">CPA 6만 이내</div></div>
+            <div class="exstep-body"><div class="es-t">1단계 · 구글애즈 단독</div><p>내부 목표(<b>CPA 6만원 이내</b>)를 달성하면서 광고주 니즈인 <b>일 리드 300개</b> 달성에 어려움 존재. 당시 <b>일 리드 평균 70개</b>.</p></div>
+          </div>
+          <div class="exstep">
+            <div class="mstep"><div class="mnum">+ META</div><div class="mmed">메타 확장</div><div class="mlead">150<span>개/일</span></div><div class="mcpa">CPA 4.5만</div></div>
+            <div class="exstep-body"><div class="es-t">2단계 · 메타 확장</div><p>추가 수량 확보를 위해, <b>구글애즈 단독 운영에서 메타까지 매체를 확장</b>. 일 리드가 <b>70 → 150개</b>로 증가. 다만 내원율이 <b>메타 2% &lt; 구글 4%</b>로, 볼륨은 늘되 <b>매체별 리드 품질 차이를 데이터로 확인</b>.</p></div>
+          </div>
+          <div class="exstep">
+            <div class="mstep"><div class="mnum">+ 구글 2계정</div><div class="mmed">계정 분리</div><div class="mlead">200<span>개/일</span></div><div class="mcpa">자가잠식 최소화</div></div>
+            <div class="exstep-body"><div class="es-t">3단계 · 구글 2계정 분리</div><p>볼륨을 더 늘리기 위해 <b>구글 계정을 '연령 타겟 / 관심사 타겟'으로 분리 신설</b>. 계정 간 자가잠식을 최소화하며 일 리드 <b>150 → 200개</b>. 광고주가 원한 <b>구글 80 : 메타 20</b> 비율도 유지.</p></div>
+          </div>
+          <div class="exstep">
+            <div class="mstep"><div class="mnum">+ TikTok</div><div class="mmed">틱톡 확장</div><div class="mlead">250<span>개/일</span></div><div class="mcpa">CPA 4만대</div></div>
+            <div class="exstep-body"><div class="es-t">4단계 · 틱톡 확장</div><p>마지막으로 <b>KB국민은행에서 검증한 시니어(45+) 오디언스</b>를 겨냥해 틱톡까지 확장. 일 리드 <b>200 → 250개</b>로 늘리며 CPA는 <b>4만대로 안정화</b>.</p></div>
+          </div>
         </div>
         <div class="dc-cap">지역별 내원율 — 치과 인근일수록 압도적 (최대 15배 격차 → '양보다 질' 설득 근거)</div>
         <div class="dc-vbar">
